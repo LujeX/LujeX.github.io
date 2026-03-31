@@ -247,6 +247,56 @@
       background:linear-gradient(135deg,rgba(74,154,187,.1),rgba(109,200,232,.07));
       border:1px solid var(--border);padding:3px 9px;border-radius:6px}
 
+    /* === STAGES DOCS === */
+    .stage-docs{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+    /* === CERTIFICATIONS === */
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+    .cert-card{background:var(--surface);border:1px solid var(--border-soft);
+      border-radius:var(--radius);padding:28px 30px;box-shadow:var(--shadow-sm);
+      transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden}
+    .cert-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent-grad)}
+    .cert-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(109,200,232,.22)}
+    .cert-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:14px}
+    .cert-icon{width:48px;height:48px;border-radius:12px;flex-shrink:0;
+      background:var(--accent-grad);display:flex;align-items:center;justify-content:center;
+      font-size:22px;color:#fff;box-shadow:0 4px 14px rgba(109,200,232,.25)}
+    .cert-icon-gold{background:linear-gradient(135deg,#b8860b,#ffd700)}
+    .cert-label{font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:600;
+      color:var(--c4);background:linear-gradient(135deg,rgba(74,154,187,.12),rgba(109,200,232,.08));
+      border:1px solid var(--border);padding:3px 10px;border-radius:6px;
+      display:inline-block;margin-bottom:6px}
+    .cert-header h3{font-size:17px;font-weight:700;color:var(--text-h);margin:0}
+    .cert-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+    .cert-date,.cert-org{font-size:12px;color:var(--text-soft);font-family:'JetBrains Mono',monospace;
+      display:flex;align-items:center;gap:6px}
+    .cert-date i,.cert-org i{color:var(--accent);font-size:11px}
+    .cert-score{background:linear-gradient(135deg,rgba(74,154,187,.08),rgba(109,200,232,.05));
+      border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;text-align:center}
+    .cert-score-num{font-size:32px;font-weight:800;font-family:'JetBrains Mono',monospace;
+      background:var(--accent-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;line-height:1.1}
+    .cert-score-num span{font-size:18px;opacity:.6}
+    .cert-score-lbl{font-size:12px;color:var(--text-soft);margin-top:4px}
+    .cert-desc{font-size:13.5px;color:var(--text-body);line-height:1.65;margin-bottom:12px}
+    .cert-verify{font-size:12px;color:var(--text-soft);font-family:'JetBrains Mono',monospace;
+      background:rgba(255,255,255,.03);border:1px solid var(--border-soft);border-radius:8px;
+      padding:10px 14px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:4px}
+    .cert-verify i{color:var(--accent)}
+    .cert-verify-link{color:var(--accent);text-decoration:none;font-weight:600;margin-left:auto;
+      transition:opacity .2s}
+    .cert-verify-link:hover{opacity:.75}
+    @media(max-width:900px){.cert-grid{grid-template-columns:1fr}}
+
+    /* === ÉPREUVES — durée === */
+    .ep-duration{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+      font-family:'JetBrains Mono',monospace;color:var(--text-soft);margin-bottom:10px}
+    .ep-duration i{color:var(--accent);font-size:11px}
+
+    /* === VEILLE SOURCE LINK === */
+    .v-source-link{color:var(--accent);text-decoration:none;font-weight:700;transition:opacity .2s}
+    .v-source-link:hover{opacity:.75;text-decoration:underline}
+
     /* === BOUTON TÉLÉCHARGER PDF === */
     .btn-dl{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
       padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;
@@ -331,6 +381,7 @@
   <a href="#parcours"><i class="fa-solid fa-road" aria-hidden="true"></i>Parcours</a>
   <a href="#stages"><i class="fa-solid fa-briefcase" aria-hidden="true"></i>Stages</a>
   <a href="#realisations"><i class="fa-solid fa-network-wired" aria-hidden="true"></i>Réalisations</a>
+  <a href="#certifications"><i class="fa-solid fa-certificate" aria-hidden="true"></i>Certifications</a>
   <a href="#epreuves"><i class="fa-solid fa-file-contract" aria-hidden="true"></i>Épreuves</a>
   <a href="#veille"><i class="fa-solid fa-rss" aria-hidden="true"></i>Veille</a>
   <a href="#contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Contact</a>
@@ -380,11 +431,10 @@
 
   <!-- BTS SIO -->
   <section id="bts" aria-label="Le BTS SIO SISR">
-    <!-- FIX : h1 → h2 (un seul h1 par page, c'est celui du hero) -->
     <div class="section-title"><span class="num">01</span><h2>Le BTS SIO SISR</h2></div>
-    <p class="reveal">Le Brevet de Technicien Supérieur aux Services Informatiques aux Organisations, option <strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong> (SISR).</p>
-    <p class="reveal d1">Cette formation de 2 ans me prépare à installer, administrer et sécuriser des équipements et services informatiques au sein d'organisations de toute taille.</p>
-    <p class="reveal d2">Elle couvre l'administration système (Windows Server, Linux), les réseaux (routage, switching, Wi-Fi), la virtualisation, la cybersécurité et la gestion de projets.</p>
+    <p class="reveal">Le <strong>Brevet de Technicien Supérieur Services Informatiques aux Organisations</strong>, option <strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong> (SISR), est une formation de niveau Bac+2 orientée vers l'administration et la gestion des infrastructures informatiques.</p>
+    <p class="reveal d1">L'option SISR forme des techniciens capables de concevoir, déployer, administrer et sécuriser des infrastructures réseau et système au sein d'organisations. Elle se distingue de l'option SLAM (développement) en se concentrant sur le cœur du réseau : équipements, serveurs, sécurité et supervision.</p>
+    <p class="reveal d2">La formation couvre notamment : l'administration système sous <strong>Windows Server</strong> (Active Directory, GPO, DHCP, DNS) et <strong>Linux</strong>, la virtualisation avec <strong>VirtualBox</strong>, la gestion et configuration de <strong>switches</strong> et routeurs (VLAN, spanning-tree, routage), la mise en place de pare-feu <strong>pfSense</strong>, la cybersécurité des SI et la supervision avec des outils comme <strong>Nagios</strong>. La formation inclut également deux périodes de stage en entreprise.</p>
   </section>
 
   <!-- PARCOURS -->
@@ -396,7 +446,7 @@
         <div class="t-card">
           <h3>BTS SIO Option SISR</h3>
           <p><strong>Lycée Raoul Follereau, Nevers</strong></p>
-          <p>Administration système (AD, GPO), virtualisation (VMware), cybersécurité. Projets en équipe et stages en entreprise.</p>
+          <p>Administration système (AD, GPO, DNS, DHCP), virtualisation avec <strong>VirtualBox</strong>, configuration de <strong>switches</strong> (VLAN, trunking), pare-feu <strong>pfSense</strong>, supervision <strong>Nagios</strong> et cybersécurité. Projets en équipe et stages en entreprise.</p>
         </div>
       </div>
       <div class="t-item reveal d1">
@@ -437,6 +487,14 @@
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Support technique de niveau 2 auprès des agents du département</li>
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Contribution au déploiement de nouveaux équipements informatiques</li>
       </ul>
+      <div class="stage-docs">
+        <a href="attestation_stage_bts1_dsin.pdf" download class="btn-dl">
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
+        </a>
+        <a href="rapport_stage_bts1_dsin.pdf" download class="btn-dl">
+          <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
+        </a>
+      </div>
     </div>
     <div class="stage-card reveal d2" style="margin-top:22px">
       <h3>Stage — 2ème année BTS SIO</h3>
@@ -450,6 +508,14 @@
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Support et assistance technique aux agents de la direction</li>
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Rédaction de documentation technique et procédures d'exploitation</li>
       </ul>
+      <div class="stage-docs">
+        <a href="attestation_stage_bts2_dgfip.pdf" download class="btn-dl">
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
+        </a>
+        <a href="rapport_stage_bts2_dgfip.pdf" download class="btn-dl">
+          <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
+        </a>
+      </div>
     </div>
   </section>
 
@@ -462,14 +528,14 @@
       <button class="fbtn" data-filter="reseau">Réseau</button>
       <button class="fbtn" data-filter="systeme">Système</button>
       <button class="fbtn" data-filter="securite">Sécurité</button>
+      <button class="fbtn" data-filter="supervision">Supervision</button>
     </div>
     <div class="proj-grid">
       <div class="proj-card reveal" data-cat="securite reseau">
         <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
         <h3>Pare-feu pfSense</h3>
-        <p>Configuration avec règles de filtrage, NAT, VPN et segmentation réseau par zones.</p>
-        <div class="tags-sm"><span>pfSense</span><span>IPsec</span><span>NAT</span></div>
-        <!-- FIX : noms de fichiers PDF sans accents/espaces recommandés pour la compatibilité serveur -->
+        <p>Configuration avec règles de filtrage, NAT, VPN IPsec et segmentation réseau par zones (LAN, DMZ, WAN). Mise en place de règles de pare-feu et logs de trafic.</p>
+        <div class="tags-sm"><span>pfSense</span><span>IPsec</span><span>NAT</span><span>DMZ</span></div>
         <a href="Procedure_Installation_pfSense.pdf" download class="btn-dl">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
         </a>
@@ -489,35 +555,99 @@
         <p>Domaine Windows Server avec GPO, unités organisationnelles et gestion des utilisateurs.</p>
         <div class="tags-sm"><span>Windows Server</span><span>AD DS</span><span>GPO</span></div>
       </div>
+      <div class="proj-card reveal d3" data-cat="supervision reseau">
+        <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-tower-broadcast"></i></div>
+        <h3>Supervision Nagios</h3>
+        <p>Mise en place d'une infrastructure de supervision réseau avec Nagios. Monitoring des hôtes, services (HTTP, SSH, ping) et alertes par e-mail. Configuration des sondes et des seuils d'alerte.</p>
+        <div class="tags-sm"><span>Nagios</span><span>Linux</span><span>SNMP</span><span>NRPE</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" aria-label="Certifications">
+    <div class="section-title"><span class="num">05</span><h2>Certifications</h2></div>
+    <p class="reveal">Certifications obtenues au cours de mon parcours de formation.</p>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-header">
+          <div class="cert-icon"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-label">Certification numérique nationale</div>
+            <h3>Certification Pix</h3>
+          </div>
+        </div>
+        <div class="cert-meta">
+          <span class="cert-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i> 20 janvier 2026</span>
+          <span class="cert-org"><i class="fa-solid fa-school" aria-hidden="true"></i> Lycée Raoul Follereau</span>
+        </div>
+        <div class="cert-score">
+          <div class="cert-score-num">446 <span>/ 895</span></div>
+          <div class="cert-score-lbl">Niveau global — <strong>Indépendant 2</strong></div>
+        </div>
+        <p class="cert-desc">À l'aise dans toutes les situations courantes du numérique : recherche d'information fiable, outils collaboratifs, pratiques sécurisées (données personnelles, protection des appareils) et usages responsables.</p>
+        <div class="cert-verify">
+          <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
+          Code de vérification : <strong>P-JR969VDX</strong>
+          <a href="https://app.pix.fr/verification-certificat" target="_blank" rel="noopener noreferrer" class="cert-verify-link">Vérifier sur app.pix.fr</a>
+        </div>
+        <a href="certification-pix-20260120.pdf" download class="btn-dl" style="margin-top:16px">
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
+        </a>
+      </div>
+      <div class="cert-card reveal d1">
+        <div class="cert-header">
+          <div class="cert-icon cert-icon-gold"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
+          <div>
+            <div class="cert-label">Diplôme national</div>
+            <h3>Bac Pro Systèmes Numériques</h3>
+          </div>
+        </div>
+        <div class="cert-meta">
+          <span class="cert-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i> 2023</span>
+          <span class="cert-org"><i class="fa-solid fa-school" aria-hidden="true"></i> Option RISC</span>
+        </div>
+        <div class="cert-score">
+          <div class="cert-score-num" style="font-size:22px;margin-bottom:4px">Mention <strong>Assez Bien</strong></div>
+          <div class="cert-score-lbl">Baccalauréat Professionnel</div>
+        </div>
+        <p class="cert-desc">Baccalauréat professionnel option Réseaux Informatiques et Systèmes Communicants (RISC). Câblage réseau, configuration switches/routeurs et télécommunications.</p>
+        <a href="diplome_bac_pro_sn.pdf" download class="btn-dl" style="margin-top:16px">
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le diplôme
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- ÉPREUVES -->
   <section id="epreuves" aria-label="Épreuves du BTS SIO">
-    <div class="section-title"><span class="num">05</span><h2>Épreuves</h2></div>
-    <p class="reveal">Les épreuves du BTS SIO évaluent les compétences acquises sur les deux années.</p>
+    <div class="section-title"><span class="num">06</span><h2>Épreuves</h2></div>
+    <p class="reveal">Les épreuves du BTS SIO évaluent les compétences acquises sur les deux années de formation.</p>
     <div class="ep-grid">
       <div class="ep-card reveal">
-        <div class="ep-label">E4 — Épreuve écrite</div>
-        <h3>Support et mise à disposition de services informatiques</h3>
-        <p>Conception et mise en œuvre d'une infrastructure réseau. Étude de cas réelle.</p>
+        <div class="ep-label">E5 — Épreuve orale</div>
+        <div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 40 minutes</div>
+        <h3>Administration des systèmes et des réseaux</h3>
+        <p>Présentation de situations professionnelles vécues en stage devant un jury de professionnels. Échange oral sur les compétences techniques mises en œuvre.</p>
       </div>
       <div class="ep-card reveal d1">
-        <div class="ep-label">E5 — Épreuve orale</div>
-        <h3>Administration des systèmes et des réseaux</h3>
-        <p>Présentation de situations professionnelles vécues en stage devant un jury de professionnels.</p>
+        <div class="ep-label">E6 — Épreuve pratique</div>
+        <div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 2h10</div>
+        <h3>Cybersécurité des services informatiques</h3>
+        <p>Mise en situation pratique sur la sécurisation des systèmes d'information. Analyse de risques, mise en œuvre de solutions de protection et rédaction de préconisations.</p>
       </div>
       <div class="ep-card reveal d2">
-        <div class="ep-label">E6 — Épreuve professionnelle</div>
-        <h3>Cybersécurité des services informatiques</h3>
-        <p>Dossier et présentation sur la sécurisation des SI et la gestion des risques.</p>
+        <div class="ep-label">E7 — Épreuve écrite</div>
+        <div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 4 heures</div>
+        <h3>Support et mise à disposition de services informatiques</h3>
+        <p>Étude de cas écrite portant sur la conception et la mise en œuvre d'une infrastructure réseau. Analyse d'un SI existant et proposition d'améliorations.</p>
       </div>
     </div>
   </section>
 
   <!-- VEILLE -->
   <section id="veille" aria-label="Veille technologique">
-    <div class="section-title"><span class="num">06</span><h2>Veille Technologique</h2></div>
+    <div class="section-title"><span class="num">07</span><h2>Veille Technologique</h2></div>
     <p class="reveal">Deux thématiques qui façonnent l'avenir de l'informatique.</p>
     <div class="veille-list">
       <div class="v-item reveal">
@@ -525,7 +655,7 @@
         <div class="v-body">
           <h3>Intelligence Artificielle &amp; Cybersécurité</h3>
           <p>L'IA transforme le paysage de la cybersécurité : les attaquants l'utilisent pour automatiser des attaques de phishing ciblées et générer du code malveillant, tandis que les défenseurs s'en servent pour la détection d'anomalies, l'analyse comportementale et la réponse aux incidents. Suivi des SIEM dopés à l'IA (Microsoft Sentinel, Darktrace) et des usages offensifs comme les deepfakes dans l'ingénierie sociale.</p>
-          <div class="v-source">Sources : ANSSI · Cert-FR · Krebs on Security · MIT Technology Review</div>
+          <div class="v-source">Sources : ANSSI · Cert-FR · Krebs on Security · MIT Technology Review · <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a> · Google Alerts</div>
           <a href="veille_ia_cybersecurite.pdf" download class="btn-dl-veille">
             <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
           </a>
@@ -536,7 +666,7 @@
         <div class="v-body">
           <h3>Nvidia &amp; GPU dans l'IA</h3>
           <p>Nvidia s'est imposé comme l'acteur incontournable de l'ère IA grâce à ses GPU (H100, RTX 4090) et l'écosystème CUDA. Suivi des architectures Blackwell et Hopper, de leur impact sur les datacenters, et des enjeux géopolitiques autour des puces (AMD MI300, Intel Gaudi).</p>
-          <div class="v-source">Sources : Nvidia Blog · AnandTech · The Register · Tom's Hardware</div>
+          <div class="v-source">Sources : Nvidia Blog · AnandTech · The Register · Tom's Hardware · <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a> · Google Alerts</div>
           <a href="veille_nvidia_gpu_ia.pdf" download class="btn-dl-veille">
             <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
           </a>
@@ -547,7 +677,7 @@
 
   <!-- CONTACT -->
   <section id="contact" aria-label="Contact">
-    <div class="section-title"><span class="num">07</span><h2>Contact</h2></div>
+    <div class="section-title"><span class="num">08</span><h2>Contact</h2></div>
     <div class="contact-inner reveal">
       <p>Mon profil vous intéresse ? Je suis disponible pour toute opportunité de stage ou de collaboration.</p>
       <div class="contact-btns">
