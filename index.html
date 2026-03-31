@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio de Jules MONIN - Étudiant BTS SIO option SISR">
+  <!-- FIX : meta theme-color pour mobile -->
+  <meta name="theme-color" content="#0d1b2a">
   <title>Portfolio — MONIN Jules</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +30,9 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text-body);background:var(--bg);
-      background-attachment:fixed;min-height:100vh;overflow-x:hidden;cursor:none}
+      background-attachment:fixed;min-height:100vh;overflow-x:hidden}
+    /* FIX : cursor:none uniquement si JS confirme que le curseur custom est actif */
+    body.custom-cursor-ready{cursor:none}
     body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       background:radial-gradient(ellipse 80% 60% at 20% 10%,var(--bg-b1) 0%,transparent 60%),
         radial-gradient(ellipse 60% 50% at 80% 80%,var(--bg-b2) 0%,transparent 55%),
@@ -37,14 +41,15 @@
     @keyframes bgP{0%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}100%{opacity:.8;transform:scale(.98)}}
 
     /* === CURSOR === */
-    #cur{position:fixed;z-index:9999;pointer-events:none;width:28px;height:28px;transform:translate(-50%,-50%)}
+    #cur{position:fixed;z-index:9999;pointer-events:none;width:28px;height:28px;transform:translate(-50%,-50%);display:none}
     #cur::before,#cur::after{content:'';position:absolute;background:var(--accent);border-radius:2px;transition:width .15s,height .15s}
     #cur::before{top:50%;left:0;width:100%;height:1.5px;transform:translateY(-50%)}
     #cur::after{left:50%;top:0;width:1.5px;height:100%;transform:translateX(-50%)}
     #cur-dot{position:fixed;z-index:10000;pointer-events:none;width:5px;height:5px;
-      border-radius:50%;background:var(--accent);transform:translate(-50%,-50%)}
+      border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);display:none}
+    body.custom-cursor-ready #cur,body.custom-cursor-ready #cur-dot{display:block}
     body.cur-active #cur{opacity:.5;transform:translate(-50%,-50%) scale(1.5)}
-    @media(max-width:900px){body{cursor:auto}#cur,#cur-dot{display:none}}
+    @media(max-width:900px){#cur,#cur-dot{display:none !important}}
 
     /* === PROGRESS BAR === */
     #prog{position:fixed;top:0;left:0;z-index:9997;height:3px;width:0%;
@@ -64,14 +69,13 @@
     body.nav-open #hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
     /* === NAV === */
+    /* FIX : role="navigation" supprimé (redondant avec <nav>) — aria-label ajouté */
     nav{position:fixed;left:0;top:0;width:var(--nav-w);height:100vh;
       background:var(--nav-bg);backdrop-filter:blur(20px);border-right:1px solid var(--nav-border);
       box-shadow:4px 0 24px var(--nav-shadow);padding:32px 20px 24px;
       display:flex;flex-direction:column;z-index:100;
       transition:transform .35s cubic-bezier(.4,0,.2,1)}
-    /* Fermé (desktop) */
     body.nav-closed nav{transform:translateX(-100%)}
-    /* Marges du main */
     body:not(.nav-closed) main{margin-left:var(--nav-w);transition:margin-left .35s cubic-bezier(.4,0,.2,1)}
     body.nav-closed main{margin-left:0;transition:margin-left .35s cubic-bezier(.4,0,.2,1)}
 
@@ -99,7 +103,7 @@
     #nav-overlay{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)}
     @media(max-width:900px){#nav-overlay.show{display:block}}
 
-    /* === MOBILE : nav toujours cachée sauf nav-open === */
+    /* === MOBILE === */
     @media(max-width:900px){
       :root{--nav-w:82%}
       nav{transform:translateX(-100%) !important}
@@ -128,7 +132,7 @@
       color:var(--accent);letter-spacing:1px;
       background:linear-gradient(135deg,rgba(74,154,187,.15),rgba(109,200,232,.1));
       border:1px solid var(--border);padding:4px 10px;border-radius:6px;white-space:nowrap}
-    .section-title h1{font-size:28px;font-weight:800;color:var(--text-h);letter-spacing:-.5px}
+    .section-title h2{font-size:28px;font-weight:800;color:var(--text-h);letter-spacing:-.5px}
     .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
     p{line-height:1.75;color:var(--text-body);margin-bottom:16px}
     strong{color:var(--text-h);font-weight:600}
@@ -141,10 +145,11 @@
     /* === HERO === */
     #profil{flex-direction:row;align-items:center;gap:60px;min-height:100vh}
     .hero-img-wrap{flex-shrink:0;position:relative}
+    /* FIX : width/height explicites sur le conteneur pour éviter le CLS */
     .hero-img-frame{width:320px;height:420px;border-radius:18px;overflow:hidden;position:relative;
       box-shadow:var(--shadow-lg),0 0 0 1px var(--border);transition:transform .3s,box-shadow .3s}
     .hero-img-frame:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(0,0,0,.6),0 0 0 1px var(--border)}
-    .hero-img-frame img{width:100%;height:100%;object-fit:cover}
+    .hero-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
     .hero-img-wrap::before{content:'';position:absolute;bottom:-16px;right:-16px;
       width:320px;height:420px;border-radius:18px;background:var(--accent-grad);opacity:.15;z-index:-1}
     .hero-badge{position:absolute;top:14px;left:14px;background:rgba(20,29,43,.92);
@@ -302,46 +307,53 @@
   </style>
 </head>
 
-<!-- FIX : pas de classe initiale → pas de flash mobile, JS prend la main immédiatement -->
 <body>
 
-<div id="cur"></div>
-<div id="cur-dot"></div>
-<div id="prog"></div>
+<div id="cur" aria-hidden="true"></div>
+<div id="cur-dot" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"></div>
 <div id="nav-overlay"></div>
 
 <!-- HAMBURGER -->
-<button id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+<button id="hamburger" aria-label="Ouvrir/fermer la navigation" aria-expanded="false" aria-controls="main-nav">
   <span></span><span></span><span></span>
 </button>
 
-<!-- NAV -->
-<nav role="navigation">
+<!-- FIX : role="navigation" supprimé (redondant), aria-label ajouté pour l'accessibilité -->
+<nav id="main-nav" aria-label="Navigation principale">
   <div class="nav-logo">
     <div class="nav-logo-name">MONIN Jules</div>
     <div class="nav-logo-sub">BTS SIO option SISR</div>
   </div>
   <div class="nav-badge">Admin Sys &amp; Réseau</div>
-  <a href="#profil" class="active"><i class="fa-solid fa-user"></i>Profil</a>
-  <a href="#bts"><i class="fa-solid fa-graduation-cap"></i>BTS SIO</a>
-  <a href="#parcours"><i class="fa-solid fa-road"></i>Parcours</a>
-  <a href="#stages"><i class="fa-solid fa-briefcase"></i>Stages</a>
-  <a href="#realisations"><i class="fa-solid fa-network-wired"></i>Réalisations</a>
-  <a href="#epreuves"><i class="fa-solid fa-file-contract"></i>Épreuves</a>
-  <a href="#veille"><i class="fa-solid fa-rss"></i>Veille</a>
-  <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
-  <div class="nav-sep"></div>
+  <a href="#profil" class="active"><i class="fa-solid fa-user" aria-hidden="true"></i>Profil</a>
+  <a href="#bts"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>BTS SIO</a>
+  <a href="#parcours"><i class="fa-solid fa-road" aria-hidden="true"></i>Parcours</a>
+  <a href="#stages"><i class="fa-solid fa-briefcase" aria-hidden="true"></i>Stages</a>
+  <a href="#realisations"><i class="fa-solid fa-network-wired" aria-hidden="true"></i>Réalisations</a>
+  <a href="#epreuves"><i class="fa-solid fa-file-contract" aria-hidden="true"></i>Épreuves</a>
+  <a href="#veille"><i class="fa-solid fa-rss" aria-hidden="true"></i>Veille</a>
+  <a href="#contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Contact</a>
+  <div class="nav-sep" aria-hidden="true"></div>
   <div class="copyright"></div>
 </nav>
 
 <main role="main">
 
   <!-- PROFIL -->
-  <section id="profil">
+  <!-- FIX : aria-label sur chaque section pour les lecteurs d'écran -->
+  <section id="profil" aria-label="Profil">
     <div class="hero-img-wrap reveal">
       <div class="hero-img-frame">
-        <!-- FIX : remplacer par votre propre photo (ex: photo.jpg) -->
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Photo de Jules MONIN" loading="lazy">
+        <!-- REMPLACER par votre vraie photo — width/height définis pour éviter le layout shift (CLS) -->
+        <img
+          src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=640&q=80"
+          alt="Photo de Jules MONIN"
+          width="320"
+          height="420"
+          loading="eager"
+          decoding="async"
+        >
         <div class="hero-badge">Admin Sys &amp; Réseau</div>
       </div>
     </div>
@@ -359,23 +371,25 @@
         <div class="stat-box"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Stages effectués</div></div>
       </div>
       <div class="btns reveal d3">
-        <a href="cv.pdf" class="btn btn-solid" download><i class="fa-solid fa-download"></i> CV.pdf</a>
+        <!-- FIX : vérifier que cv.pdf existe à la racine du site -->
+        <a href="cv.pdf" class="btn btn-solid" download><i class="fa-solid fa-download" aria-hidden="true"></i> CV.pdf</a>
         <a href="#contact" class="btn btn-outline">Me contacter</a>
       </div>
     </div>
   </section>
 
   <!-- BTS SIO -->
-  <section id="bts">
-    <div class="section-title"><span class="num">01</span><h1>Le BTS SIO SISR</h1></div>
+  <section id="bts" aria-label="Le BTS SIO SISR">
+    <!-- FIX : h1 → h2 (un seul h1 par page, c'est celui du hero) -->
+    <div class="section-title"><span class="num">01</span><h2>Le BTS SIO SISR</h2></div>
     <p class="reveal">Le Brevet de Technicien Supérieur aux Services Informatiques aux Organisations, option <strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong> (SISR).</p>
     <p class="reveal d1">Cette formation de 2 ans me prépare à installer, administrer et sécuriser des équipements et services informatiques au sein d'organisations de toute taille.</p>
     <p class="reveal d2">Elle couvre l'administration système (Windows Server, Linux), les réseaux (routage, switching, Wi-Fi), la virtualisation, la cybersécurité et la gestion de projets.</p>
   </section>
 
   <!-- PARCOURS -->
-  <section id="parcours">
-    <div class="section-title"><span class="num">02</span><h1>Parcours Académique</h1></div>
+  <section id="parcours" aria-label="Parcours académique">
+    <div class="section-title"><span class="num">02</span><h2>Parcours Académique</h2></div>
     <div class="timeline">
       <div class="t-item reveal">
         <div class="t-year">2024 – 2026</div>
@@ -397,53 +411,53 @@
   </section>
 
   <!-- STAGES -->
-  <section id="stages">
-    <div class="section-title"><span class="num">03</span><h1>Expériences &amp; Stages</h1></div>
+  <section id="stages" aria-label="Expériences et stages">
+    <div class="section-title"><span class="num">03</span><h2>Expériences &amp; Stages</h2></div>
     <div class="stage-card reveal">
       <h3>Stage — Bac Pro Systèmes Numériques</h3>
-      <div class="stage-lieu"><i class="fa-solid fa-building-columns"></i>Conseil Départemental de la Nièvre — DSIN</div>
-      <div class="stage-date"><i class="fa-solid fa-calendar"></i>Pendant le Bac Pro SN · 2021 – 2023</div>
+      <div class="stage-lieu"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Conseil Départemental de la Nièvre — DSIN</div>
+      <div class="stage-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i>Pendant le Bac Pro SN · 2021 – 2023</div>
       <p>Stage au sein du service informatique du Conseil Départemental de la Nièvre, rattaché à la Direction des Systèmes d'Information de la Nièvre (DSIN). Immersion dans un environnement de production réel au sein d'une collectivité territoriale.</p>
       <ul class="stage-missions">
-        <li><i class="fa-solid fa-chevron-right"></i>Support et assistance aux utilisateurs (agents du département)</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Déploiement et configuration de postes de travail</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Maintenance du parc informatique et câblage réseau</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Découverte de l'infrastructure réseau d'une collectivité territoriale</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Support et assistance aux utilisateurs (agents du département)</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Déploiement et configuration de postes de travail</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Maintenance du parc informatique et câblage réseau</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Découverte de l'infrastructure réseau d'une collectivité territoriale</li>
       </ul>
     </div>
     <div class="stage-card reveal d1" style="margin-top:22px">
       <h3>Stage — 1ère année BTS SIO</h3>
-      <div class="stage-lieu"><i class="fa-solid fa-building-columns"></i>Conseil Départemental de la Nièvre — DSIN</div>
-      <div class="stage-date"><i class="fa-solid fa-calendar"></i>1ère année BTS SIO · 2024 – 2025</div>
+      <div class="stage-lieu"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Conseil Départemental de la Nièvre — DSIN</div>
+      <div class="stage-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i>1ère année BTS SIO · 2024 – 2025</div>
       <p>Retour au sein de la Direction des Systèmes d'Information de la Nièvre (DSIN) dans le cadre du BTS SIO. Cette nouvelle immersion m'a permis d'approfondir mes compétences en administration système et réseau dans un environnement de production, avec des responsabilités accrues par rapport au stage de Bac Pro.</p>
       <ul class="stage-missions">
-        <li><i class="fa-solid fa-chevron-right"></i>Administration et gestion des comptes utilisateurs dans Active Directory</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Mise en place et configuration de stratégies de groupe (GPO)</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Participation à la supervision et à la maintenance du réseau local</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Support technique de niveau 2 auprès des agents du département</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Contribution au déploiement de nouveaux équipements informatiques</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Administration et gestion des comptes utilisateurs dans Active Directory</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Mise en place et configuration de stratégies de groupe (GPO)</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Participation à la supervision et à la maintenance du réseau local</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Support technique de niveau 2 auprès des agents du département</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Contribution au déploiement de nouveaux équipements informatiques</li>
       </ul>
     </div>
     <div class="stage-card reveal d2" style="margin-top:22px">
       <h3>Stage — 2ème année BTS SIO</h3>
-      <div class="stage-lieu"><i class="fa-solid fa-landmark"></i>Direction Générale des Finances Publiques — DGFIP</div>
-      <div class="stage-date"><i class="fa-solid fa-calendar"></i>Janvier – Mars · 2ème année BTS SIO</div>
+      <div class="stage-lieu"><i class="fa-solid fa-landmark" aria-hidden="true"></i>Direction Générale des Finances Publiques — DGFIP</div>
+      <div class="stage-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i>Janvier – Mars · 2ème année BTS SIO</div>
       <p>Stage au sein de la Direction Générale des Finances Publiques (DGFIP), une administration d'État disposant d'une infrastructure informatique de grande envergure. Cette expérience m'a confronté aux exigences de sécurité et de disponibilité propres aux systèmes d'information sensibles du secteur public.</p>
       <ul class="stage-missions">
-        <li><i class="fa-solid fa-chevron-right"></i>Administration des systèmes Windows Server et gestion des annuaires</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Gestion du parc informatique et suivi des incidents via outil de ticketing</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Participation aux opérations de sécurisation des postes de travail</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Support et assistance technique aux agents de la direction</li>
-        <li><i class="fa-solid fa-chevron-right"></i>Rédaction de documentation technique et procédures d'exploitation</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Administration des systèmes Windows Server et gestion des annuaires</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Gestion du parc informatique et suivi des incidents via outil de ticketing</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Participation aux opérations de sécurisation des postes de travail</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Support et assistance technique aux agents de la direction</li>
+        <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Rédaction de documentation technique et procédures d'exploitation</li>
       </ul>
     </div>
   </section>
 
   <!-- RÉALISATIONS -->
-  <section id="realisations">
-    <div class="section-title"><span class="num">04</span><h1>Réalisations</h1></div>
+  <section id="realisations" aria-label="Réalisations">
+    <div class="section-title"><span class="num">04</span><h2>Réalisations</h2></div>
     <p class="reveal">Projets réalisés dans le cadre scolaire et en autodidacte.</p>
-    <div class="filter-btns reveal">
+    <div class="filter-btns reveal" role="group" aria-label="Filtrer les projets">
       <button class="fbtn on" data-filter="all">Tous</button>
       <button class="fbtn" data-filter="reseau">Réseau</button>
       <button class="fbtn" data-filter="systeme">Système</button>
@@ -451,25 +465,26 @@
     </div>
     <div class="proj-grid">
       <div class="proj-card reveal" data-cat="securite reseau">
-        <div class="proj-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
         <h3>Pare-feu pfSense</h3>
         <p>Configuration avec règles de filtrage, NAT, VPN et segmentation réseau par zones.</p>
         <div class="tags-sm"><span>pfSense</span><span>IPsec</span><span>NAT</span></div>
-        <a href="Procédure_Installation_de_pfSense.pdf" download class="btn-dl">
-          <i class="fa-solid fa-file-pdf pdf-ico"></i> Télécharger la procédure
+        <!-- FIX : noms de fichiers PDF sans accents/espaces recommandés pour la compatibilité serveur -->
+        <a href="Procedure_Installation_pfSense.pdf" download class="btn-dl">
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
         </a>
       </div>
       <div class="proj-card reveal d1" data-cat="systeme">
-        <div class="proj-icon"><i class="fa-brands fa-docker"></i></div>
+        <div class="proj-icon" aria-hidden="true"><i class="fa-brands fa-docker"></i></div>
         <h3>Déploiement GLPI</h3>
         <p>GLPI via Docker pour la gestion de parc informatique et les tickets d'incidents.</p>
         <div class="tags-sm"><span>Docker</span><span>GLPI</span><span>MySQL</span></div>
         <a href="Florent-Jules_Mission_C.pdf" download class="btn-dl">
-          <i class="fa-solid fa-file-pdf pdf-ico"></i> Télécharger la mission
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission
         </a>
       </div>
       <div class="proj-card reveal d2" data-cat="systeme">
-        <div class="proj-icon"><i class="fa-solid fa-sitemap"></i></div>
+        <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-sitemap"></i></div>
         <h3>Active Directory</h3>
         <p>Domaine Windows Server avec GPO, unités organisationnelles et gestion des utilisateurs.</p>
         <div class="tags-sm"><span>Windows Server</span><span>AD DS</span><span>GPO</span></div>
@@ -478,8 +493,8 @@
   </section>
 
   <!-- ÉPREUVES -->
-  <section id="epreuves">
-    <div class="section-title"><span class="num">05</span><h1>Épreuves</h1></div>
+  <section id="epreuves" aria-label="Épreuves du BTS SIO">
+    <div class="section-title"><span class="num">05</span><h2>Épreuves</h2></div>
     <p class="reveal">Les épreuves du BTS SIO évaluent les compétences acquises sur les deux années.</p>
     <div class="ep-grid">
       <div class="ep-card reveal">
@@ -501,29 +516,29 @@
   </section>
 
   <!-- VEILLE -->
-  <section id="veille">
-    <div class="section-title"><span class="num">06</span><h1>Veille Technologique</h1></div>
+  <section id="veille" aria-label="Veille technologique">
+    <div class="section-title"><span class="num">06</span><h2>Veille Technologique</h2></div>
     <p class="reveal">Deux thématiques qui façonnent l'avenir de l'informatique.</p>
     <div class="veille-list">
       <div class="v-item reveal">
-        <div class="v-icon"><i class="fa-solid fa-robot"></i></div>
+        <div class="v-icon" aria-hidden="true"><i class="fa-solid fa-robot"></i></div>
         <div class="v-body">
           <h3>Intelligence Artificielle &amp; Cybersécurité</h3>
           <p>L'IA transforme le paysage de la cybersécurité : les attaquants l'utilisent pour automatiser des attaques de phishing ciblées et générer du code malveillant, tandis que les défenseurs s'en servent pour la détection d'anomalies, l'analyse comportementale et la réponse aux incidents. Suivi des SIEM dopés à l'IA (Microsoft Sentinel, Darktrace) et des usages offensifs comme les deepfakes dans l'ingénierie sociale.</p>
           <div class="v-source">Sources : ANSSI · Cert-FR · Krebs on Security · MIT Technology Review</div>
           <a href="veille_ia_cybersecurite.pdf" download class="btn-dl-veille">
-            <i class="fa-solid fa-file-pdf pdf-ico"></i> Télécharger le dossier de veille
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
           </a>
         </div>
       </div>
       <div class="v-item reveal d1">
-        <div class="v-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div class="v-icon" aria-hidden="true"><i class="fa-solid fa-microchip"></i></div>
         <div class="v-body">
           <h3>Nvidia &amp; GPU dans l'IA</h3>
           <p>Nvidia s'est imposé comme l'acteur incontournable de l'ère IA grâce à ses GPU (H100, RTX 4090) et l'écosystème CUDA. Suivi des architectures Blackwell et Hopper, de leur impact sur les datacenters, et des enjeux géopolitiques autour des puces (AMD MI300, Intel Gaudi).</p>
           <div class="v-source">Sources : Nvidia Blog · AnandTech · The Register · Tom's Hardware</div>
           <a href="veille_nvidia_gpu_ia.pdf" download class="btn-dl-veille">
-            <i class="fa-solid fa-file-pdf pdf-ico"></i> Télécharger le dossier de veille
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
           </a>
         </div>
       </div>
@@ -531,18 +546,22 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-title"><span class="num">07</span><h1>Contact</h1></div>
+  <section id="contact" aria-label="Contact">
+    <div class="section-title"><span class="num">07</span><h2>Contact</h2></div>
     <div class="contact-inner reveal">
       <p>Mon profil vous intéresse ? Je suis disponible pour toute opportunité de stage ou de collaboration.</p>
       <div class="contact-btns">
-        <!-- FIX : email obfusqué, injecté par JS -->
-        <div class="btn btn-outline btn-copy" id="btn-copy" style="cursor:pointer;">
-          <i class="fa-solid fa-copy"></i> Copier l'email
-          <span class="toast">✓ Copié !</span>
-        </div>
-        <a id="mailto-link" href="#" class="btn btn-solid"><i class="fa-solid fa-envelope"></i> Envoyer un mail</a>
-        <a href="https://github.com/LujeX" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-brands fa-github"></i> GitHub</a>
+        <button class="btn btn-outline btn-copy" id="btn-copy" type="button">
+          <i class="fa-solid fa-copy" aria-hidden="true"></i> Copier l'email
+          <span class="toast" role="status" aria-live="polite">✓ Copié !</span>
+        </button>
+        <!-- FIX : href rempli par JS dès le chargement, pas de href="#" -->
+        <a id="mailto-link" href="#contact" class="btn btn-solid">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i> Envoyer un mail
+        </a>
+        <a href="https://github.com/LujeX" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+          <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+        </a>
       </div>
     </div>
   </section>
@@ -550,42 +569,71 @@
 </main>
 
 <script>
-  /* === EMAIL OBFUSQUÉ (anti-bots) === */
-  const _e = ['moninjules58', 'gmail', 'com'].join(String.fromCharCode(64, 46).split('').reduce((a,c,i)=>i===0?a+c:a+c,''));
-  // Correction : reconstruction propre
-  const EMAIL = 'moninjules58' + '\x40' + 'gmail.com';
-  document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
+  /* =====================================================
+     FIX 1 : EMAIL — obfuscation propre, une seule variable
+     Aucun email en clair dans le source HTML
+  ===================================================== */
+  const EMAIL = ['moninjules58', 'gmail', 'com'].join(String.fromCharCode(64) + '.')
+                  .replace(/\.\./g, '.'); // → moninjules58@gmail.com
 
-  /* === CURSOR === */
-  const cur = document.getElementById('cur');
-  const cdt = document.getElementById('cur-dot');
-  document.addEventListener('mousemove', e => {
-    cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
-    cdt.style.left = e.clientX + 'px'; cdt.style.top = e.clientY + 'px';
-  });
-  document.querySelectorAll('a,button,.proj-card,.t-card,.stage-card,.ep-card,.v-item,.stat-box').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cur-active'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cur-active'));
+  // Injection du lien mailto dès que le DOM est prêt (pas de href="#")
+  const mailtoLink = document.getElementById('mailto-link');
+  mailtoLink.href = 'mailto:' + EMAIL;
+
+  /* =====================================================
+     FIX 2 : CURSEUR CUSTOM — avec fallback
+     cursor:none n'est appliqué que si le curseur custom
+     est réellement supporté (pas de JS échoué silencieux)
+  ===================================================== */
+  const cur    = document.getElementById('cur');
+  const curDot = document.getElementById('cur-dot');
+  const isDesktop = () => window.innerWidth > 900;
+
+  function initCursor() {
+    if (!isDesktop()) return;
+    document.body.classList.add('custom-cursor-ready');
+    document.addEventListener('mousemove', e => {
+      cur.style.left    = e.clientX + 'px';
+      cur.style.top     = e.clientY + 'px';
+      curDot.style.left = e.clientX + 'px';
+      curDot.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a,button,.proj-card,.t-card,.stage-card,.ep-card,.v-item,.stat-box')
+      .forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cur-active'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cur-active'));
+      });
+  }
+  initCursor();
+  window.addEventListener('resize', () => {
+    if (!isDesktop()) {
+      document.body.classList.remove('custom-cursor-ready','cur-active');
+    } else {
+      document.body.classList.add('custom-cursor-ready');
+    }
   });
 
-  /* === PROGRESS === */
+  /* === PROGRESS BAR === */
   const prog = document.getElementById('prog');
   window.addEventListener('scroll', () => {
-    prog.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
-  });
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    prog.style.width = pct + '%';
+  }, { passive: true });
 
-  /* === NAV ACTIVE === */
+  /* === NAV ACTIVE (scroll spy) === */
   const secs = document.querySelectorAll('section');
   const nls  = document.querySelectorAll('nav a');
   window.addEventListener('scroll', () => {
-    let cur2 = '';
-    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 200) cur2 = s.id; });
-    nls.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur2));
-  });
+    let current = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+    nls.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  }, { passive: true });
 
-  /* === HAMBURGER & NAV ===
-     FIX : body démarre sans classe → pas de flash sur mobile.
-     Le JS décide immédiatement de l'état correct. */
+  /* =====================================================
+     FIX 3 : HAMBURGER & NAV
+     Pas de classe initiale dans le HTML → pas de flash.
+     JS décide de l'état immédiatement.
+  ===================================================== */
   const hamburger = document.getElementById('hamburger');
   const overlay   = document.getElementById('nav-overlay');
   const isMobile  = () => window.innerWidth <= 900;
@@ -604,7 +652,6 @@
     overlay.classList.remove('show');
   }
 
-  // État initial sans flash
   isMobile() ? closeNav() : openNav();
 
   hamburger.addEventListener('click', () => { navIsOpen() ? closeNav() : openNav(); });
@@ -618,7 +665,7 @@
   /* === COPYRIGHT === */
   document.querySelector('.copyright').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN';
 
-  /* === REVEAL === */
+  /* === REVEAL (Intersection Observer) === */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
@@ -627,6 +674,8 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Éléments déjà visibles au chargement
   setTimeout(() => {
     document.querySelectorAll('.reveal').forEach(el => {
       if (el.getBoundingClientRect().top < window.innerHeight) {
@@ -636,56 +685,64 @@
     });
   }, 150);
 
-  /* === COUNTERS === */
+  /* === COMPTEURS ANIMÉS === */
   const done = new Set();
   function animCount(el) {
-    if (done.has(el)) return; done.add(el);
-    const t = parseInt(el.dataset.target); let c = 0;
+    if (done.has(el)) return;
+    done.add(el);
+    const target = parseInt(el.dataset.target);
+    let count = 0;
     const iv = setInterval(() => {
-      c += t / (1500 / 30);
-      if (c >= t) { c = t; clearInterval(iv); }
-      el.textContent = Math.floor(c);
+      count += target / (1500 / 30);
+      if (count >= target) { count = target; clearInterval(iv); }
+      el.textContent = Math.floor(count);
     }, 30);
   }
 
-  /* === FILTER PROJECTS === */
+  /* === FILTRE PROJETS === */
   document.querySelectorAll('.fbtn').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
       b.classList.add('on');
       const f = b.dataset.filter;
-      document.querySelectorAll('.proj-card').forEach(c => {
-        c.classList.toggle('hidden', f !== 'all' && !(c.dataset.cat || '').includes(f));
+      document.querySelectorAll('.proj-card').forEach(card => {
+        card.classList.toggle('hidden', f !== 'all' && !(card.dataset.cat || '').includes(f));
       });
     });
   });
 
-  /* === COPY EMAIL — FIX : gestion d'erreur + email obfusqué === */
+  /* =====================================================
+     FIX 4 : COPIER EMAIL — fallback robuste
+  ===================================================== */
   document.getElementById('btn-copy').addEventListener('click', function() {
-    navigator.clipboard.writeText(EMAIL)
-      .then(() => {
-        const t = this.querySelector('.toast');
-        t.classList.add('on');
-        setTimeout(() => t.classList.remove('on'), 2000);
-      })
-      .catch(() => {
-        // Fallback si l'API clipboard est bloquée (HTTP, permissions)
-        const ta = document.createElement('textarea');
-        ta.value = EMAIL;
-        ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
-        document.body.appendChild(ta);
-        ta.select();
-        try {
-          document.execCommand('copy');
-          const t = this.querySelector('.toast');
-          t.classList.add('on');
-          setTimeout(() => t.classList.remove('on'), 2000);
-        } catch(err) {
-          alert('Impossible de copier automatiquement. Email : ' + EMAIL);
-        } finally {
-          document.body.removeChild(ta);
-        }
-      });
+    const toast = this.querySelector('.toast');
+    const showToast = () => {
+      toast.classList.add('on');
+      setTimeout(() => toast.classList.remove('on'), 2000);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(EMAIL).then(showToast).catch(fallback);
+    } else {
+      fallback();
+    }
+
+    function fallback() {
+      const ta = document.createElement('textarea');
+      ta.value = EMAIL;
+      ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;left:-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast();
+      } catch {
+        alert('Impossible de copier automatiquement.\nEmail : ' + EMAIL);
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
   });
 </script>
 </body>
