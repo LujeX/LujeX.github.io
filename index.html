@@ -880,8 +880,7 @@
   /* =====================================================
      EMAIL — obfuscation
   ===================================================== */
-  const EMAIL = ['moninjules58', 'gmail', 'com'].join(String.fromCharCode(64) + '.')
-                  .replace(/\.\./g, '.');
+  const EMAIL = 'moninjules58' + String.fromCharCode(64) + 'gmail.com';
 
   document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
 
