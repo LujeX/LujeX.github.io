@@ -3,14 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Jules MONIN - Étudiant BTS SIO option SISR">
-  <!-- FIX : meta theme-color pour mobile -->
+  <meta name="description" content="Portfolio de Jules MONIN — Étudiant BTS SIO option SISR, administration système et réseau à Nevers.">
   <meta name="theme-color" content="#0d1b2a">
+
+  <!-- ===================================================
+       FIX 1 : OPEN GRAPH & TWITTER CARD
+       Remplacer l'URL par votre domaine réel.
+       og:image → assets/og-preview.jpg (1200×630px requis)
+  =================================================== -->
+  <meta property="og:title" content="Portfolio — Jules MONIN | BTS SIO SISR">
+  <meta property="og:description" content="Étudiant BTS SIO option SISR — Administration système et réseau. Nevers, France.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lujex.github.io/portfolio/">
+  <meta property="og:image" content="https://lujex.github.io/portfolio/assets/og-preview.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio — Jules MONIN | BTS SIO SISR">
+  <meta name="twitter:description" content="Admin Sys & Réseau · BTS SIO SISR · Nevers">
+  <meta name="twitter:image" content="https://lujex.github.io/portfolio/assets/og-preview.jpg">
+
   <title>Portfolio — MONIN Jules</title>
+
+  <!-- ===================================================
+       FIX 2 : CHARGEMENT NON-BLOQUANT DES POLICES
+       Technique : preconnect + preload as="style" + media="print" swap
+       Évite le render-blocking tout en conservant font-display:swap.
+  =================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <!-- Préchargement de la feuille de style (non-bloquant) -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <!-- Chargement différé via media="print" → basculé en "all" après load -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    media="print" onload="this.media='all'">
+  <!-- Fallback sans JS -->
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  </noscript>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     /* === THEME NUIT (unique) === */
     :root {
@@ -31,7 +66,6 @@
     html{scroll-behavior:smooth}
     body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text-body);background:var(--bg);
       background-attachment:fixed;min-height:100vh;overflow-x:hidden}
-    /* FIX : cursor:none uniquement si JS confirme que le curseur custom est actif */
     body.custom-cursor-ready{cursor:none}
     body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       background:radial-gradient(ellipse 80% 60% at 20% 10%,var(--bg-b1) 0%,transparent 60%),
@@ -69,7 +103,6 @@
     body.nav-open #hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
     /* === NAV === */
-    /* FIX : role="navigation" supprimé (redondant avec <nav>) — aria-label ajouté */
     nav{position:fixed;left:0;top:0;width:var(--nav-w);height:100vh;
       background:var(--nav-bg);backdrop-filter:blur(20px);border-right:1px solid var(--nav-border);
       box-shadow:4px 0 24px var(--nav-shadow);padding:32px 20px 24px;
@@ -121,6 +154,7 @@
       .proj-grid,.ep-grid{grid-template-columns:1fr}
       .v-item{flex-direction:column}
       .stats-row{justify-content:center}
+      .contact-form-row{grid-template-columns:1fr}
     }
 
     /* === MAIN / SECTIONS === */
@@ -145,11 +179,20 @@
     /* === HERO === */
     #profil{flex-direction:row;align-items:center;gap:60px;min-height:100vh}
     .hero-img-wrap{flex-shrink:0;position:relative}
-    /* FIX : width/height explicites sur le conteneur pour éviter le CLS */
     .hero-img-frame{width:320px;height:420px;border-radius:18px;overflow:hidden;position:relative;
-      box-shadow:var(--shadow-lg),0 0 0 1px var(--border);transition:transform .3s,box-shadow .3s}
+      box-shadow:var(--shadow-lg),0 0 0 1px var(--border);transition:transform .3s,box-shadow .3s;
+      /* FIX 3 : fond de secours affiché si l'image locale est absente */
+      background:linear-gradient(135deg,#1a2332 0%,#141d2b 100%)}
     .hero-img-frame:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(0,0,0,.6),0 0 0 1px var(--border)}
     .hero-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Icône de remplacement affichée si l'image échoue (géré via JS onerror) */
+    .hero-img-fallback{display:none;width:100%;height:100%;
+      align-items:center;justify-content:center;flex-direction:column;gap:14px;
+      color:var(--accent);opacity:.5}
+    .hero-img-fallback i{font-size:64px}
+    .hero-img-fallback span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-soft)}
+    .hero-img-frame.img-error img{display:none}
+    .hero-img-frame.img-error .hero-img-fallback{display:flex}
     .hero-img-wrap::before{content:'';position:absolute;bottom:-16px;right:-16px;
       width:320px;height:420px;border-radius:18px;background:var(--accent-grad);opacity:.15;z-index:-1}
     .hero-badge{position:absolute;top:14px;left:14px;background:rgba(20,29,43,.92);
@@ -345,15 +388,49 @@
 
     /* === CONTACT === */
     .contact-inner{background:var(--surface);border:1px solid var(--border-soft);
-      border-radius:20px;padding:50px 40px;text-align:center;box-shadow:var(--shadow-md)}
-    .contact-inner p{font-size:16px;color:var(--text-soft);margin-bottom:32px}
-    .contact-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+      border-radius:20px;padding:50px 40px;box-shadow:var(--shadow-md)}
+    .contact-inner>p{font-size:16px;color:var(--text-soft);margin-bottom:28px;text-align:center}
+    .contact-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:36px}
     .btn-copy{position:relative}
     .toast{position:absolute;top:-38px;left:50%;transform:translateX(-50%);
       background:var(--accent-grad);color:#fff;padding:5px 12px;border-radius:7px;
       font-size:12px;font-weight:700;white-space:nowrap;opacity:0;pointer-events:none;
       transition:opacity .3s;box-shadow:0 4px 12px rgba(109,200,232,.3)}
     .toast.on{opacity:1}
+
+    /* ===================================================
+       FIX 5 : FORMULAIRE DE CONTACT
+    =================================================== */
+    .contact-divider{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+    .contact-divider span{font-size:12px;font-family:'JetBrains Mono',monospace;
+      color:var(--text-xsoft);white-space:nowrap}
+    .contact-divider::before,.contact-divider::after{content:'';flex:1;
+      height:1px;background:var(--border-soft)}
+
+    .contact-form{display:grid;gap:18px}
+    .contact-form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .form-group{display:flex;flex-direction:column;gap:7px}
+    .form-group label{font-size:12px;font-weight:600;color:var(--text-soft);
+      font-family:'JetBrains Mono',monospace;letter-spacing:.3px}
+    .form-group input,.form-group textarea{
+      background:var(--surface-2);border:1.5px solid var(--border-soft);
+      border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text-h);
+      font-family:'Plus Jakarta Sans',sans-serif;transition:border-color .2s,box-shadow .2s;
+      resize:vertical;outline:none}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-xsoft)}
+    .form-group input:focus,.form-group textarea:focus{
+      border-color:var(--accent);box-shadow:0 0 0 3px rgba(109,200,232,.1)}
+    .form-submit{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+    .form-notice{font-size:12px;color:var(--text-xsoft);font-family:'JetBrains Mono',monospace}
+    .form-success{display:none;align-items:center;gap:8px;
+      background:linear-gradient(135deg,rgba(74,154,187,.12),rgba(109,200,232,.08));
+      border:1px solid var(--border);border-radius:10px;padding:12px 18px;
+      color:var(--accent);font-size:14px;font-weight:600;margin-top:6px}
+    .form-success i{font-size:16px}
+    .form-error{display:none;align-items:center;gap:8px;
+      background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);
+      border-radius:10px;padding:12px 18px;
+      color:#e74c3c;font-size:14px;font-weight:600;margin-top:6px}
   </style>
 </head>
 
@@ -369,7 +446,6 @@
   <span></span><span></span><span></span>
 </button>
 
-<!-- FIX : role="navigation" supprimé (redondant), aria-label ajouté pour l'accessibilité -->
 <nav id="main-nav" aria-label="Navigation principale">
   <div class="nav-logo">
     <div class="nav-logo-name">MONIN Jules</div>
@@ -392,19 +468,29 @@
 <main role="main">
 
   <!-- PROFIL -->
-  <!-- FIX : aria-label sur chaque section pour les lecteurs d'écran -->
   <section id="profil" aria-label="Profil">
     <div class="hero-img-wrap reveal">
-      <div class="hero-img-frame">
-        <!-- REMPLACER par votre vraie photo — width/height définis pour éviter le layout shift (CLS) -->
+      <div class="hero-img-frame" id="hero-frame">
+        <!--
+          FIX 3 : IMAGE LOCALE — remplacer l'URL Unsplash par assets/hero-infra.jpg
+          Le fallback SVG s'affiche automatiquement si le fichier est absent (voir JS onerror).
+          Dimensions recommandées : 640×840px, format WebP ou JPEG optimisé (< 120 Ko).
+        -->
         <img
-          src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=640&q=80"
+          src="assets/hero-infra.jpg"
           alt="Infrastructure réseau et serveurs — SISR"
           width="320"
           height="420"
           loading="eager"
           decoding="async"
+          id="hero-img"
+          onerror="document.getElementById('hero-frame').classList.add('img-error');this.onerror=null;"
         >
+        <!-- Affiché uniquement si l'image échoue -->
+        <div class="hero-img-fallback" aria-hidden="true">
+          <i class="fa-solid fa-server"></i>
+          <span>hero-infra.jpg manquant</span>
+        </div>
         <div class="hero-badge">Admin Sys &amp; Réseau</div>
       </div>
     </div>
@@ -422,7 +508,6 @@
         <div class="stat-box"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Stages effectués</div></div>
       </div>
       <div class="btns reveal d3">
-        <!-- FIX : vérifier que cv.pdf existe à la racine du site -->
         <a href="cv.pdf" class="btn btn-solid" download><i class="fa-solid fa-download" aria-hidden="true"></i> CV.pdf</a>
         <a href="#contact" class="btn btn-outline">Me contacter</a>
       </div>
@@ -479,7 +564,7 @@
       <h3>Stage — 1ère année BTS SIO</h3>
       <div class="stage-lieu"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Conseil Départemental de la Nièvre — DSIN</div>
       <div class="stage-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i>1ère année BTS SIO · 2024 – 2025</div>
-      <p>Retour au sein de la Direction des Systèmes d'Information de la Nièvre (DSIN) dans le cadre du BTS SIO. Cette nouvelle immersion m'a permis d'approfondir mes compétences en administration système et réseau dans un environnement de production, avec des responsabilités accrues par rapport au stage de Bac Pro.</p>
+      <p>Retour au sein de la Direction des Systèmes d'Information de la Nièvre (DSIN) dans le cadre du BTS SIO. Cette nouvelle immersion m'a permis d'approfondir mes compétences en administration système et réseau dans un environnement de production, avec des responsabilités accrues.</p>
       <ul class="stage-missions">
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Administration et gestion des comptes utilisateurs dans Active Directory</li>
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Mise en place et configuration de stratégies de groupe (GPO)</li>
@@ -561,7 +646,7 @@
       <div class="proj-card reveal d3" data-cat="supervision reseau">
         <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-tower-broadcast"></i></div>
         <h3>Supervision Nagios</h3>
-        <p>Mise en place d'une infrastructure de supervision réseau avec Nagios. Monitoring des hôtes, services (HTTP, SSH, ping) et alertes par e-mail. Configuration des sondes et des seuils d'alerte.</p>
+        <p>Mise en place d'une infrastructure de supervision réseau avec Nagios. Monitoring des hôtes, services (HTTP, SSH, ping) et alertes par e-mail.</p>
         <div class="tags-sm"><span>Nagios</span><span>Linux</span><span>SNMP</span><span>NRPE</span></div>
         <a href="procedure_nagios.pdf" download class="btn-dl">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
@@ -591,11 +676,11 @@
           <div class="cert-score-num">446 <span>/ 895</span></div>
           <div class="cert-score-lbl">Niveau global — <strong>Indépendant 2</strong></div>
         </div>
-        <p class="cert-desc">À l'aise dans toutes les situations courantes du numérique : recherche d'information fiable, outils collaboratifs, pratiques sécurisées (données personnelles, protection des appareils) et usages responsables.</p>
+        <p class="cert-desc">À l'aise dans toutes les situations courantes du numérique : recherche d'information fiable, outils collaboratifs, pratiques sécurisées et usages responsables.</p>
         <div class="cert-verify">
           <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
-          Code de vérification : <strong>P-JR969VDX</strong>
-          <a href="https://app.pix.fr/verification-certificat" target="_blank" rel="noopener noreferrer" class="cert-verify-link">Vérifier sur app.pix.fr</a>
+          Code : <strong>P-JR969VDX</strong>
+          <a href="https://app.pix.fr/verification-certificat" target="_blank" rel="noopener noreferrer" class="cert-verify-link">Vérifier sur pix.fr</a>
         </div>
         <a href="certification-pix-20260120.pdf" download class="btn-dl" style="margin-top:16px">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
@@ -686,12 +771,13 @@
     <div class="section-title"><span class="num">08</span><h2>Contact</h2></div>
     <div class="contact-inner reveal">
       <p>Mon profil vous intéresse ? Je suis disponible pour toute opportunité de stage ou de collaboration.</p>
+
+      <!-- Boutons rapides -->
       <div class="contact-btns">
         <button class="btn btn-outline btn-copy" id="btn-copy" type="button">
           <i class="fa-solid fa-copy" aria-hidden="true"></i> Copier l'email
           <span class="toast" role="status" aria-live="polite">✓ Copié !</span>
         </button>
-        <!-- FIX : href rempli par JS dès le chargement, pas de href="#" -->
         <a id="mailto-link" href="#contact" class="btn btn-solid">
           <i class="fa-solid fa-envelope" aria-hidden="true"></i> Envoyer un mail
         </a>
@@ -699,6 +785,84 @@
           <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
         </a>
       </div>
+
+      <!-- Séparateur -->
+      <div class="contact-divider">
+        <span>ou via le formulaire</span>
+      </div>
+
+      <!--
+        FIX 5 : FORMULAIRE DE CONTACT (Formspree)
+        Étapes :
+          1. Créer un compte gratuit sur https://formspree.io
+          2. Créer un nouveau formulaire → copier l'ID (ex: xpwzabcd)
+          3. Remplacer VOTRE_FORM_ID ci-dessous par cet ID
+        Le plan gratuit autorise 50 soumissions/mois, sans serveur requis.
+      -->
+      <form
+        id="contact-form"
+        class="contact-form"
+        action="https://formspree.io/f/VOTRE_FORM_ID"
+        method="POST"
+        novalidate
+      >
+        <div class="contact-form-row">
+          <div class="form-group">
+            <label for="cf-name">Nom complet</label>
+            <input
+              type="text"
+              id="cf-name"
+              name="name"
+              placeholder="Jean Dupont"
+              required
+              autocomplete="name"
+            >
+          </div>
+          <div class="form-group">
+            <label for="cf-email">Adresse email</label>
+            <input
+              type="email"
+              id="cf-email"
+              name="email"
+              placeholder="jean@exemple.fr"
+              required
+              autocomplete="email"
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cf-subject">Objet</label>
+          <input
+            type="text"
+            id="cf-subject"
+            name="subject"
+            placeholder="Opportunité de stage / Collaboration / Question"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="cf-message">Message</label>
+          <textarea
+            id="cf-message"
+            name="message"
+            rows="5"
+            placeholder="Bonjour Jules, je vous contacte au sujet de…"
+            required
+          ></textarea>
+        </div>
+        <div class="form-submit">
+          <span class="form-notice">Réponse sous 48h · Données transmises via Formspree</span>
+          <button type="submit" class="btn btn-solid" id="form-btn">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message
+          </button>
+        </div>
+        <div class="form-success" id="form-success" role="status" aria-live="polite">
+          <i class="fa-solid fa-circle-check"></i> Message envoyé avec succès — je vous répondrai rapidement.
+        </div>
+        <div class="form-error" id="form-error" role="alert" aria-live="polite">
+          <i class="fa-solid fa-circle-exclamation"></i> Une erreur est survenue. Merci de réessayer ou d'utiliser le bouton « Envoyer un mail » ci-dessus.
+        </div>
+      </form>
     </div>
   </section>
 
@@ -706,20 +870,15 @@
 
 <script>
   /* =====================================================
-     FIX 1 : EMAIL — obfuscation propre, une seule variable
-     Aucun email en clair dans le source HTML
+     EMAIL — obfuscation
   ===================================================== */
   const EMAIL = ['moninjules58', 'gmail', 'com'].join(String.fromCharCode(64) + '.')
-                  .replace(/\.\./g, '.'); // → moninjules58@gmail.com
+                  .replace(/\.\./g, '.');
 
-  // Injection du lien mailto dès que le DOM est prêt (pas de href="#")
-  const mailtoLink = document.getElementById('mailto-link');
-  mailtoLink.href = 'mailto:' + EMAIL;
+  document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
 
   /* =====================================================
-     FIX 2 : CURSEUR CUSTOM — avec fallback
-     cursor:none n'est appliqué que si le curseur custom
-     est réellement supporté (pas de JS échoué silencieux)
+     CURSEUR CUSTOM
   ===================================================== */
   const cur    = document.getElementById('cur');
   const curDot = document.getElementById('cur-dot');
@@ -743,7 +902,7 @@
   initCursor();
   window.addEventListener('resize', () => {
     if (!isDesktop()) {
-      document.body.classList.remove('custom-cursor-ready','cur-active');
+      document.body.classList.remove('custom-cursor-ready', 'cur-active');
     } else {
       document.body.classList.add('custom-cursor-ready');
     }
@@ -765,11 +924,7 @@
     nls.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
   }, { passive: true });
 
-  /* =====================================================
-     FIX 3 : HAMBURGER & NAV
-     Pas de classe initiale dans le HTML → pas de flash.
-     JS décide de l'état immédiatement.
-  ===================================================== */
+  /* === HAMBURGER & NAV === */
   const hamburger = document.getElementById('hamburger');
   const overlay   = document.getElementById('nav-overlay');
   const isMobile  = () => window.innerWidth <= 900;
@@ -789,7 +944,6 @@
   }
 
   isMobile() ? closeNav() : openNav();
-
   hamburger.addEventListener('click', () => { navIsOpen() ? closeNav() : openNav(); });
   overlay.addEventListener('click', closeNav);
   nls.forEach(l => l.addEventListener('click', () => { if (isMobile()) closeNav(); }));
@@ -801,39 +955,41 @@
   /* === COPYRIGHT === */
   document.querySelector('.copyright').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN';
 
-  /* === REVEAL (Intersection Observer) === */
+  /* =====================================================
+     FIX 4 : REVEAL + COMPTEURS ANIMÉS
+     Unification en un seul chemin (IntersectionObserver).
+     obs.unobserve() après déclenchement → plus de double appel possible.
+     La Set `done` reste présente comme garde de sécurité secondaire.
+  ===================================================== */
+  const done = new Set();
+
+  function animCount(el) {
+    if (done.has(el)) return;
+    done.add(el); // Ajout synchrone — JS est mono-thread, pas de race condition
+    const target = parseInt(el.dataset.target, 10);
+    let count = 0;
+    const step = target / (1500 / 30); // ~50 frames sur 1,5s
+    const iv = setInterval(() => {
+      count += step;
+      if (count >= target) {
+        count = target;
+        clearInterval(iv);
+      }
+      el.textContent = Math.floor(count);
+    }, 30);
+  }
+
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       e.target.classList.add('visible');
+      // Compteurs : déclenchés une seule fois puis l'élément n'est plus observé
       e.target.querySelectorAll('.stat-num[data-target]').forEach(animCount);
+      obs.unobserve(e.target); // ← supprime le double-déclenchement
     });
   }, { threshold: 0.12 });
+
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // Éléments déjà visibles au chargement
-  setTimeout(() => {
-    document.querySelectorAll('.reveal').forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight) {
-        el.classList.add('visible');
-        el.querySelectorAll('.stat-num[data-target]').forEach(animCount);
-      }
-    });
-  }, 150);
-
-  /* === COMPTEURS ANIMÉS === */
-  const done = new Set();
-  function animCount(el) {
-    if (done.has(el)) return;
-    done.add(el);
-    const target = parseInt(el.dataset.target);
-    let count = 0;
-    const iv = setInterval(() => {
-      count += target / (1500 / 30);
-      if (count >= target) { count = target; clearInterval(iv); }
-      el.textContent = Math.floor(count);
-    }, 30);
-  }
 
   /* === FILTRE PROJETS === */
   document.querySelectorAll('.fbtn').forEach(b => {
@@ -847,37 +1003,70 @@
     });
   });
 
-  /* =====================================================
-     FIX 4 : COPIER EMAIL — fallback robuste
-  ===================================================== */
+  /* === COPIER EMAIL — fallback robuste === */
   document.getElementById('btn-copy').addEventListener('click', function() {
     const toast = this.querySelector('.toast');
     const showToast = () => {
       toast.classList.add('on');
       setTimeout(() => toast.classList.remove('on'), 2000);
     };
-
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(EMAIL).then(showToast).catch(fallback);
     } else {
       fallback();
     }
-
     function fallback() {
       const ta = document.createElement('textarea');
       ta.value = EMAIL;
       ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;left:-9999px';
       document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      try {
-        document.execCommand('copy');
-        showToast();
-      } catch {
-        alert('Impossible de copier automatiquement.\nEmail : ' + EMAIL);
-      } finally {
-        document.body.removeChild(ta);
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); showToast(); }
+      catch { alert('Email : ' + EMAIL); }
+      finally { document.body.removeChild(ta); }
+    }
+  });
+
+  /* =====================================================
+     FIX 5 : FORMULAIRE DE CONTACT — soumission AJAX
+     Gère les états loading / succès / erreur sans rechargement.
+  ===================================================== */
+  const form    = document.getElementById('contact-form');
+  const formBtn = document.getElementById('form-btn');
+  const formOk  = document.getElementById('form-success');
+  const formErr = document.getElementById('form-error');
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    // Validation HTML5 native
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    // État chargement
+    formBtn.disabled = true;
+    formBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Envoi en cours…';
+    formOk.style.display = 'none';
+    formErr.style.display = 'none';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.reset();
+        formOk.style.display = 'flex';
+        formOk.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        formErr.style.display = 'flex';
       }
+    } catch {
+      formErr.style.display = 'flex';
+    } finally {
+      formBtn.disabled = false;
+      formBtn.innerHTML = '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message';
     }
   });
 </script>
