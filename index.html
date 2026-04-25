@@ -431,6 +431,52 @@
       background:rgba(231,76,60,.08);border:1px solid rgba(231,76,60,.2);
       border-radius:10px;padding:12px 18px;
       color:#e74c3c;font-size:14px;font-weight:600;margin-top:6px}
+
+    /* === RÉALISATIONS PROFESSIONNELLES === */
+    .rp-synthese{background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);padding:28px 32px;display:flex;align-items:center;
+      justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:32px;
+      box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+    .rp-synthese::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+      background:linear-gradient(to bottom,#4a9abb,#6dc8e8)}
+    .rp-synthese-left{display:flex;align-items:flex-start;gap:20px;flex:1;min-width:0}
+    .rp-synthese-icon{width:52px;height:52px;border-radius:14px;flex-shrink:0;
+      background:var(--accent-grad);display:flex;align-items:center;justify-content:center;
+      font-size:24px;color:#fff;box-shadow:0 4px 14px rgba(109,200,232,.25)}
+    .rp-synthese-label{font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:600;
+      color:var(--c4);background:linear-gradient(135deg,rgba(74,154,187,.12),rgba(109,200,232,.08));
+      border:1px solid var(--border);padding:3px 10px;border-radius:6px;
+      display:inline-block;margin-bottom:6px}
+    .rp-synthese-title{font-size:18px;font-weight:700;color:var(--text-h);margin-bottom:6px}
+    .rp-synthese-desc{font-size:13.5px;color:var(--text-body);line-height:1.65;margin:0}
+    .btn-dl-rp{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;
+      padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;
+      font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;
+      background:var(--accent-grad);color:#fff;border:none;
+      box-shadow:0 4px 14px rgba(109,200,232,.25);transition:all .22s;white-space:nowrap}
+    .btn-dl-rp:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(109,200,232,.35)}
+    .rp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+    .rp-card{background:var(--surface);border:1px solid var(--border-soft);
+      border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);
+      transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column}
+    .rp-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:rgba(109,200,232,.22)}
+    .rp-card-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:14px}
+    .rp-num{width:48px;height:48px;border-radius:12px;flex-shrink:0;
+      background:var(--accent-grad);display:flex;align-items:center;justify-content:center;
+      font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:800;color:#fff;
+      box-shadow:0 4px 14px rgba(109,200,232,.25)}
+    .rp-card-label{font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:600;
+      color:var(--c4);background:linear-gradient(135deg,rgba(74,154,187,.12),rgba(109,200,232,.08));
+      border:1px solid var(--border);padding:3px 10px;border-radius:6px;
+      display:inline-block;margin-bottom:6px}
+    .rp-card-meta h3{font-size:16px;font-weight:700;color:var(--text-h);margin:0}
+    .rp-lieu{display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,rgba(74,154,187,.1),rgba(109,200,232,.07));
+      border:1px solid var(--border);color:var(--c4);font-size:12px;font-weight:600;
+      padding:5px 12px;border-radius:8px;margin-bottom:14px;font-family:'JetBrains Mono',monospace}
+    .rp-lieu i{color:var(--accent);font-size:11px}
+    .rp-card p{font-size:13.5px;color:var(--text-body);line-height:1.65;flex:1;margin-bottom:0}
+    @media(max-width:900px){.rp-synthese{flex-direction:column}.rp-grid{grid-template-columns:1fr}}
   </style>
 </head>
 
@@ -457,6 +503,7 @@
   <a href="#parcours"><i class="fa-solid fa-road" aria-hidden="true"></i>Parcours</a>
   <a href="#stages"><i class="fa-solid fa-briefcase" aria-hidden="true"></i>Stages</a>
   <a href="#realisations"><i class="fa-solid fa-network-wired" aria-hidden="true"></i>Réalisations</a>
+  <a href="#rp"><i class="fa-solid fa-folder-open" aria-hidden="true"></i>Réalisations Pro.</a>
   <a href="#certifications"><i class="fa-solid fa-certificate" aria-hidden="true"></i>Certifications</a>
   <a href="#epreuves"><i class="fa-solid fa-file-contract" aria-hidden="true"></i>Épreuves</a>
   <a href="#veille"><i class="fa-solid fa-rss" aria-hidden="true"></i>Veille</a>
@@ -655,9 +702,63 @@
     </div>
   </section>
 
+  <!-- RÉALISATIONS PROFESSIONNELLES -->
+  <section id="rp" aria-label="Réalisations Professionnelles">
+    <div class="section-title"><span class="num">05</span><h2>Réalisations Professionnelles</h2></div>
+    <p class="reveal">Situations professionnelles documentées, réalisées en stage et présentées dans le cadre des épreuves du BTS SIO.</p>
+
+    <div class="rp-synthese reveal">
+      <div class="rp-synthese-left">
+        <div class="rp-synthese-icon" aria-hidden="true"><i class="fa-solid fa-table-list"></i></div>
+        <div>
+          <div class="rp-synthese-label">Document global</div>
+          <div class="rp-synthese-title">Tableau de Synthèse</div>
+          <p class="rp-synthese-desc">Récapitulatif de l'ensemble des réalisations professionnelles effectuées durant les deux années de BTS SIO, avec correspondance des compétences du référentiel.</p>
+        </div>
+      </div>
+      <a href="tableau_synthese_rp.pdf" download class="btn-dl-rp">
+        <i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Télécharger le tableau de synthèse
+      </a>
+    </div>
+
+    <div class="rp-grid">
+      <div class="rp-card reveal d1">
+        <div class="rp-card-header">
+          <div class="rp-num">RP1</div>
+          <div class="rp-card-meta">
+            <div class="rp-card-label">Réalisation Professionnelle 1</div>
+            <h3>Infrastructure Active Directory &amp; GPO</h3>
+          </div>
+        </div>
+        <div class="rp-lieu"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Conseil Départemental de la Nièvre — DSIN</div>
+        <p>Déploiement et administration d'un domaine Windows Server avec Active Directory. Mise en place de stratégies de groupe (GPO) pour la gestion centralisée des postes et des politiques de sécurité. Intégration de partages Samba pour les environnements mixtes Windows/Linux.</p>
+        <div class="tags-sm"><span>Windows Server</span><span>Active Directory</span><span>GPO</span><span>Samba</span></div>
+        <a href="procedure_rp1_active_directory.pdf" download class="btn-dl" style="margin-top:18px">
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure RP1
+        </a>
+      </div>
+
+      <div class="rp-card reveal d2">
+        <div class="rp-card-header">
+          <div class="rp-num">RP2</div>
+          <div class="rp-card-meta">
+            <div class="rp-card-label">Réalisation Professionnelle 2</div>
+            <h3>Supervision réseau avec Nagios</h3>
+          </div>
+        </div>
+        <div class="rp-lieu"><i class="fa-solid fa-landmark" aria-hidden="true"></i>Direction Générale des Finances Publiques — DGFIP</div>
+        <p>Mise en place d'une solution de supervision réseau avec Nagios Core. Configuration du monitoring des hôtes et services critiques (HTTP, SSH, ICMP), définition des seuils d'alerte et notifications par e-mail. Déploiement des sondes NRPE sur les machines distantes.</p>
+        <div class="tags-sm"><span>Nagios</span><span>Linux</span><span>NRPE</span><span>SNMP</span></div>
+        <a href="procedure_rp2_nagios.pdf" download class="btn-dl" style="margin-top:18px">
+          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure RP2
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- CERTIFICATIONS -->
   <section id="certifications" aria-label="Certifications">
-    <div class="section-title"><span class="num">05</span><h2>Certifications</h2></div>
+    <div class="section-title"><span class="num">06</span><h2>Certifications</h2></div>
     <p class="reveal">Certifications obtenues au cours de mon parcours de formation.</p>
     <div class="cert-grid">
       <div class="cert-card reveal">
@@ -712,7 +813,7 @@
 
   <!-- ÉPREUVES -->
   <section id="epreuves" aria-label="Épreuves du BTS SIO">
-    <div class="section-title"><span class="num">06</span><h2>Épreuves</h2></div>
+    <div class="section-title"><span class="num">07</span><h2>Épreuves</h2></div>
     <p class="reveal">Les épreuves du BTS SIO évaluent les compétences acquises sur les deux années de formation.</p>
     <div class="ep-grid">
       <div class="ep-card reveal">
@@ -738,7 +839,7 @@
 
   <!-- VEILLE -->
   <section id="veille" aria-label="Veille technologique">
-    <div class="section-title"><span class="num">07</span><h2>Veille Technologique</h2></div>
+    <div class="section-title"><span class="num">08</span><h2>Veille Technologique</h2></div>
     <p class="reveal">Deux thématiques qui façonnent l'avenir de l'informatique.</p>
     <div class="veille-list">
       <div class="v-item reveal">
@@ -776,7 +877,7 @@
 
   <!-- CONTACT -->
   <section id="contact" aria-label="Contact">
-    <div class="section-title"><span class="num">08</span><h2>Contact</h2></div>
+    <div class="section-title"><span class="num">09</span><h2>Contact</h2></div>
     <div class="contact-inner reveal">
       <p>Mon profil vous intéresse ? Je suis disponible pour toute opportunité de stage ou de collaboration.</p>
 
