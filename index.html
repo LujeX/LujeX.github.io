@@ -6,11 +6,7 @@
   <meta name="description" content="Portfolio de Jules MONIN — Étudiant BTS SIO option SISR, administration système et réseau à Nevers.">
   <meta name="theme-color" content="#0d1b2a">
 
-  <!-- ===================================================
-       FIX 1 : OPEN GRAPH & TWITTER CARD
-       Remplacer l'URL par votre domaine réel.
-       og:image → assets/og-preview.jpg (1200×630px requis)
-  =================================================== -->
+  <!-- OPEN GRAPH & TWITTER CARD -->
   <meta property="og:title" content="Portfolio — Jules MONIN | BTS SIO SISR">
   <meta property="og:description" content="Étudiant BTS SIO option SISR — Administration système et réseau. Nevers, France.">
   <meta property="og:type" content="website">
@@ -24,21 +20,14 @@
 
   <title>Portfolio — MONIN Jules</title>
 
-  <!-- ===================================================
-       FIX 2 : CHARGEMENT NON-BLOQUANT DES POLICES
-       Technique : preconnect + preload as="style" + media="print" swap
-       Évite le render-blocking tout en conservant font-display:swap.
-  =================================================== -->
+  <!-- CHARGEMENT NON-BLOQUANT DES POLICES -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Préchargement de la feuille de style (non-bloquant) -->
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
-  <!-- Chargement différé via media="print" → basculé en "all" après load -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
     media="print" onload="this.media='all'">
-  <!-- Fallback sans JS -->
   <noscript>
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -162,10 +151,107 @@
     p{line-height:1.75;color:var(--text-body);margin-bottom:16px}
     strong{color:var(--text-h);font-weight:600}
 
-    /* === REVEAL === */
-    .reveal{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+    /* ===================================================
+       ✨ ANIMATIONS RÉVÉLATION AMÉLIORÉES
+       Sans flou (blur) — fade + translate + scale + rotations
+       Courbes d'accélération naturelles (cubic-bezier)
+    =================================================== */
+    
+    /* --- Animation principale (par défaut) --- */
+    .reveal{
+      opacity: 0;
+      transform: translateY(45px) scale(0.97);
+      transition:
+        opacity 0.7s cubic-bezier(.25,.46,.45,.94),
+        transform 0.7s cubic-bezier(.25,.46,.45,.94);
+      will-change: opacity, transform;
+    }
+    .reveal.visible{
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Délais échelonnés pour l'effet cascade */
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.18s; }
+    .d3 { transition-delay: 0.30s; }
+    .d4 { transition-delay: 0.42s; }
+    .d5 { transition-delay: 0.54s; }
+
+    /* --- Animation pour les cartes de projet/cert/RP (rotation perspective) --- */
+    .proj-card.reveal,
+    .cert-card.reveal,
+    .ep-card.reveal,
+    .rp-card.reveal {
+      transform: translateY(50px) scale(0.95) rotateX(4deg);
+      transition:
+        opacity 0.8s cubic-bezier(.25,.46,.45,.94),
+        transform 0.8s cubic-bezier(.25,.46,.45,.94),
+        box-shadow 0.8s ease;
+    }
+    .proj-card.reveal.visible,
+    .cert-card.reveal.visible,
+    .ep-card.reveal.visible,
+    .rp-card.reveal.visible {
+      transform: translateY(0) scale(1) rotateX(0deg);
+    }
+
+    /* --- Animation pour le hero image (arrivée latérale gauche + rotation 3D) --- */
+    #profil .hero-img-wrap.reveal {
+      transform: translateX(-60px) scale(0.9) rotateY(-5deg);
+      opacity: 0;
+      transition:
+        opacity 1s cubic-bezier(.22,1,.36,1),
+        transform 1s cubic-bezier(.22,1,.36,1);
+    }
+    #profil .hero-img-wrap.reveal.visible {
+      transform: translateX(0) scale(1) rotateY(0deg);
+      opacity: 1;
+    }
+
+    /* --- Animation pour le hero text (arrivée latérale droite) --- */
+    #profil .hero-text .reveal {
+      transform: translateX(40px) scale(0.97);
+      opacity: 0;
+    }
+    #profil .hero-text .reveal.visible {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+
+    /* --- Animation pour la timeline (arrivée diagonale) --- */
+    .t-item .reveal {
+      transform: translateX(-30px) translateY(20px) scale(0.98);
+    }
+    .t-item .reveal.visible {
+      transform: translateX(0) translateY(0) scale(1);
+    }
+
+    /* --- Animation pour les statistiques (effet bounce/rebond) --- */
+    .stat-box.reveal {
+      transform: translateY(30px) scale(0.85);
+      opacity: 0;
+      transition:
+        opacity 0.6s cubic-bezier(.34,1.56,.64,1),
+        transform 0.6s cubic-bezier(.34,1.56,.64,1);
+    }
+    .stat-box.reveal.visible {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* --- Animation pour le contact (entrée large et douce) --- */
+    #contact .contact-inner.reveal {
+      transform: translateY(60px) scale(0.98);
+      opacity: 0;
+      transition:
+        opacity 0.9s cubic-bezier(.25,.46,.45,.94),
+        transform 0.9s cubic-bezier(.25,.46,.45,.94);
+    }
+    #contact .contact-inner.reveal.visible {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
 
     /* === HERO === */
     #profil{flex-direction:row;align-items:center;gap:60px;min-height:100vh}
@@ -279,7 +365,7 @@
       background:linear-gradient(135deg,rgba(74,154,187,.1),rgba(109,200,232,.07));
       border:1px solid var(--border);padding:3px 9px;border-radius:6px}
 
-    /* === STAGES DOCS === */
+    /* === STAGE DOCS === */
     .stage-docs{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
 
     /* === CERTIFICATIONS === */
@@ -387,9 +473,7 @@
       transition:opacity .3s;box-shadow:0 4px 12px rgba(109,200,232,.3)}
     .toast.on{opacity:1}
 
-    /* ===================================================
-       FIX 5 : FORMULAIRE DE CONTACT
-    =================================================== */
+    /* FORMULAIRE DE CONTACT */
     .contact-divider{display:flex;align-items:center;gap:14px;margin-bottom:28px}
     .contact-divider span{font-size:12px;font-family:'JetBrains Mono',monospace;
       color:var(--text-xsoft);white-space:nowrap}
@@ -561,11 +645,6 @@
   <section id="profil" aria-label="Profil">
     <div class="hero-img-wrap reveal">
       <div class="hero-img-frame" id="hero-frame">
-        <!--
-          FIX 3 : IMAGE LOCALE — remplacer l'URL Unsplash par assets/hero-infra.jpg
-          Le fallback SVG s'affiche automatiquement si le fichier est absent (voir JS onerror).
-          Dimensions recommandées : 640×840px, format WebP ou JPEG optimisé (< 120 Ko).
-        -->
         <img
           src="assets/hero-infra.jpg"
           alt="Infrastructure réseau et serveurs — SISR"
@@ -576,7 +655,6 @@
           id="hero-img"
           onerror="document.getElementById('hero-frame').classList.add('img-error');this.onerror=null;"
         >
-        <!-- Affiché uniquement si l'image échoue -->
         <div class="hero-img-fallback" aria-hidden="true">
           <i class="fa-solid fa-server"></i>
           <span>hero-infra.jpg manquant</span>
@@ -593,9 +671,9 @@
       </div>
       <blockquote class="reveal d3">"Concevoir des architectures robustes et sécurisées pour le monde de demain."</blockquote>
       <div class="stats-row reveal d3">
-        <div class="stat-box"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Ans de formation</div></div>
-        <div class="stat-box"><div class="stat-num" data-target="4">0</div><div class="stat-lbl">Projets réalisés</div></div>
-        <div class="stat-box"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Stages effectués</div></div>
+        <div class="stat-box reveal"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Ans de formation</div></div>
+        <div class="stat-box reveal d1"><div class="stat-num" data-target="4">0</div><div class="stat-lbl">Projets réalisés</div></div>
+        <div class="stat-box reveal d2"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Stages effectués</div></div>
       </div>
       <div class="btns reveal d3">
         <a href="cv.pdf" class="btn btn-solid" download><i class="fa-solid fa-download" aria-hidden="true"></i> CV.pdf</a>
@@ -1119,14 +1197,7 @@
         <span>ou via le formulaire</span>
       </div>
 
-      <!--
-        FIX 5 : FORMULAIRE DE CONTACT (Formspree)
-        Étapes :
-          1. Créer un compte gratuit sur https://formspree.io
-          2. Créer un nouveau formulaire → copier l'ID (ex: xpwzabcd)
-          3. Remplacer VOTRE_FORM_ID ci-dessous par cet ID
-        Le plan gratuit autorise 50 soumissions/mois, sans serveur requis.
-      -->
+      <!-- FORMULAIRE DE CONTACT (Formspree) -->
       <form
         id="contact-form"
         class="contact-form"
@@ -1214,27 +1285,18 @@
 </footer>
 
 <script>
-  /* =====================================================
-     EMAIL — obfuscation
-  ===================================================== */
+  /* EMAIL — obfuscation */
   const EMAIL = 'moninjules58' + String.fromCharCode(64) + 'gmail.com';
-
   document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
 
-  /* =====================================================
-     CURSEUR CUSTOM — DÉSACTIVÉ
-     Le curseur custom est maintenant désactivé via CSS (#cur,#cur-dot{display:none !important})
-     Le code JS ci-dessous est conservé mais non exécuté car les éléments sont cachés.
-  ===================================================== */
-
-  /* === PROGRESS BAR === */
+  /* PROGRESS BAR */
   const prog = document.getElementById('prog');
   window.addEventListener('scroll', () => {
     const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
     prog.style.width = pct + '%';
   }, { passive: true });
 
-  /* === NAV ACTIVE (scroll spy) === */
+  /* NAV ACTIVE (scroll spy) */
   const secs = document.querySelectorAll('section');
   const nls  = document.querySelectorAll('nav a');
   window.addEventListener('scroll', () => {
@@ -1243,7 +1305,7 @@
     nls.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
   }, { passive: true });
 
-  /* === HAMBURGER & NAV === */
+  /* HAMBURGER & NAV */
   const hamburger = document.getElementById('hamburger');
   const overlay   = document.getElementById('nav-overlay');
   const isMobile  = () => window.innerWidth <= 900;
@@ -1271,24 +1333,19 @@
     if (isMobile()) overlay.classList.remove('show');
   });
 
-  /* === COPYRIGHT === */
+  /* COPYRIGHT */
   document.querySelector('.copyright').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN';
   document.getElementById('footer-copy').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN — Tous droits réservés';
 
-  /* =====================================================
-     FIX 4 : REVEAL + COMPTEURS ANIMÉS
-     Unification en un seul chemin (IntersectionObserver).
-     obs.unobserve() après déclenchement → plus de double appel possible.
-     La Set `done` reste présente comme garde de sécurité secondaire.
-  ===================================================== */
+  /* ANIMATIONS RÉVÉLATION — Sans flou */
   const done = new Set();
 
   function animCount(el) {
     if (done.has(el)) return;
-    done.add(el); // Ajout synchrone — JS est mono-thread, pas de race condition
+    done.add(el);
     const target = parseInt(el.dataset.target, 10);
     let count = 0;
-    const step = target / (1500 / 30); // ~50 frames sur 1,5s
+    const step = target / (1500 / 30);
     const iv = setInterval(() => {
       count += step;
       if (count >= target) {
@@ -1302,16 +1359,23 @@
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      e.target.classList.add('visible');
-      // Compteurs : déclenchés une seule fois puis l'élément n'est plus observé
+      
+      requestAnimationFrame(() => {
+        e.target.classList.add('visible');
+      });
+      
       e.target.querySelectorAll('.stat-num[data-target]').forEach(animCount);
-      obs.unobserve(e.target); // ← supprime le double-déclenchement
+      
+      obs.unobserve(e.target);
     });
-  }, { threshold: 0.12 });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -60px 0px'
+  });
 
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  /* === FILTRE PROJETS === */
+  /* FILTRE PROJETS */
   document.querySelectorAll('.fbtn').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
@@ -1323,7 +1387,7 @@
     });
   });
 
-  /* === COPIER EMAIL — fallback robuste === */
+  /* COPIER EMAIL */
   document.getElementById('btn-copy').addEventListener('click', function() {
     const toast = this.querySelector('.toast');
     const showToast = () => {
@@ -1347,10 +1411,7 @@
     }
   });
 
-  /* =====================================================
-     FIX 5 : FORMULAIRE DE CONTACT — soumission AJAX
-     Gère les états loading / succès / erreur sans rechargement.
-  ===================================================== */
+  /* FORMULAIRE DE CONTACT — soumission AJAX */
   const form    = document.getElementById('contact-form');
   const formBtn = document.getElementById('form-btn');
   const formOk  = document.getElementById('form-success');
@@ -1359,10 +1420,8 @@
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
-    // Validation HTML5 native
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
-    // État chargement
     formBtn.disabled = true;
     formBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Envoi en cours…';
     formOk.style.display = 'none';
@@ -1390,7 +1449,7 @@
     }
   });
 
-  /* === VISIONNEUSE PDF === */
+  /* VISIONNEUSE PDF */
   function togglePdf(id, file, btn) {
     const wrap   = document.getElementById('pdf-viewer-' + id);
     const iframe = document.getElementById('pdf-iframe-' + id);
@@ -1409,7 +1468,7 @@
     }
   }
 
-  /* === RETOUR EN HAUT === */
+  /* RETOUR EN HAUT */
   const backTop = document.getElementById('back-top');
   if (backTop) {
     window.addEventListener('scroll', () => {
