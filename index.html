@@ -491,6 +491,27 @@
     .footer-sep{width:32px;height:1px;background:var(--border-soft);margin:4px auto}
     .footer-copy{font-size:11px;color:var(--text-xsoft);font-family:'JetBrains Mono',monospace}
     @media(max-width:900px){.site-footer{padding:28px 22px}}
+
+    /* === VISIONNEUSE PDF INTÉGRÉE === */
+    .pdf-viewer-wrap{display:none;margin-top:18px;border-radius:var(--radius);
+      overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-md)}
+    .pdf-viewer-wrap.open{display:block}
+    .pdf-viewer-bar{background:var(--surface-2);padding:10px 16px;display:flex;
+      align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-soft)}
+    .pdf-viewer-bar span{font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--text-soft)}
+    .pdf-viewer-close{background:none;border:none;color:var(--text-soft);cursor:pointer;
+      font-size:13px;padding:4px 8px;border-radius:6px;transition:color .2s,background .2s;
+      font-family:'Plus Jakarta Sans',sans-serif;font-weight:600}
+    .pdf-viewer-close:hover{color:var(--accent);background:rgba(109,200,232,.08)}
+    .pdf-viewer-wrap iframe{display:block;width:100%;height:600px;border:none;background:#fff}
+    .btn-preview{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+      padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;
+      font-family:'Plus Jakarta Sans',sans-serif;color:var(--text-soft);text-decoration:none;
+      background:rgba(255,255,255,.04);border:1.5px solid var(--border-soft);
+      transition:all .22s;cursor:pointer;align-self:flex-start}
+    .btn-preview:hover{border-color:var(--accent);color:var(--accent);background:rgba(109,200,232,.05)}
+    .btn-preview.active{border-color:var(--accent);color:var(--accent);background:rgba(109,200,232,.08)}
+    @media(max-width:900px){.pdf-viewer-wrap iframe{height:400px}}
   </style>
 </head>
 
@@ -730,9 +751,21 @@
           <p class="rp-synthese-desc">Récapitulatif de l'ensemble des réalisations professionnelles effectuées durant les deux années de BTS SIO, avec correspondance des compétences du référentiel.</p>
         </div>
       </div>
-      <a href="tableau_synthese_rp.pdf" download class="btn-dl-rp">
-        <i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Télécharger le tableau de synthèse
-      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+        <a href="tableau_synthese_rp.pdf" download class="btn-dl-rp">
+          <i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Télécharger
+        </a>
+        <button class="btn-preview" id="btn-preview-synthese" onclick="togglePdf('synthese','tableau_synthese_rp.pdf',this)">
+          <i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu
+        </button>
+      </div>
+    </div>
+    <div class="pdf-viewer-wrap" id="pdf-viewer-synthese">
+      <div class="pdf-viewer-bar">
+        <span>tableau_synthese_rp.pdf</span>
+        <button class="pdf-viewer-close" onclick="togglePdf('synthese','tableau_synthese_rp.pdf',document.getElementById('btn-preview-synthese'))">✕ Fermer</button>
+      </div>
+      <iframe id="pdf-iframe-synthese" src="" title="Aperçu tableau de synthèse"></iframe>
     </div>
 
     <div class="rp-grid">
@@ -1209,6 +1242,25 @@
       formBtn.innerHTML = '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message';
     }
   });
+
+  /* === VISIONNEUSE PDF === */
+  function togglePdf(id, file, btn) {
+    const wrap   = document.getElementById('pdf-viewer-' + id);
+    const iframe = document.getElementById('pdf-iframe-' + id);
+    const isOpen = wrap.classList.contains('open');
+    if (isOpen) {
+      wrap.classList.remove('open');
+      iframe.src = '';
+      btn.classList.remove('active');
+      btn.innerHTML = '<i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu';
+    } else {
+      wrap.classList.add('open');
+      iframe.src = file;
+      btn.classList.add('active');
+      btn.innerHTML = '<i class="fa-solid fa-eye-slash" aria-hidden="true"></i> Masquer';
+      wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
 </script>
 </body>
 </html>
