@@ -66,7 +66,6 @@
     html{scroll-behavior:smooth}
     body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text-body);background:var(--bg);
       background-attachment:fixed;min-height:100vh;overflow-x:hidden}
-    body.custom-cursor-ready{cursor:none}
     body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       background:radial-gradient(ellipse 80% 60% at 20% 10%,var(--bg-b1) 0%,transparent 60%),
         radial-gradient(ellipse 60% 50% at 80% 80%,var(--bg-b2) 0%,transparent 55%),
@@ -74,16 +73,8 @@
       animation:bgP 12s ease-in-out infinite alternate}
     @keyframes bgP{0%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}100%{opacity:.8;transform:scale(.98)}}
 
-    /* === CURSOR === */
-    #cur{position:fixed;z-index:9999;pointer-events:none;width:28px;height:28px;transform:translate(-50%,-50%);display:none}
-    #cur::before,#cur::after{content:'';position:absolute;background:var(--accent);border-radius:2px;transition:width .15s,height .15s}
-    #cur::before{top:50%;left:0;width:100%;height:1.5px;transform:translateY(-50%)}
-    #cur::after{left:50%;top:0;width:1.5px;height:100%;transform:translateX(-50%)}
-    #cur-dot{position:fixed;z-index:10000;pointer-events:none;width:5px;height:5px;
-      border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);display:none}
-    body.custom-cursor-ready #cur,body.custom-cursor-ready #cur-dot{display:block}
-    body.cur-active #cur{opacity:.5;transform:translate(-50%,-50%) scale(1.5)}
-    @media(max-width:900px){#cur,#cur-dot{display:none !important}}
+    /* === CURSEUR CUSTOM DÉSACTIVÉ === */
+    #cur,#cur-dot{display:none !important}
 
     /* === PROGRESS BAR === */
     #prog{position:fixed;top:0;left:0;z-index:9997;height:3px;width:0%;
@@ -181,11 +172,9 @@
     .hero-img-wrap{flex-shrink:0;position:relative}
     .hero-img-frame{width:320px;height:420px;border-radius:18px;overflow:hidden;position:relative;
       box-shadow:var(--shadow-lg),0 0 0 1px var(--border);transition:transform .3s,box-shadow .3s;
-      /* FIX 3 : fond de secours affiché si l'image locale est absente */
       background:linear-gradient(135deg,#1a2332 0%,#141d2b 100%)}
     .hero-img-frame:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(0,0,0,.6),0 0 0 1px var(--border)}
     .hero-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
-    /* Icône de remplacement affichée si l'image échoue (géré via JS onerror) */
     .hero-img-fallback{display:none;width:100%;height:100%;
       align-items:center;justify-content:center;flex-direction:column;gap:14px;
       color:var(--accent);opacity:.5}
@@ -1233,35 +1222,10 @@
   document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
 
   /* =====================================================
-     CURSEUR CUSTOM
+     CURSEUR CUSTOM — DÉSACTIVÉ
+     Le curseur custom est maintenant désactivé via CSS (#cur,#cur-dot{display:none !important})
+     Le code JS ci-dessous est conservé mais non exécuté car les éléments sont cachés.
   ===================================================== */
-  const cur    = document.getElementById('cur');
-  const curDot = document.getElementById('cur-dot');
-  const isDesktop = () => window.innerWidth > 900;
-
-  function initCursor() {
-    if (!isDesktop()) return;
-    document.body.classList.add('custom-cursor-ready');
-    document.addEventListener('mousemove', e => {
-      cur.style.left    = e.clientX + 'px';
-      cur.style.top     = e.clientY + 'px';
-      curDot.style.left = e.clientX + 'px';
-      curDot.style.top  = e.clientY + 'px';
-    });
-    document.querySelectorAll('a,button,.proj-card,.t-card,.stage-card,.ep-card,.v-item,.stat-box')
-      .forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('cur-active'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('cur-active'));
-      });
-  }
-  initCursor();
-  window.addEventListener('resize', () => {
-    if (!isDesktop()) {
-      document.body.classList.remove('custom-cursor-ready', 'cur-active');
-    } else {
-      document.body.classList.add('custom-cursor-ready');
-    }
-  });
 
   /* === PROGRESS BAR === */
   const prog = document.getElementById('prog');
