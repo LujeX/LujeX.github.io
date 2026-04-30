@@ -512,6 +512,12 @@
     .btn-preview:hover{border-color:var(--accent);color:var(--accent);background:rgba(109,200,232,.05)}
     .btn-preview.active{border-color:var(--accent);color:var(--accent);background:rgba(109,200,232,.08)}
     @media(max-width:900px){.pdf-viewer-wrap iframe{height:400px}}
+
+    /* === PAIRE BOUTON TÉLÉCHARGER + APERÇU === */
+    .btn-pair{display:flex;flex-direction:row;flex-wrap:wrap;
+      gap:8px;align-items:center;margin-top:14px}
+    .btn-pair .btn-dl,.btn-pair .btn-dl-veille{margin-top:0 !important;align-self:auto}
+    .btn-pair .btn-preview{margin-top:0}
   </style>
 </head>
 
@@ -666,7 +672,7 @@
       </ul>
       <div class="stage-docs">
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="attestation_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
         </a>
@@ -680,7 +686,7 @@
           <iframe id="pdf-iframe-att-bts1" src="" title="Aperçu Attestation stage BTS1"></iframe>
         </div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="rapport_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
         </a>
@@ -709,7 +715,7 @@
       </ul>
       <div class="stage-docs">
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="attestation_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
         </a>
@@ -723,7 +729,7 @@
           <iframe id="pdf-iframe-att-bts2" src="" title="Aperçu Attestation stage BTS2"></iframe>
         </div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="rapport_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
         </a>
@@ -758,7 +764,7 @@
         <p>Configuration avec règles de filtrage, NAT, VPN IPsec et segmentation réseau par zones (LAN, DMZ, WAN). Mise en place de règles de pare-feu et logs de trafic.</p>
         <div class="tags-sm"><span>pfSense</span><span>IPsec</span><span>NAT</span><span>DMZ</span></div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="Procedure_Installation_pfSense.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
         </a>
@@ -778,7 +784,7 @@
         <p>GLPI via Docker pour la gestion de parc informatique et les tickets d'incidents.</p>
         <div class="tags-sm"><span>Docker</span><span>GLPI</span><span>MySQL</span></div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="Florent-Jules_Mission_C.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission
         </a>
@@ -798,7 +804,7 @@
         <p>Domaine Windows Server avec GPO, unités organisationnelles et gestion des utilisateurs.</p>
         <div class="tags-sm"><span>Windows Server</span><span>AD DS</span><span>GPO</span></div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="procedure_active_directory.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
         </a>
@@ -818,7 +824,7 @@
         <p>Mise en place d'une infrastructure de supervision réseau avec Nagios. Monitoring des hôtes, services (HTTP, SSH, ping) et alertes par e-mail.</p>
         <div class="tags-sm"><span>Nagios</span><span>Linux</span><span>SNMP</span><span>NRPE</span></div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="procedure_nagios.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
         </a>
@@ -879,7 +885,7 @@
         <p>Mise en place d'un cluster Haute Disponibilité Active/Passive pour le service web Apache2. Réplication synchrone des données entre deux nœuds Ubuntu via DRBD, gestion des ressources et basculement automatique (failover) avec HeartBeat via une IP virtuelle (192.168.56.100). Supervision de l'état du cluster avec Nagios Core.</p>
         <div class="tags-sm"><span>DRBD</span><span>HeartBeat</span><span>Apache2</span><span>Nagios</span><span>Ubuntu Server</span><span>VirtualBox</span></div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="procedure_rp1_haute_disponibilite.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP1
         </a>
@@ -906,7 +912,7 @@
         <p>Déploiement d'un contrôleur de domaine Windows Server 2022 avec AD DS, DNS et DHCP. Création automatisée de 25 comptes via PowerShell, application de 5 GPO critiques (sécurité, restrictions, déploiement logiciel, redirection de dossiers). Intégration d'un serveur Linux Samba au domaine avec authentification SSO Kerberos.</p>
         <div class="tags-sm"><span>Windows Server 2022</span><span>Active Directory</span><span>GPO</span><span>Samba</span><span>Kerberos</span><span>PowerShell</span></div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="procedure_rp2_active_directory.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP2
         </a>
@@ -951,7 +957,7 @@
           <a href="https://app.pix.fr/verification-certificat" target="_blank" rel="noopener noreferrer" class="cert-verify-link">Vérifier sur pix.fr</a>
         </div>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="certification-pix-20260120.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
         </a>
@@ -983,7 +989,7 @@
         </div>
         <p class="cert-desc">Baccalauréat professionnel option Réseaux Informatiques et Systèmes Communicants (RISC). Câblage réseau, configuration switches/routeurs et télécommunications.</p>
         
-        <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+        <div class="btn-pair">
           <a href="diplome_bac_pro_sn.pdf" download class="btn-dl" style="margin-top:0">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le diplôme
         </a>
@@ -1042,7 +1048,7 @@
             <span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span>
           </div>
           
-          <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+          <div class="btn-pair">
             <a href="veille_ia_cybersecurite.pdf" download class="btn-dl-veille" style="margin-top:0">
             <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
           </a>
@@ -1068,7 +1074,7 @@
             <span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span>
           </div>
           
-          <div style="display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:0">
+          <div class="btn-pair">
             <a href="veille_nvidia_gpu_ia.pdf" download class="btn-dl-veille" style="margin-top:0">
             <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
           </a>
