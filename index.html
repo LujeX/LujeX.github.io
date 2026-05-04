@@ -6,11 +6,6 @@
   <meta name="description" content="Portfolio de Jules MONIN — Étudiant BTS SIO option SISR, administration système et réseau à Nevers.">
   <meta name="theme-color" content="#f8fafc">
 
-  <!-- ===================================================
-       FIX 1 : OPEN GRAPH & TWITTER CARD
-       Remplacer l'URL par votre domaine réel.
-       og:image → assets/og-preview.jpg (1200×630px requis)
-  =================================================== -->
   <meta property="og:title" content="Portfolio — Jules MONIN | BTS SIO SISR">
   <meta property="og:description" content="Étudiant BTS SIO option SISR — Administration système et réseau. Nevers, France.">
   <meta property="og:type" content="website">
@@ -24,21 +19,13 @@
 
   <title>Portfolio — MONIN Jules</title>
 
-  <!-- ===================================================
-       FIX 2 : CHARGEMENT NON-BLOQUANT DES POLICES
-       Technique : preconnect + preload as="style" + media="print" swap
-       Évite le render-blocking tout en conservant font-display:swap.
-  =================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Préchargement de la feuille de style (non-bloquant) -->
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
-  <!-- Chargement différé via media="print" → basculé en "all" après load -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
     media="print" onload="this.media='all'">
-  <!-- Fallback sans JS -->
   <noscript>
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -60,7 +47,6 @@
       --nav-w:260px;--radius:12px;
     }
 
-    /* === BASE === */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text-body);background:var(--bg);
@@ -72,11 +58,9 @@
       animation:bgP 12s ease-in-out infinite alternate}
     @keyframes bgP{0%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}100%{opacity:.8;transform:scale(.98)}}
 
-    /* === PROGRESS BAR === */
     #prog{position:fixed;top:0;left:0;z-index:9997;height:3px;width:0%;
       background:var(--accent-grad);box-shadow:0 0 10px rgba(109,200,232,.6);transition:width .08s linear}
 
-    /* === HAMBURGER === */
     #hamburger{position:fixed;top:16px;left:16px;z-index:9998;width:44px;height:44px;
       background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;
       box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;
@@ -89,7 +73,6 @@
     body.nav-open #hamburger span:nth-child(2){opacity:0;width:0}
     body.nav-open #hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-    /* === NAV === */
     nav{position:fixed;left:0;top:0;width:var(--nav-w);height:100vh;
       background:var(--nav-bg);backdrop-filter:blur(20px);border-right:1px solid var(--nav-border);
       box-shadow:4px 0 24px var(--nav-shadow);padding:32px 20px 24px;
@@ -119,11 +102,9 @@
     .copyright{margin-top:auto;font-size:11px;color:var(--text-xsoft);text-align:center;
       padding-top:12px;font-family:'JetBrains Mono',monospace}
 
-    /* === OVERLAY === */
     #nav-overlay{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)}
     @media(max-width:900px){#nav-overlay.show{display:block}}
 
-    /* === MOBILE === */
     @media(max-width:900px){
       :root{--nav-w:82%}
       nav{transform:translateX(-100%) !important}
@@ -144,7 +125,6 @@
       .contact-form-row{grid-template-columns:1fr}
     }
 
-    /* === MAIN / SECTIONS === */
     main{min-height:100vh;position:relative;z-index:1;transition:margin-left .35s cubic-bezier(.4,0,.2,1)}
     section{min-height:80vh;padding:90px 70px;display:flex;flex-direction:column;
       justify-content:center;max-width:1100px;margin:0 auto}
@@ -158,13 +138,18 @@
     p{line-height:1.75;color:var(--text-body);margin-bottom:16px}
     strong{color:var(--text-h);font-weight:600}
 
-    /* === REVEAL === */
     .reveal{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
     .reveal.visible{opacity:1;transform:translateY(0)}
     .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
     .d4{transition-delay:.4s}.d5{transition-delay:.5s}
 
-    /* === HERO === */
+    /* === BADGES COMPÉTENCES === */
+    .comp-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+    .comp-badge{font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:700;
+      padding:2px 8px;border-radius:4px;letter-spacing:.3px;
+      background:linear-gradient(135deg,rgba(3,105,161,.08),rgba(14,165,233,.05));
+      border:1px solid var(--border);color:var(--c3)}
+
     #profil{flex-direction:row;align-items:center;gap:60px;min-height:100vh}
     .hero-img-wrap{flex-shrink:0;position:relative}
     .hero-img-frame{width:320px;height:420px;border-radius:18px;overflow:hidden;position:relative;
@@ -217,7 +202,6 @@
     .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text-body)}
     .btn-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(109,200,232,.05)}
 
-    /* === TIMELINE === */
     .timeline{position:relative;max-width:820px;padding-top:10px}
     .timeline::before{content:'';position:absolute;left:100px;top:0;bottom:0;width:2px;
       background:linear-gradient(to bottom,var(--c3),var(--c4),transparent);opacity:.4}
@@ -233,7 +217,6 @@
     .t-card h3{font-size:17px;font-weight:700;color:var(--text-h);margin-bottom:6px}
     .t-card p{font-size:14px;color:var(--text-body);line-height:1.7;margin-bottom:4px}
 
-    /* === STAGES === */
     .stage-card{background:var(--surface);border:1px solid var(--border-soft);
       border-radius:var(--radius);padding:30px 32px;box-shadow:var(--shadow-sm);
       transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
@@ -251,7 +234,6 @@
       display:flex;align-items:flex-start;gap:10px}
     .stage-missions li i{color:var(--accent);margin-top:3px;flex-shrink:0;font-size:11px}
 
-    /* === PROJETS === */
     .filter-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
     .fbtn{padding:7px 18px;border-radius:8px;font-size:12.5px;font-weight:600;
       border:1.5px solid var(--border-soft);color:var(--text-soft);background:var(--surface);
@@ -276,10 +258,8 @@
       background:linear-gradient(135deg,rgba(74,154,187,.1),rgba(109,200,232,.07));
       border:1px solid var(--border);padding:3px 9px;border-radius:6px}
 
-    /* === STAGES DOCS === */
     .stage-docs{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
 
-    /* === CERTIFICATIONS === */
     .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
     .cert-card{background:var(--surface);border:1px solid var(--border-soft);
       border-radius:var(--radius);padding:28px 30px;box-shadow:var(--shadow-sm);
@@ -317,16 +297,13 @@
     .cert-verify-link:hover{opacity:.75}
     @media(max-width:900px){.cert-grid{grid-template-columns:1fr}}
 
-    /* === ÉPREUVES — durée === */
     .ep-duration{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
       font-family:'JetBrains Mono',monospace;color:var(--text-soft);margin-bottom:10px}
     .ep-duration i{color:var(--accent);font-size:11px}
 
-    /* === VEILLE SOURCE LINK === */
     .v-source-link{color:var(--accent);text-decoration:none;font-weight:700;transition:opacity .2s}
     .v-source-link:hover{opacity:.75;text-decoration:underline}
 
-    /* === BOUTON TÉLÉCHARGER PDF === */
     .btn-dl{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
       padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;
       font-family:'Plus Jakarta Sans',sans-serif;color:var(--accent);text-decoration:none;
@@ -337,7 +314,6 @@
     .btn-dl .pdf-ico{font-size:13px;color:#e74c3c;transition:color .2s}
     .btn-dl:hover .pdf-ico{color:#fff}
 
-    /* === ÉPREUVES === */
     .ep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px}
     .ep-card{background:var(--surface);border:1px solid var(--border-soft);
       border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);
@@ -349,7 +325,6 @@
     .ep-card h3{font-size:16px;font-weight:700;color:var(--text-h);margin-bottom:8px}
     .ep-card p{font-size:13.5px;color:var(--text-body);line-height:1.65;margin:0}
 
-    /* === VEILLE === */
     .veille-list{display:flex;flex-direction:column;gap:20px}
     .v-item{background:var(--surface);border:1px solid var(--border-soft);
       border-radius:var(--radius);padding:26px 30px;display:flex;gap:22px;
@@ -372,7 +347,6 @@
     .btn-dl-veille .pdf-ico{font-size:14px;color:#e74c3c;transition:color .2s}
     .btn-dl-veille:hover .pdf-ico{color:#fff}
 
-    /* === CONTACT === */
     .contact-inner{background:var(--surface);border:1px solid var(--border-soft);
       border-radius:20px;padding:50px 40px;box-shadow:var(--shadow-md)}
     .contact-inner>p{font-size:16px;color:var(--text-soft);margin-bottom:28px;text-align:center}
@@ -415,7 +389,6 @@
       border-radius:10px;padding:12px 18px;
       color:#e74c3c;font-size:14px;font-weight:600;margin-top:6px}
 
-    /* === RÉALISATIONS PROFESSIONNELLES === */
     .rp-synthese{background:var(--surface);border:1px solid var(--border);
       border-radius:var(--radius);padding:28px 32px;display:flex;align-items:center;
       justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:32px;
@@ -461,7 +434,6 @@
     .rp-card p{font-size:13.5px;color:var(--text-body);line-height:1.65;flex:1;margin-bottom:0}
     @media(max-width:900px){.rp-synthese{flex-direction:column}.rp-grid{grid-template-columns:1fr}}
 
-    /* === FOOTER MENTIONS LÉGALES === */
     .site-footer{background:var(--surface-2);border-top:1px solid var(--border-soft);
       padding:32px 70px;text-align:center;position:relative;z-index:1}
     .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
@@ -475,7 +447,6 @@
     .footer-copy{font-size:11px;color:var(--text-xsoft);font-family:'JetBrains Mono',monospace}
     @media(max-width:900px){.site-footer{padding:28px 22px}}
 
-    /* === VISIONNEUSE PDF INTÉGRÉE === */
     .pdf-viewer-wrap{display:none;margin-top:18px;border-radius:var(--radius);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-md)}
     .pdf-viewer-wrap.open{display:block}
@@ -496,13 +467,11 @@
     .btn-preview.active{border-color:var(--accent);color:var(--accent);background:rgba(109,200,232,.08)}
     @media(max-width:900px){.pdf-viewer-wrap iframe{height:400px}}
 
-    /* === PAIRE BOUTON TÉLÉCHARGER + APERÇU === */
     .btn-pair{display:flex;flex-direction:row;flex-wrap:wrap;
       gap:8px;align-items:center;margin-top:14px}
     .btn-pair .btn-dl,.btn-pair .btn-dl-veille{margin-top:0 !important;align-self:auto}
     .btn-pair .btn-preview{margin-top:0}
 
-    /* === BOUTON RETOUR EN HAUT === */
     #back-top{position:fixed;bottom:28px;right:28px;z-index:9996;
       width:44px;height:44px;border-radius:12px;border:1.5px solid var(--border);
       background:var(--surface);color:var(--accent);
@@ -515,10 +484,8 @@
       transform:translateY(-3px);box-shadow:0 8px 24px rgba(109,200,232,.2)}
     @media(max-width:900px){#back-top{bottom:20px;right:16px}}
 
-    /* === BULLES FOND ANIMÉ === */
     #bubbles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
 
-    /* === BTS COMPÉTENCES === */
     .bts-competences{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
       gap:16px;margin-top:8px}
     .bts-comp-item{background:var(--surface);border:1px solid var(--border-soft);
@@ -533,11 +500,9 @@
     .bts-comp-detail{font-size:12.5px;color:var(--text-body);line-height:1.6}
     @media(max-width:900px){.bts-competences{grid-template-columns:1fr}}
 
-    /* === ACCESSIBILITÉ CLAVIER === */
     a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 
-    /* === RÉDUCTION DES MOUVEMENTS === */
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{animation-duration:0s!important;transition-duration:0s!important}
       .reveal{opacity:1;transform:none}
@@ -553,7 +518,6 @@
 <div id="prog" aria-hidden="true"></div>
 <div id="nav-overlay"></div>
 
-<!-- HAMBURGER -->
 <button id="hamburger" aria-label="Ouvrir/fermer la navigation" aria-expanded="false" aria-controls="main-nav">
   <span></span><span></span><span></span>
 </button>
@@ -584,20 +548,9 @@
   <section id="profil" aria-label="Profil">
     <div class="hero-img-wrap reveal">
       <div class="hero-img-frame" id="hero-frame">
-        <img
-          src="assets/hero-infra.jpg"
-          alt="Infrastructure réseau et serveurs — SISR"
-          width="320"
-          height="420"
-          loading="eager"
-          decoding="async"
-          id="hero-img"
-          onerror="document.getElementById('hero-frame').classList.add('img-error');this.onerror=null;"
-        >
-        <div class="hero-img-fallback" aria-hidden="true">
-          <i class="fa-solid fa-server"></i>
-          <span>hero-infra.jpg manquant</span>
-        </div>
+        <img src="assets/hero-infra.jpg" alt="Infrastructure réseau et serveurs — SISR" width="320" height="420" loading="eager" decoding="async" id="hero-img"
+          onerror="document.getElementById('hero-frame').classList.add('img-error');this.onerror=null;">
+        <div class="hero-img-fallback" aria-hidden="true"><i class="fa-solid fa-server"></i><span>hero-infra.jpg manquant</span></div>
         <div class="hero-badge">Admin Sys &amp; Réseau</div>
       </div>
     </div>
@@ -616,16 +569,11 @@
       </div>
       <div class="btns reveal d3">
         <a href="cv.pdf" class="btn btn-solid" download><i class="fa-solid fa-download" aria-hidden="true"></i> CV.pdf</a>
-        <button class="btn btn-outline btn-preview" id="btn-preview-cv" onclick="togglePdf('cv','cv.pdf',this)">
-          <i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu CV
-        </button>
+        <button class="btn btn-outline btn-preview" id="btn-preview-cv" onclick="togglePdf('cv','cv.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu CV</button>
         <a href="#contact" class="btn btn-outline">Me contacter</a>
       </div>
       <div class="pdf-viewer-wrap" id="pdf-viewer-cv" style="margin-top:24px;max-width:700px">
-        <div class="pdf-viewer-bar">
-          <span>cv.pdf</span>
-          <button class="pdf-viewer-close" onclick="togglePdf('cv','cv.pdf',document.getElementById('btn-preview-cv'))">✕ Fermer</button>
-        </div>
+        <div class="pdf-viewer-bar"><span>cv.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('cv','cv.pdf',document.getElementById('btn-preview-cv'))">✕ Fermer</button></div>
         <iframe id="pdf-iframe-cv" src="" title="Aperçu CV"></iframe>
       </div>
     </div>
@@ -637,48 +585,12 @@
     <p class="reveal">Le <strong>Brevet de Technicien Supérieur Services Informatiques aux Organisations</strong>, option <strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong> (SISR), est une formation de niveau Bac+2 qui prépare à l'administration et à la gestion des infrastructures informatiques en entreprise.</p>
     <p class="reveal d1">Le référentiel du BTS SIO définit <strong>6 blocs de compétences communs</strong> aux deux options, auxquels s'ajoutent les compétences spécifiques à l'option SISR :</p>
     <div class="bts-competences reveal d2">
-      <div class="bts-comp-item">
-        <div class="bts-comp-num">B1</div>
-        <div class="bts-comp-body">
-          <div class="bts-comp-title">Gérer le patrimoine informatique</div>
-          <div class="bts-comp-detail">Recenser les ressources numériques, gérer les habilitations, assurer la continuité de service, gérer les sauvegardes et vérifier le respect des règles d'utilisation.</div>
-        </div>
-      </div>
-      <div class="bts-comp-item">
-        <div class="bts-comp-num">B2</div>
-        <div class="bts-comp-body">
-          <div class="bts-comp-title">Répondre aux incidents et aux demandes d'assistance</div>
-          <div class="bts-comp-detail">Collecter et orienter les demandes, traiter les incidents liés aux services réseau, système et applicatifs.</div>
-        </div>
-      </div>
-      <div class="bts-comp-item">
-        <div class="bts-comp-num">B3</div>
-        <div class="bts-comp-body">
-          <div class="bts-comp-title">Développer la présence en ligne de l'organisation</div>
-          <div class="bts-comp-detail">Valoriser l'image numérique de l'organisation, référencer les services en ligne et participer à l'évolution d'un site web.</div>
-        </div>
-      </div>
-      <div class="bts-comp-item">
-        <div class="bts-comp-num">B4</div>
-        <div class="bts-comp-body">
-          <div class="bts-comp-title">Travailler en mode projet</div>
-          <div class="bts-comp-detail">Analyser les objectifs d'un projet, planifier les activités, suivre les indicateurs et analyser les écarts.</div>
-        </div>
-      </div>
-      <div class="bts-comp-item">
-        <div class="bts-comp-num">B5</div>
-        <div class="bts-comp-body">
-          <div class="bts-comp-title">Mettre à disposition des utilisateurs un service informatique</div>
-          <div class="bts-comp-detail">Réaliser les tests d'intégration et d'acceptation, déployer un service et accompagner les utilisateurs.</div>
-        </div>
-      </div>
-      <div class="bts-comp-item">
-        <div class="bts-comp-num">B6</div>
-        <div class="bts-comp-body">
-          <div class="bts-comp-title">Organiser son développement professionnel</div>
-          <div class="bts-comp-detail">Mettre en place une veille informationnelle, gérer son identité professionnelle et développer son projet professionnel.</div>
-        </div>
-      </div>
+      <div class="bts-comp-item"><div class="bts-comp-num">B1</div><div class="bts-comp-body"><div class="bts-comp-title">Gérer le patrimoine informatique</div><div class="bts-comp-detail">Recenser les ressources numériques, gérer les habilitations, assurer la continuité de service, gérer les sauvegardes et vérifier le respect des règles d'utilisation.</div></div></div>
+      <div class="bts-comp-item"><div class="bts-comp-num">B2</div><div class="bts-comp-body"><div class="bts-comp-title">Répondre aux incidents et aux demandes d'assistance</div><div class="bts-comp-detail">Collecter et orienter les demandes, traiter les incidents liés aux services réseau, système et applicatifs.</div></div></div>
+      <div class="bts-comp-item"><div class="bts-comp-num">B3</div><div class="bts-comp-body"><div class="bts-comp-title">Développer la présence en ligne de l'organisation</div><div class="bts-comp-detail">Valoriser l'image numérique de l'organisation, référencer les services en ligne et participer à l'évolution d'un site web.</div></div></div>
+      <div class="bts-comp-item"><div class="bts-comp-num">B4</div><div class="bts-comp-body"><div class="bts-comp-title">Travailler en mode projet</div><div class="bts-comp-detail">Analyser les objectifs d'un projet, planifier les activités, suivre les indicateurs et analyser les écarts.</div></div></div>
+      <div class="bts-comp-item"><div class="bts-comp-num">B5</div><div class="bts-comp-body"><div class="bts-comp-title">Mettre à disposition des utilisateurs un service informatique</div><div class="bts-comp-detail">Réaliser les tests d'intégration et d'acceptation, déployer un service et accompagner les utilisateurs.</div></div></div>
+      <div class="bts-comp-item"><div class="bts-comp-num">B6</div><div class="bts-comp-body"><div class="bts-comp-title">Organiser son développement professionnel</div><div class="bts-comp-detail">Mettre en place une veille informationnelle, gérer son identité professionnelle et développer son projet professionnel.</div></div></div>
     </div>
   </section>
 
@@ -708,6 +620,7 @@
   <!-- STAGES -->
   <section id="stages" aria-label="Expériences et stages">
     <div class="section-title"><span class="num">03</span><h2>Expériences &amp; Stages</h2></div>
+
     <div class="stage-card reveal">
       <h3>Stage — Bac Pro Systèmes Numériques</h3>
       <div class="stage-lieu"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Conseil Départemental de la Nièvre — DSIN</div>
@@ -719,7 +632,9 @@
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Maintenance du parc informatique et câblage réseau</li>
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Découverte de l'infrastructure réseau d'une collectivité territoriale</li>
       </ul>
+      <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B2</span><span class="comp-badge">B5</span></div>
     </div>
+
     <div class="stage-card reveal d1" style="margin-top:22px">
       <h3>Stage — 1ère année BTS SIO</h3>
       <div class="stage-lieu"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Conseil Départemental de la Nièvre — DSIN</div>
@@ -734,33 +649,19 @@
       </ul>
       <div class="stage-docs">
         <div class="btn-pair">
-          <a href="attestation_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
-          </a>
+          <a href="attestation_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage</a>
           <button class="btn-preview" id="btn-preview-att-bts1" onclick="togglePdf('att-bts1','attestation_stage_bts1_dsin.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts1">
-          <div class="pdf-viewer-bar">
-            <span>attestation_stage_bts1_dsin.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('att-bts1','attestation_stage_bts1_dsin.pdf',document.getElementById('btn-preview-att-bts1'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-att-bts1" src="" title="Aperçu Attestation stage BTS1"></iframe>
-        </div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts1"><div class="pdf-viewer-bar"><span>attestation_stage_bts1_dsin.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('att-bts1','attestation_stage_bts1_dsin.pdf',document.getElementById('btn-preview-att-bts1'))">✕ Fermer</button></div><iframe id="pdf-iframe-att-bts1" src="" title="Aperçu Attestation stage BTS1"></iframe></div>
         <div class="btn-pair">
-          <a href="rapport_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
-          </a>
+          <a href="rapport_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage</a>
           <button class="btn-preview" id="btn-preview-rap-bts1" onclick="togglePdf('rap-bts1','rapport_stage_bts1_dsin.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts1">
-          <div class="pdf-viewer-bar">
-            <span>rapport_stage_bts1_dsin.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('rap-bts1','rapport_stage_bts1_dsin.pdf',document.getElementById('btn-preview-rap-bts1'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-rap-bts1" src="" title="Aperçu Rapport stage BTS1"></iframe>
-        </div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts1"><div class="pdf-viewer-bar"><span>rapport_stage_bts1_dsin.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('rap-bts1','rapport_stage_bts1_dsin.pdf',document.getElementById('btn-preview-rap-bts1'))">✕ Fermer</button></div><iframe id="pdf-iframe-rap-bts1" src="" title="Aperçu Rapport stage BTS1"></iframe></div>
       </div>
+      <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B2</span><span class="comp-badge">B4</span><span class="comp-badge">B5</span></div>
     </div>
+
     <div class="stage-card reveal d2" style="margin-top:22px">
       <h3>Stage — 2ème année BTS SIO</h3>
       <div class="stage-lieu"><i class="fa-solid fa-landmark" aria-hidden="true"></i>Direction Générale des Finances Publiques — DGFIP</div>
@@ -775,32 +676,17 @@
       </ul>
       <div class="stage-docs">
         <div class="btn-pair">
-          <a href="attestation_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
-          </a>
+          <a href="attestation_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage</a>
           <button class="btn-preview" id="btn-preview-att-bts2" onclick="togglePdf('att-bts2','attestation_stage_bts2_dgfip.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts2">
-          <div class="pdf-viewer-bar">
-            <span>attestation_stage_bts2_dgfip.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('att-bts2','attestation_stage_bts2_dgfip.pdf',document.getElementById('btn-preview-att-bts2'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-att-bts2" src="" title="Aperçu Attestation stage BTS2"></iframe>
-        </div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts2"><div class="pdf-viewer-bar"><span>attestation_stage_bts2_dgfip.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('att-bts2','attestation_stage_bts2_dgfip.pdf',document.getElementById('btn-preview-att-bts2'))">✕ Fermer</button></div><iframe id="pdf-iframe-att-bts2" src="" title="Aperçu Attestation stage BTS2"></iframe></div>
         <div class="btn-pair">
-          <a href="rapport_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
-          </a>
+          <a href="rapport_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage</a>
           <button class="btn-preview" id="btn-preview-rap-bts2" onclick="togglePdf('rap-bts2','rapport_stage_bts2_dgfip.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts2">
-          <div class="pdf-viewer-bar">
-            <span>rapport_stage_bts2_dgfip.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('rap-bts2','rapport_stage_bts2_dgfip.pdf',document.getElementById('btn-preview-rap-bts2'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-rap-bts2" src="" title="Aperçu Rapport stage BTS2"></iframe>
-        </div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts2"><div class="pdf-viewer-bar"><span>rapport_stage_bts2_dgfip.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('rap-bts2','rapport_stage_bts2_dgfip.pdf',document.getElementById('btn-preview-rap-bts2'))">✕ Fermer</button></div><iframe id="pdf-iframe-rap-bts2" src="" title="Aperçu Rapport stage BTS2"></iframe></div>
       </div>
+      <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B2</span><span class="comp-badge">B3</span><span class="comp-badge">B4</span><span class="comp-badge">B5</span></div>
     </div>
   </section>
 
@@ -821,114 +707,54 @@
         <h3>Pare-feu pfSense</h3>
         <p>Configuration avec règles de filtrage, NAT, VPN IPsec et segmentation réseau par zones (LAN, DMZ, WAN). Mise en place de règles de pare-feu et logs de trafic.</p>
         <div class="tags-sm"><span>pfSense</span><span>IPsec</span><span>NAT</span><span>DMZ</span></div>
-        <div class="btn-pair">
-          <a href="Procedure_Installation_pfSense.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-          </a>
-          <button class="btn-preview" id="btn-preview-pfsense" onclick="togglePdf('pfsense','Procedure_Installation_pfSense.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-pfsense">
-          <div class="pdf-viewer-bar">
-            <span>Procedure_Installation_pfSense.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('pfsense','Procedure_Installation_pfSense.pdf',document.getElementById('btn-preview-pfsense'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-pfsense" src="" title="Aperçu Procédure pfSense"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="Procedure_Installation_pfSense.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure</a><button class="btn-preview" id="btn-preview-pfsense" onclick="togglePdf('pfsense','Procedure_Installation_pfSense.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-pfsense"><div class="pdf-viewer-bar"><span>Procedure_Installation_pfSense.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('pfsense','Procedure_Installation_pfSense.pdf',document.getElementById('btn-preview-pfsense'))">✕ Fermer</button></div><iframe id="pdf-iframe-pfsense" src="" title="Aperçu Procédure pfSense"></iframe></div>
       </div>
       <div class="proj-card reveal d1" data-cat="systeme">
         <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-ticket"></i></div>
         <h3>GLPI &amp; gestion de parc</h3>
         <p>Déploiement de la solution GLPI pour la gestion des incidents et du parc informatique. Installation et déploiement automatisé des agents GLPI via Stratégies de Groupe (GPO) sur un domaine Active Directory existant.</p>
         <div class="tags-sm"><span>GLPI</span><span>GPO</span><span>Active Directory</span><span>MySQL</span></div>
-        <div class="btn-pair">
-          <a href="Florent-Jules_Mission_C.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission
-          </a>
-          <button class="btn-preview" id="btn-preview-glpi" onclick="togglePdf('glpi','Florent-Jules_Mission_C.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-glpi">
-          <div class="pdf-viewer-bar">
-            <span>Florent-Jules_Mission_C.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('glpi','Florent-Jules_Mission_C.pdf',document.getElementById('btn-preview-glpi'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-glpi" src="" title="Aperçu Mission GLPI"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B2</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="Florent-Jules_Mission_C.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission</a><button class="btn-preview" id="btn-preview-glpi" onclick="togglePdf('glpi','Florent-Jules_Mission_C.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-glpi"><div class="pdf-viewer-bar"><span>Florent-Jules_Mission_C.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('glpi','Florent-Jules_Mission_C.pdf',document.getElementById('btn-preview-glpi'))">✕ Fermer</button></div><iframe id="pdf-iframe-glpi" src="" title="Aperçu Mission GLPI"></iframe></div>
       </div>
       <div class="proj-card reveal d2" data-cat="systeme">
         <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-sitemap"></i></div>
         <h3>Active Directory</h3>
         <p>Domaine Windows Server avec GPO, unités organisationnelles et gestion des utilisateurs.</p>
         <div class="tags-sm"><span>Windows Server</span><span>AD DS</span><span>GPO</span></div>
-        <div class="btn-pair">
-          <a href="procedure_active_directory.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-          </a>
-          <button class="btn-preview" id="btn-preview-ad" onclick="togglePdf('ad','procedure_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-ad">
-          <div class="pdf-viewer-bar">
-            <span>procedure_active_directory.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('ad','procedure_active_directory.pdf',document.getElementById('btn-preview-ad'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-ad" src="" title="Aperçu Procédure Active Directory"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="procedure_active_directory.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure</a><button class="btn-preview" id="btn-preview-ad" onclick="togglePdf('ad','procedure_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-ad"><div class="pdf-viewer-bar"><span>procedure_active_directory.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('ad','procedure_active_directory.pdf',document.getElementById('btn-preview-ad'))">✕ Fermer</button></div><iframe id="pdf-iframe-ad" src="" title="Aperçu Procédure Active Directory"></iframe></div>
       </div>
       <div class="proj-card reveal d3" data-cat="supervision reseau">
         <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-tower-broadcast"></i></div>
         <h3>Supervision Nagios</h3>
         <p>Mise en place d'une infrastructure de supervision réseau avec Nagios. Monitoring des hôtes, services (HTTP, SSH, ping) et alertes par e-mail.</p>
         <div class="tags-sm"><span>Nagios</span><span>Linux</span><span>SNMP</span><span>NRPE</span></div>
-        <div class="btn-pair">
-          <a href="procedure_nagios.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-          </a>
-          <button class="btn-preview" id="btn-preview-nagios" onclick="togglePdf('nagios','procedure_nagios.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-nagios">
-          <div class="pdf-viewer-bar">
-            <span>procedure_nagios.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('nagios','procedure_nagios.pdf',document.getElementById('btn-preview-nagios'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-nagios" src="" title="Aperçu Procédure Nagios"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B2</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="procedure_nagios.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure</a><button class="btn-preview" id="btn-preview-nagios" onclick="togglePdf('nagios','procedure_nagios.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-nagios"><div class="pdf-viewer-bar"><span>procedure_nagios.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('nagios','procedure_nagios.pdf',document.getElementById('btn-preview-nagios'))">✕ Fermer</button></div><iframe id="pdf-iframe-nagios" src="" title="Aperçu Procédure Nagios"></iframe></div>
       </div>
       <div class="proj-card reveal d4" data-cat="securite">
         <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-bug-slash"></i></div>
         <h3>IDS/IPS — Détection d'intrusion</h3>
         <p>Implémentation d'un système de détection et prévention d'intrusion à l'aide de Snort. Configuration de règles de détection personnalisées pour identifier les attaques réseau courantes (scans, DoS, injections).</p>
         <div class="tags-sm"><span>Snort</span><span>IDS/IPS</span><span>Linux</span><span>Cybersécurité</span></div>
-        <div class="btn-pair">
-          <a href="procedure_mission_e_ids_ips.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-          </a>
-          <button class="btn-preview" id="btn-preview-ids" onclick="togglePdf('ids','procedure_mission_e_ids_ips.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-ids">
-          <div class="pdf-viewer-bar">
-            <span>procedure_mission_e_ids_ips.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('ids','procedure_mission_e_ids_ips.pdf',document.getElementById('btn-preview-ids'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-ids" src="" title="Aperçu IDS/IPS Snort"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="procedure_mission_e_ids_ips.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure</a><button class="btn-preview" id="btn-preview-ids" onclick="togglePdf('ids','procedure_mission_e_ids_ips.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-ids"><div class="pdf-viewer-bar"><span>procedure_mission_e_ids_ips.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('ids','procedure_mission_e_ids_ips.pdf',document.getElementById('btn-preview-ids'))">✕ Fermer</button></div><iframe id="pdf-iframe-ids" src="" title="Aperçu IDS/IPS Snort"></iframe></div>
       </div>
       <div class="proj-card reveal d5" data-cat="supervision systeme">
         <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-chart-bar"></i></div>
         <h3>Centralisation de logs — Stack ELK</h3>
         <p>Mise en place d'une solution de centralisation et d'analyse des logs avec la stack ELK. Collecte des logs via Logstash, indexation dans Elasticsearch et visualisation des données dans des tableaux de bord Kibana.</p>
         <div class="tags-sm"><span>Elasticsearch</span><span>Logstash</span><span>Kibana</span><span>Linux</span></div>
-        <div class="btn-pair">
-          <a href="procedure_mission_g_elk.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-          </a>
-          <button class="btn-preview" id="btn-preview-elk" onclick="togglePdf('elk','procedure_mission_g_elk.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-elk">
-          <div class="pdf-viewer-bar">
-            <span>procedure_mission_g_elk.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('elk','procedure_mission_g_elk.pdf',document.getElementById('btn-preview-elk'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-elk" src="" title="Aperçu Stack ELK"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="procedure_mission_g_elk.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure</a><button class="btn-preview" id="btn-preview-elk" onclick="togglePdf('elk','procedure_mission_g_elk.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-elk"><div class="pdf-viewer-bar"><span>procedure_mission_g_elk.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('elk','procedure_mission_g_elk.pdf',document.getElementById('btn-preview-elk'))">✕ Fermer</button></div><iframe id="pdf-iframe-elk" src="" title="Aperçu Stack ELK"></iframe></div>
       </div>
     </div>
   </section>
@@ -948,21 +774,11 @@
         </div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
-        <a href="tableau_synthese_rp.pdf" download class="btn-dl-rp">
-          <i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Télécharger
-        </a>
-        <button class="btn-preview" id="btn-preview-synthese" onclick="togglePdf('synthese','tableau_synthese_rp.pdf',this)">
-          <i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu
-        </button>
+        <a href="tableau_synthese_rp.pdf" download class="btn-dl-rp"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Télécharger</a>
+        <button class="btn-preview" id="btn-preview-synthese" onclick="togglePdf('synthese','tableau_synthese_rp.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
       </div>
     </div>
-    <div class="pdf-viewer-wrap" id="pdf-viewer-synthese">
-      <div class="pdf-viewer-bar">
-        <span>tableau_synthese_rp.pdf</span>
-        <button class="pdf-viewer-close" onclick="togglePdf('synthese','tableau_synthese_rp.pdf',document.getElementById('btn-preview-synthese'))">✕ Fermer</button>
-      </div>
-      <iframe id="pdf-iframe-synthese" src="" title="Aperçu tableau de synthèse"></iframe>
-    </div>
+    <div class="pdf-viewer-wrap" id="pdf-viewer-synthese"><div class="pdf-viewer-bar"><span>tableau_synthese_rp.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('synthese','tableau_synthese_rp.pdf',document.getElementById('btn-preview-synthese'))">✕ Fermer</button></div><iframe id="pdf-iframe-synthese" src="" title="Aperçu tableau de synthèse"></iframe></div>
 
     <div class="rp-grid">
       <div class="rp-card reveal d1">
@@ -976,19 +792,9 @@
         <div class="rp-lieu"><i class="fa-solid fa-school" aria-hidden="true"></i>GSB — Lycée Raoul Follereau, Nevers</div>
         <p>Mise en place d'un cluster Haute Disponibilité Active/Passive pour le service web Apache2. Réplication synchrone des données entre deux nœuds Ubuntu via DRBD, gestion des ressources et basculement automatique (failover) avec HeartBeat via une IP virtuelle (192.168.56.100). Supervision de l'état du cluster avec Nagios Core.</p>
         <div class="tags-sm"><span>DRBD</span><span>HeartBeat</span><span>Apache2</span><span>Nagios</span><span>Ubuntu Server</span><span>VirtualBox</span></div>
-        <div class="btn-pair">
-          <a href="procedure_rp1_haute_disponibilite.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP1
-          </a>
-          <button class="btn-preview" id="btn-preview-rp1" onclick="togglePdf('rp1','procedure_rp1_haute_disponibilite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-rp1">
-          <div class="pdf-viewer-bar">
-            <span>procedure_rp1_haute_disponibilite.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('rp1','procedure_rp1_haute_disponibilite.pdf',document.getElementById('btn-preview-rp1'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-rp1" src="" title="Aperçu Fiche RP1"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B4</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="procedure_rp1_haute_disponibilite.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP1</a><button class="btn-preview" id="btn-preview-rp1" onclick="togglePdf('rp1','procedure_rp1_haute_disponibilite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-rp1"><div class="pdf-viewer-bar"><span>procedure_rp1_haute_disponibilite.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('rp1','procedure_rp1_haute_disponibilite.pdf',document.getElementById('btn-preview-rp1'))">✕ Fermer</button></div><iframe id="pdf-iframe-rp1" src="" title="Aperçu Fiche RP1"></iframe></div>
       </div>
 
       <div class="rp-card reveal d2">
@@ -1002,19 +808,9 @@
         <div class="rp-lieu"><i class="fa-solid fa-school" aria-hidden="true"></i>GSB — Lycée Raoul Follereau, Nevers</div>
         <p>Déploiement d'un contrôleur de domaine Windows Server 2022 avec AD DS, DNS et DHCP. Création automatisée de 25 comptes via PowerShell, application de 5 GPO critiques (sécurité, restrictions, déploiement logiciel, redirection de dossiers). Intégration d'un serveur Linux Samba au domaine avec authentification SSO Kerberos.</p>
         <div class="tags-sm"><span>Windows Server 2022</span><span>Active Directory</span><span>GPO</span><span>Samba</span><span>Kerberos</span><span>PowerShell</span></div>
-        <div class="btn-pair">
-          <a href="procedure_rp2_active_directory.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP2
-          </a>
-          <button class="btn-preview" id="btn-preview-rp2" onclick="togglePdf('rp2','procedure_rp2_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-rp2">
-          <div class="pdf-viewer-bar">
-            <span>procedure_rp2_active_directory.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('rp2','procedure_rp2_active_directory.pdf',document.getElementById('btn-preview-rp2'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-rp2" src="" title="Aperçu Fiche RP2"></iframe>
-        </div>
+        <div class="comp-badges"><span class="comp-badge">B1</span><span class="comp-badge">B5</span></div>
+        <div class="btn-pair"><a href="procedure_rp2_active_directory.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP2</a><button class="btn-preview" id="btn-preview-rp2" onclick="togglePdf('rp2','procedure_rp2_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-rp2"><div class="pdf-viewer-bar"><span>procedure_rp2_active_directory.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('rp2','procedure_rp2_active_directory.pdf',document.getElementById('btn-preview-rp2'))">✕ Fermer</button></div><iframe id="pdf-iframe-rp2" src="" title="Aperçu Fiche RP2"></iframe></div>
       </div>
     </div>
   </section>
@@ -1025,58 +821,21 @@
     <p class="reveal">Certifications obtenues au cours de mon parcours de formation.</p>
     <div class="cert-grid">
       <div class="cert-card reveal">
-        <div class="cert-header">
-          <div class="cert-icon"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
-          <div>
-            <div class="cert-label">Certification numérique nationale</div>
-            <h3>Certification Pix</h3>
-          </div>
-        </div>
-        <div class="cert-meta">
-          <span class="cert-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i> 20 janvier 2026</span>
-          <span class="cert-org"><i class="fa-solid fa-school" aria-hidden="true"></i> Lycée Raoul Follereau</span>
-        </div>
-        <div class="cert-score">
-          <div class="cert-score-num">446 <span>/ 895</span></div>
-          <div class="cert-score-lbl">Niveau global — <strong>Indépendant 2</strong></div>
-        </div>
+        <div class="cert-header"><div class="cert-icon"><i class="fa-solid fa-award" aria-hidden="true"></i></div><div><div class="cert-label">Certification numérique nationale</div><h3>Certification Pix</h3></div></div>
+        <div class="cert-meta"><span class="cert-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i> 20 janvier 2026</span><span class="cert-org"><i class="fa-solid fa-school" aria-hidden="true"></i> Lycée Raoul Follereau</span></div>
+        <div class="cert-score"><div class="cert-score-num">446 <span>/ 895</span></div><div class="cert-score-lbl">Niveau global — <strong>Indépendant 2</strong></div></div>
         <p class="cert-desc">À l'aise dans toutes les situations courantes du numérique : recherche d'information fiable, outils collaboratifs, pratiques sécurisées et usages responsables.</p>
-        <div class="cert-verify">
-          <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
-          Code : <strong>P-JR969VDX</strong>
-          <a href="https://app.pix.fr/verification-certificat" target="_blank" rel="noopener noreferrer" class="cert-verify-link">Vérifier sur pix.fr</a>
-        </div>
-        <div class="btn-pair">
-          <a href="certification-pix-20260120.pdf" download class="btn-dl" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
-          </a>
-          <button class="btn-preview" id="btn-preview-pix" onclick="togglePdf('pix','certification-pix-20260120.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-pix">
-          <div class="pdf-viewer-bar">
-            <span>certification-pix-20260120.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('pix','certification-pix-20260120.pdf',document.getElementById('btn-preview-pix'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-pix" src="" title="Aperçu Attestation Pix"></iframe>
-        </div>
+        <div class="cert-verify"><i class="fa-solid fa-qrcode" aria-hidden="true"></i> Code : <strong>P-JR969VDX</strong><a href="https://app.pix.fr/verification-certificat" target="_blank" rel="noopener noreferrer" class="cert-verify-link">Vérifier sur pix.fr</a></div>
+        <div class="comp-badges"><span class="comp-badge">B6</span></div>
+        <div class="btn-pair"><a href="certification-pix-20260120.pdf" download class="btn-dl" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix</a><button class="btn-preview" id="btn-preview-pix" onclick="togglePdf('pix','certification-pix-20260120.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-pix"><div class="pdf-viewer-bar"><span>certification-pix-20260120.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('pix','certification-pix-20260120.pdf',document.getElementById('btn-preview-pix'))">✕ Fermer</button></div><iframe id="pdf-iframe-pix" src="" title="Aperçu Attestation Pix"></iframe></div>
       </div>
       <div class="cert-card reveal d1">
-        <div class="cert-header">
-          <div class="cert-icon cert-icon-gold"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
-          <div>
-            <div class="cert-label">Diplôme national</div>
-            <h3>Bac Pro Systèmes Numériques</h3>
-          </div>
-        </div>
-        <div class="cert-meta">
-          <span class="cert-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i> 2023</span>
-          <span class="cert-org"><i class="fa-solid fa-school" aria-hidden="true"></i> Option RISC</span>
-        </div>
-        <div class="cert-score">
-          <div class="cert-score-num" style="font-size:22px;margin-bottom:4px">Mention <strong>Bien</strong></div>
-          <div class="cert-score-lbl">Baccalauréat Professionnel</div>
-        </div>
+        <div class="cert-header"><div class="cert-icon cert-icon-gold"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div><div><div class="cert-label">Diplôme national</div><h3>Bac Pro Systèmes Numériques</h3></div></div>
+        <div class="cert-meta"><span class="cert-date"><i class="fa-solid fa-calendar" aria-hidden="true"></i> 2023</span><span class="cert-org"><i class="fa-solid fa-school" aria-hidden="true"></i> Option RISC</span></div>
+        <div class="cert-score"><div class="cert-score-num" style="font-size:22px;margin-bottom:4px">Mention <strong>Bien</strong></div><div class="cert-score-lbl">Baccalauréat Professionnel</div></div>
         <p class="cert-desc">Baccalauréat professionnel option Réseaux Informatiques et Systèmes Communicants (RISC). Câblage réseau, configuration switches/routeurs et télécommunications.</p>
+        <div class="comp-badges"><span class="comp-badge">B6</span></div>
       </div>
     </div>
   </section>
@@ -1086,24 +845,9 @@
     <div class="section-title"><span class="num">07</span><h2>Épreuves</h2></div>
     <p class="reveal">Les épreuves du BTS SIO évaluent les compétences acquises sur les deux années de formation.</p>
     <div class="ep-grid">
-      <div class="ep-card reveal">
-        <div class="ep-label">E5 — Épreuve orale</div>
-        <div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 40 minutes</div>
-        <h3>Administration des systèmes et des réseaux</h3>
-        <p>Présentation de situations professionnelles vécues en stage devant un jury de professionnels. Échange oral sur les compétences techniques mises en œuvre.</p>
-      </div>
-      <div class="ep-card reveal d1">
-        <div class="ep-label">E6 — Épreuve pratique</div>
-        <div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 2h10</div>
-        <h3>Cybersécurité des services informatiques</h3>
-        <p>Mise en situation pratique sur la sécurisation des systèmes d'information. Analyse de risques, mise en œuvre de solutions de protection et rédaction de préconisations.</p>
-      </div>
-      <div class="ep-card reveal d2">
-        <div class="ep-label">E7 — Épreuve écrite</div>
-        <div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 4 heures</div>
-        <h3>Support et mise à disposition de services informatiques</h3>
-        <p>Étude de cas écrite portant sur la conception et la mise en œuvre d'une infrastructure réseau. Analyse d'un SI existant et proposition d'améliorations.</p>
-      </div>
+      <div class="ep-card reveal"><div class="ep-label">E5 — Épreuve orale</div><div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 40 minutes</div><h3>Administration des systèmes et des réseaux</h3><p>Présentation de situations professionnelles vécues en stage devant un jury de professionnels. Échange oral sur les compétences techniques mises en œuvre.</p></div>
+      <div class="ep-card reveal d1"><div class="ep-label">E6 — Épreuve pratique</div><div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 2h10</div><h3>Cybersécurité des services informatiques</h3><p>Mise en situation pratique sur la sécurisation des systèmes d'information. Analyse de risques, mise en œuvre de solutions de protection et rédaction de préconisations.</p></div>
+      <div class="ep-card reveal d2"><div class="ep-label">E7 — Épreuve écrite</div><div class="ep-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> 4 heures</div><h3>Support et mise à disposition de services informatiques</h3><p>Étude de cas écrite portant sur la conception et la mise en œuvre d'une infrastructure réseau. Analyse d'un SI existant et proposition d'améliorations.</p></div>
     </div>
   </section>
 
@@ -1117,24 +861,10 @@
         <div class="v-body">
           <h3>Intelligence Artificielle &amp; Cybersécurité</h3>
           <p>L'IA transforme le paysage de la cybersécurité : les attaquants l'utilisent pour automatiser des attaques de phishing ciblées et générer du code malveillant, tandis que les défenseurs s'en servent pour la détection d'anomalies, l'analyse comportementale et la réponse aux incidents. Suivi des SIEM dopés à l'IA (Microsoft Sentinel, Darktrace) et des usages offensifs comme les deepfakes dans l'ingénierie sociale.</p>
-          <div class="v-source">
-            <span title="Veille automatique">⚙ Automatique — Google Alerts</span>
-            &nbsp;·&nbsp;
-            <span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span>
-          </div>
-          <div class="btn-pair">
-            <a href="veille_ia_cybersecurite.pdf" download class="btn-dl-veille" style="margin-top:0">
-              <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
-            </a>
-            <button class="btn-preview" id="btn-preview-veille-ia2" onclick="togglePdf('veille-ia2','veille_ia_cybersecurite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-          </div>
-          <div class="pdf-viewer-wrap" id="pdf-viewer-veille-ia2">
-            <div class="pdf-viewer-bar">
-              <span>veille_ia_cybersecurite.pdf</span>
-              <button class="pdf-viewer-close" onclick="togglePdf('veille-ia2','veille_ia_cybersecurite.pdf',document.getElementById('btn-preview-veille-ia2'))">✕ Fermer</button>
-            </div>
-            <iframe id="pdf-iframe-veille-ia2" src="" title="Aperçu Dossier veille IA"></iframe>
-          </div>
+          <div class="v-source"><span title="Veille automatique">⚙ Automatique — Google Alerts</span>&nbsp;·&nbsp;<span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span></div>
+          <div class="comp-badges"><span class="comp-badge">B6</span></div>
+          <div class="btn-pair"><a href="veille_ia_cybersecurite.pdf" download class="btn-dl-veille" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille</a><button class="btn-preview" id="btn-preview-veille-ia2" onclick="togglePdf('veille-ia2','veille_ia_cybersecurite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+          <div class="pdf-viewer-wrap" id="pdf-viewer-veille-ia2"><div class="pdf-viewer-bar"><span>veille_ia_cybersecurite.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('veille-ia2','veille_ia_cybersecurite.pdf',document.getElementById('btn-preview-veille-ia2'))">✕ Fermer</button></div><iframe id="pdf-iframe-veille-ia2" src="" title="Aperçu Dossier veille IA"></iframe></div>
         </div>
       </div>
       <div class="v-item reveal d1">
@@ -1142,24 +872,10 @@
         <div class="v-body">
           <h3>Nvidia &amp; GPU dans l'IA</h3>
           <p>Nvidia s'est imposé comme l'acteur incontournable de l'ère IA grâce à ses GPU (H100, RTX 4090) et l'écosystème CUDA. Suivi des architectures Blackwell et Hopper, de leur impact sur les datacenters, et des enjeux géopolitiques autour des puces (AMD MI300, Intel Gaudi).</p>
-          <div class="v-source">
-            <span title="Veille automatique">⚙ Automatique — Google Alerts</span>
-            &nbsp;·&nbsp;
-            <span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span>
-          </div>
-          <div class="btn-pair">
-            <a href="veille_nvidia_gpu_ia.pdf" download class="btn-dl-veille" style="margin-top:0">
-              <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
-            </a>
-            <button class="btn-preview" id="btn-preview-veille-gpu2" onclick="togglePdf('veille-gpu2','veille_nvidia_gpu_ia.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-          </div>
-          <div class="pdf-viewer-wrap" id="pdf-viewer-veille-gpu2">
-            <div class="pdf-viewer-bar">
-              <span>veille_nvidia_gpu_ia.pdf</span>
-              <button class="pdf-viewer-close" onclick="togglePdf('veille-gpu2','veille_nvidia_gpu_ia.pdf',document.getElementById('btn-preview-veille-gpu2'))">✕ Fermer</button>
-            </div>
-            <iframe id="pdf-iframe-veille-gpu2" src="" title="Aperçu Dossier veille GPU"></iframe>
-          </div>
+          <div class="v-source"><span title="Veille automatique">⚙ Automatique — Google Alerts</span>&nbsp;·&nbsp;<span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span></div>
+          <div class="comp-badges"><span class="comp-badge">B6</span></div>
+          <div class="btn-pair"><a href="veille_nvidia_gpu_ia.pdf" download class="btn-dl-veille" style="margin-top:0"><i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille</a><button class="btn-preview" id="btn-preview-veille-gpu2" onclick="togglePdf('veille-gpu2','veille_nvidia_gpu_ia.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button></div>
+          <div class="pdf-viewer-wrap" id="pdf-viewer-veille-gpu2"><div class="pdf-viewer-bar"><span>veille_nvidia_gpu_ia.pdf</span><button class="pdf-viewer-close" onclick="togglePdf('veille-gpu2','veille_nvidia_gpu_ia.pdf',document.getElementById('btn-preview-veille-gpu2'))">✕ Fermer</button></div><iframe id="pdf-iframe-veille-gpu2" src="" title="Aperçu Dossier veille GPU"></iframe></div>
         </div>
       </div>
     </div>
@@ -1170,61 +886,25 @@
     <div class="section-title"><span class="num">09</span><h2>Contact</h2></div>
     <div class="contact-inner reveal">
       <p>Mon profil vous intéresse ? Je suis disponible pour toute opportunité de stage ou de collaboration.</p>
-
       <div class="contact-btns">
-        <button class="btn btn-outline btn-copy" id="btn-copy" type="button">
-          <i class="fa-solid fa-copy" aria-hidden="true"></i> Copier l'email
-          <span class="toast" role="status" aria-live="polite">✓ Copié !</span>
-        </button>
-        <a id="mailto-link" href="#contact" class="btn btn-solid">
-          <i class="fa-solid fa-envelope" aria-hidden="true"></i> Envoyer un mail
-        </a>
-        <a href="https://github.com/LujeX" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-          <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
-        </a>
+        <button class="btn btn-outline btn-copy" id="btn-copy" type="button"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copier l'email<span class="toast" role="status" aria-live="polite">✓ Copié !</span></button>
+        <a id="mailto-link" href="#contact" class="btn btn-solid"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Envoyer un mail</a>
+        <a href="https://github.com/LujeX" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
       </div>
-
-      <div class="contact-divider">
-        <span>ou via le formulaire</span>
-      </div>
-
-      <form
-        id="contact-form"
-        class="contact-form"
-        action="https://formspree.io/f/xdayrpjr"
-        method="POST"
-        novalidate
-      >
+      <div class="contact-divider"><span>ou via le formulaire</span></div>
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/xdayrpjr" method="POST" novalidate>
         <div class="contact-form-row">
-          <div class="form-group">
-            <label for="cf-name">Nom complet</label>
-            <input type="text" id="cf-name" name="name" placeholder="Jean Dupont" required autocomplete="name">
-          </div>
-          <div class="form-group">
-            <label for="cf-email">Adresse email</label>
-            <input type="email" id="cf-email" name="email" placeholder="jean@exemple.fr" required autocomplete="email">
-          </div>
+          <div class="form-group"><label for="cf-name">Nom complet</label><input type="text" id="cf-name" name="name" placeholder="Jean Dupont" required autocomplete="name"></div>
+          <div class="form-group"><label for="cf-email">Adresse email</label><input type="email" id="cf-email" name="email" placeholder="jean@exemple.fr" required autocomplete="email"></div>
         </div>
-        <div class="form-group">
-          <label for="cf-subject">Objet</label>
-          <input type="text" id="cf-subject" name="subject" placeholder="Opportunité de stage / Collaboration / Question" required>
-        </div>
-        <div class="form-group">
-          <label for="cf-message">Message</label>
-          <textarea id="cf-message" name="message" rows="5" placeholder="Bonjour Jules, je vous contacte au sujet de…" required></textarea>
-        </div>
+        <div class="form-group"><label for="cf-subject">Objet</label><input type="text" id="cf-subject" name="subject" placeholder="Opportunité de stage / Collaboration / Question" required></div>
+        <div class="form-group"><label for="cf-message">Message</label><textarea id="cf-message" name="message" rows="5" placeholder="Bonjour Jules, je vous contacte au sujet de…" required></textarea></div>
         <div class="form-submit">
           <span class="form-notice">Réponse sous 48h · Données transmises via Formspree</span>
-          <button type="submit" class="btn btn-solid" id="form-btn">
-            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message
-          </button>
+          <button type="submit" class="btn btn-solid" id="form-btn"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message</button>
         </div>
-        <div class="form-success" id="form-success" role="status" aria-live="polite">
-          <i class="fa-solid fa-circle-check"></i> Message envoyé avec succès — je vous répondrai rapidement.
-        </div>
-        <div class="form-error" id="form-error" role="alert" aria-live="polite">
-          <i class="fa-solid fa-circle-exclamation"></i> Une erreur est survenue. Merci de réessayer ou d'utiliser le bouton « Envoyer un mail » ci-dessus.
-        </div>
+        <div class="form-success" id="form-success" role="status" aria-live="polite"><i class="fa-solid fa-circle-check"></i> Message envoyé avec succès — je vous répondrai rapidement.</div>
+        <div class="form-error" id="form-error" role="alert" aria-live="polite"><i class="fa-solid fa-circle-exclamation"></i> Une erreur est survenue. Merci de réessayer ou d'utiliser le bouton « Envoyer un mail » ci-dessus.</div>
       </form>
     </div>
   </section>
@@ -1238,8 +918,7 @@
     <p class="footer-mentions">
       <strong style="color:var(--text-soft)">Éditeur :</strong> Jules MONIN — Étudiant BTS SIO SISR — Nevers (58), France<br>
       <strong style="color:var(--text-soft)">Contact :</strong> <a href="mailto:moninjules58@gmail.com">moninjules58@gmail.com</a><br>
-      <strong style="color:var(--text-soft)">Hébergeur :</strong> GitHub Pages — GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis —
-      <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">pages.github.com</a><br>
+      <strong style="color:var(--text-soft)">Hébergeur :</strong> GitHub Pages — GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis — <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">pages.github.com</a><br>
       Ce site est un portfolio personnel à but non commercial, réalisé dans le cadre d'une formation BTS SIO option SISR.
       Aucune donnée personnelle n'est collectée sans consentement explicite.
     </p>
@@ -1247,246 +926,37 @@
     <div class="footer-copy" id="footer-copy"></div>
   </div>
 </footer>
-<button id="back-top" aria-label="Retour en haut de page" title="Retour en haut">
-  <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
-</button>
+<button id="back-top" aria-label="Retour en haut de page" title="Retour en haut"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
 
 <script>
-  /* === EMAIL — obfuscation === */
-  const EMAIL = 'moninjules58' + String.fromCharCode(64) + 'gmail.com';
-  document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
-
-  /* === PROGRESS BAR === */
-  const prog = document.getElementById('prog');
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
-    prog.style.width = pct + '%';
-  }, { passive: true });
-
-  /* === NAV ACTIVE (scroll spy) === */
-  const secs = document.querySelectorAll('section');
-  const nls  = document.querySelectorAll('nav a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
-    nls.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
-  }, { passive: true });
-
-  /* === HAMBURGER & NAV === */
-  const hamburger = document.getElementById('hamburger');
-  const overlay   = document.getElementById('nav-overlay');
-  const isMobile  = () => window.innerWidth <= 900;
-  const navIsOpen = () => document.body.classList.contains('nav-open');
-
-  function openNav() {
-    document.body.classList.add('nav-open');
-    document.body.classList.remove('nav-closed');
-    hamburger.setAttribute('aria-expanded', 'true');
-    if (isMobile()) overlay.classList.add('show');
-  }
-  function closeNav() {
-    document.body.classList.remove('nav-open');
-    document.body.classList.add('nav-closed');
-    hamburger.setAttribute('aria-expanded', 'false');
-    overlay.classList.remove('show');
-  }
-
-  isMobile() ? closeNav() : openNav();
-  hamburger.addEventListener('click', () => { navIsOpen() ? closeNav() : openNav(); });
-  overlay.addEventListener('click', closeNav);
-  nls.forEach(l => l.addEventListener('click', () => { if (isMobile()) closeNav(); }));
-  window.addEventListener('resize', () => {
-    if (!isMobile() && !navIsOpen()) openNav();
-    if (isMobile()) overlay.classList.remove('show');
-  });
-
-  /* === COPYRIGHT === */
-  document.querySelector('.copyright').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN';
-  document.getElementById('footer-copy').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN — Tous droits réservés';
-
-  /* === REVEAL + COMPTEURS ANIMÉS === */
-  const done = new Set();
-
-  function animCount(el) {
-    if (done.has(el)) return;
-    done.add(el);
-    const target = parseInt(el.dataset.target, 10);
-    let count = 0;
-    const step = target / (1500 / 30);
-    const iv = setInterval(() => {
-      count += step;
-      if (count >= target) {
-        count = target;
-        clearInterval(iv);
-      }
-      el.textContent = Math.floor(count);
-    }, 30);
-  }
-
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('visible');
-      e.target.querySelectorAll('.stat-num[data-target]').forEach(animCount);
-      obs.unobserve(e.target);
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  /* === FILTRE PROJETS === */
-  document.querySelectorAll('.fbtn').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
-      b.classList.add('on');
-      const f = b.dataset.filter;
-      document.querySelectorAll('.proj-card').forEach(card => {
-        card.classList.toggle('hidden', f !== 'all' && !(card.dataset.cat || '').includes(f));
-      });
-    });
-  });
-
-  /* === COPIER EMAIL === */
-  document.getElementById('btn-copy').addEventListener('click', function() {
-    const toast = this.querySelector('.toast');
-    const showToast = () => {
-      toast.classList.add('on');
-      setTimeout(() => toast.classList.remove('on'), 2000);
-    };
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(EMAIL).then(showToast).catch(fallback);
-    } else {
-      fallback();
-    }
-    function fallback() {
-      const ta = document.createElement('textarea');
-      ta.value = EMAIL;
-      ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;left:-9999px';
-      document.body.appendChild(ta);
-      ta.focus(); ta.select();
-      try { document.execCommand('copy'); showToast(); }
-      catch { alert('Email : ' + EMAIL); }
-      finally { document.body.removeChild(ta); }
-    }
-  });
-
-  /* === FORMULAIRE DE CONTACT — soumission AJAX === */
-  const form    = document.getElementById('contact-form');
-  const formBtn = document.getElementById('form-btn');
-  const formOk  = document.getElementById('form-success');
-  const formErr = document.getElementById('form-error');
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); return; }
-
-    formBtn.disabled = true;
-    formBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Envoi en cours…';
-    formOk.style.display = 'none';
-    formErr.style.display = 'none';
-
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        form.reset();
-        formOk.style.display = 'flex';
-        formOk.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } else {
-        formErr.style.display = 'flex';
-      }
-    } catch {
-      formErr.style.display = 'flex';
-    } finally {
-      formBtn.disabled = false;
-      formBtn.innerHTML = '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message';
-    }
-  });
-
-  /* === VISIONNEUSE PDF === */
-  function togglePdf(id, file, btn) {
-    const wrap   = document.getElementById('pdf-viewer-' + id);
-    const iframe = document.getElementById('pdf-iframe-' + id);
-    const isOpen = wrap.classList.contains('open');
-    if (isOpen) {
-      wrap.classList.remove('open');
-      iframe.src = '';
-      btn.classList.remove('active');
-      btn.innerHTML = '<i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu';
-    } else {
-      wrap.classList.add('open');
-      iframe.src = file;
-      btn.classList.add('active');
-      btn.innerHTML = '<i class="fa-solid fa-eye-slash" aria-hidden="true"></i> Masquer';
-      wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-
-  /* === RETOUR EN HAUT === */
-  const backTop = document.getElementById('back-top');
-  if (backTop) {
-    window.addEventListener('scroll', () => {
-      backTop.classList.toggle('visible', window.scrollY > 400);
-    }, { passive: true });
-    backTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  /* === BULLES FOND ANIMÉ === */
-  (function() {
-    const canvas = document.getElementById('bubbles-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let W, H, bubbles;
-
-    function resize() {
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-
-    function createBubbles() {
-      bubbles = [];
-      const count = Math.floor((W * H) / 22000);
-      for (let i = 0; i < count; i++) {
-        bubbles.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          r: Math.random() * 3 + 1,
-          speedX: (Math.random() - .5) * .3,
-          speedY: -(Math.random() * .4 + .1),
-          opacity: Math.random() * .4 + .1
-        });
-      }
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (const b of bubbles) {
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(109,200,232,${b.opacity})`;
-        ctx.fill();
-        b.x += b.speedX;
-        b.y += b.speedY;
-        if (b.y + b.r < 0) {
-          b.y = H + b.r;
-          b.x = Math.random() * W;
-        }
-        if (b.x < -b.r) b.x = W + b.r;
-        if (b.x > W + b.r) b.x = -b.r;
-      }
-      requestAnimationFrame(draw);
-    }
-
-    resize();
-    createBubbles();
-    draw();
-    window.addEventListener('resize', () => { resize(); createBubbles(); }, { passive: true });
-  })();
+  const EMAIL='moninjules58'+String.fromCharCode(64)+'gmail.com';
+  document.getElementById('mailto-link').href='mailto:'+EMAIL;
+  const prog=document.getElementById('prog');
+  window.addEventListener('scroll',()=>{prog.style.width=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100+'%';},{passive:true});
+  const secs=document.querySelectorAll('section'),nls=document.querySelectorAll('nav a');
+  window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-200)c=s.id});nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+c));},{passive:true});
+  const hamburger=document.getElementById('hamburger'),overlay=document.getElementById('nav-overlay'),isMobile=()=>window.innerWidth<=900,navIsOpen=()=>document.body.classList.contains('nav-open');
+  function openNav(){document.body.classList.add('nav-open');document.body.classList.remove('nav-closed');hamburger.setAttribute('aria-expanded','true');if(isMobile())overlay.classList.add('show')}
+  function closeNav(){document.body.classList.remove('nav-open');document.body.classList.add('nav-closed');hamburger.setAttribute('aria-expanded','false');overlay.classList.remove('show')}
+  isMobile()?closeNav():openNav();
+  hamburger.addEventListener('click',()=>{navIsOpen()?closeNav():openNav()});
+  overlay.addEventListener('click',closeNav);
+  nls.forEach(l=>l.addEventListener('click',()=>{if(isMobile())closeNav()}));
+  window.addEventListener('resize',()=>{if(!isMobile()&&!navIsOpen())openNav();if(isMobile())overlay.classList.remove('show')});
+  document.querySelector('.copyright').textContent='© '+new Date().getFullYear()+' Jules MONIN';
+  document.getElementById('footer-copy').textContent='© '+new Date().getFullYear()+' Jules MONIN — Tous droits réservés';
+  const done=new Set();
+  function animCount(el){if(done.has(el))return;done.add(el);const t=parseInt(el.dataset.target,10);let c=0;const s=t/(1500/30);const iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv)}el.textContent=Math.floor(c)},30)}
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');e.target.querySelectorAll('.stat-num[data-target]').forEach(animCount);obs.unobserve(e.target)})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  document.querySelectorAll('.fbtn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');const f=b.dataset.filter;document.querySelectorAll('.proj-card').forEach(card=>{card.classList.toggle('hidden',f!=='all'&&!(card.dataset.cat||'').includes(f))})})});
+  document.getElementById('btn-copy').addEventListener('click',function(){const toast=this.querySelector('.toast');const show=()=>{toast.classList.add('on');setTimeout(()=>toast.classList.remove('on'),2000)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(EMAIL).then(show).catch(fb)}else{fb()}function fb(){const ta=document.createElement('textarea');ta.value=EMAIL;ta.style.cssText='position:fixed;opacity:0;pointer-events:none;left:-9999px';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');show()}catch{alert('Email : '+EMAIL)}finally{document.body.removeChild(ta)}}});
+  const form=document.getElementById('contact-form'),formBtn=document.getElementById('form-btn'),formOk=document.getElementById('form-success'),formErr=document.getElementById('form-error');
+  form.addEventListener('submit',async e=>{e.preventDefault();if(!form.checkValidity()){form.reportValidity();return}formBtn.disabled=true;formBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Envoi en cours…';formOk.style.display='none';formErr.style.display='none';try{const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});if(res.ok){form.reset();formOk.style.display='flex';formOk.scrollIntoView({behavior:'smooth',block:'nearest'})}else{formErr.style.display='flex'}}catch{formErr.style.display='flex'}finally{formBtn.disabled=false;formBtn.innerHTML='<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Envoyer le message'}});
+  function togglePdf(id,file,btn){const wrap=document.getElementById('pdf-viewer-'+id),iframe=document.getElementById('pdf-iframe-'+id),isOpen=wrap.classList.contains('open');if(isOpen){wrap.classList.remove('open');iframe.src='';btn.classList.remove('active');btn.innerHTML='<i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu'}else{wrap.classList.add('open');iframe.src=file;btn.classList.add('active');btn.innerHTML='<i class="fa-solid fa-eye-slash" aria-hidden="true"></i> Masquer';wrap.scrollIntoView({behavior:'smooth',block:'nearest'})}}
+  const backTop=document.getElementById('back-top');
+  if(backTop){window.addEventListener('scroll',()=>{backTop.classList.toggle('visible',window.scrollY>400)},{passive:true});backTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})})}
+  (function(){const canvas=document.getElementById('bubbles-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,bubbles;function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}function createBubbles(){bubbles=[];const count=Math.floor((W*H)/22000);for(let i=0;i<count;i++){bubbles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*3+1,speedX:(Math.random()-.5)*.3,speedY:-(Math.random()*.4+.1),opacity:Math.random()*.4+.1})}}function draw(){ctx.clearRect(0,0,W,H);for(const b of bubbles){ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fillStyle=`rgba(109,200,232,${b.opacity})`;ctx.fill();b.x+=b.speedX;b.y+=b.speedY;if(b.y+b.r<0){b.y=H+b.r;b.x=Math.random()*W}if(b.x<-b.r)b.x=W+b.r;if(b.x>W+b.r)b.x=-b.r}requestAnimationFrame(draw)}resize();createBubbles();draw();window.addEventListener('resize',()=>{resize();createBubbles()},{passive:true})})();
 </script>
 
 </body>
