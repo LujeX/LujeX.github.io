@@ -903,6 +903,44 @@
           <iframe id="pdf-iframe-nagios" src="" title="Aperçu Procédure Nagios"></iframe>
         </div>
       </div>
+      <div class="proj-card reveal d4" data-cat="securite">
+        <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-bug-slash"></i></div>
+        <h3>IDS/IPS — Détection d'intrusion</h3>
+        <p>Implémentation d'un système de détection et prévention d'intrusion à l'aide de Snort. Configuration de règles de détection personnalisées pour identifier les attaques réseau courantes (scans, DoS, injections).</p>
+        <div class="tags-sm"><span>Snort</span><span>IDS/IPS</span><span>Linux</span><span>Cybersécurité</span></div>
+        <div class="btn-pair">
+          <a href="procedure_mission_e_ids_ips.pdf" download class="btn-dl" style="margin-top:0">
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
+          <button class="btn-preview" id="btn-preview-ids" onclick="togglePdf('ids','procedure_mission_e_ids_ips.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
+        </div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-ids">
+          <div class="pdf-viewer-bar">
+            <span>procedure_mission_e_ids_ips.pdf</span>
+            <button class="pdf-viewer-close" onclick="togglePdf('ids','procedure_mission_e_ids_ips.pdf',document.getElementById('btn-preview-ids'))">✕ Fermer</button>
+          </div>
+          <iframe id="pdf-iframe-ids" src="" title="Aperçu IDS/IPS Snort"></iframe>
+        </div>
+      </div>
+      <div class="proj-card reveal d5" data-cat="supervision systeme">
+        <div class="proj-icon" aria-hidden="true"><i class="fa-solid fa-chart-bar"></i></div>
+        <h3>Centralisation de logs — Stack ELK</h3>
+        <p>Mise en place d'une solution de centralisation et d'analyse des logs avec la stack ELK. Collecte des logs via Logstash, indexation dans Elasticsearch et visualisation des données dans des tableaux de bord Kibana.</p>
+        <div class="tags-sm"><span>Elasticsearch</span><span>Logstash</span><span>Kibana</span><span>Linux</span></div>
+        <div class="btn-pair">
+          <a href="procedure_mission_g_elk.pdf" download class="btn-dl" style="margin-top:0">
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
+          <button class="btn-preview" id="btn-preview-elk" onclick="togglePdf('elk','procedure_mission_g_elk.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
+        </div>
+        <div class="pdf-viewer-wrap" id="pdf-viewer-elk">
+          <div class="pdf-viewer-bar">
+            <span>procedure_mission_g_elk.pdf</span>
+            <button class="pdf-viewer-close" onclick="togglePdf('elk','procedure_mission_g_elk.pdf',document.getElementById('btn-preview-elk'))">✕ Fermer</button>
+          </div>
+          <iframe id="pdf-iframe-elk" src="" title="Aperçu Stack ELK"></iframe>
+        </div>
+      </div>
     </div>
   </section>
 
