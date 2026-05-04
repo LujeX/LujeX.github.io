@@ -537,6 +537,10 @@
     .bts-comp-title{font-size:14px;font-weight:700;color:var(--text-h);margin-bottom:6px}
     .bts-comp-detail{font-size:12.5px;color:var(--text-body);line-height:1.6}
     @media(max-width:900px){.bts-competences{grid-template-columns:1fr}}
+
+    /* === ACCESSIBILITÉ CLAVIER === */
+    a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+      outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
   </style>
 </head>
 
@@ -1259,6 +1263,9 @@
     <div class="footer-copy" id="footer-copy"></div>
   </div>
 </footer>
+<button id="back-top" aria-label="Retour en haut de page" title="Retour en haut">
+  <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+</button>
 
 <script>
   /* =====================================================
@@ -1271,14 +1278,6 @@
   /* =====================================================
      CURSEUR CUSTOM
   ===================================================== */
-  window.addEventListener('resize', () => {
-    if (!isDesktop()) {
-      
-    } else {
-      
-    }
-  });
-
   /* === PROGRESS BAR === */
   const prog = document.getElementById('prog');
   window.addEventListener('scroll', () => {
@@ -1528,8 +1527,5 @@
   })();
 </script>
 
-<button id="back-top" aria-label="Retour en haut de page" title="Retour en haut">
-  <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
-</button>
 </body>
 </html>
