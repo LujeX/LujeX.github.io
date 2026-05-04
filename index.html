@@ -6,7 +6,11 @@
   <meta name="description" content="Portfolio de Jules MONIN — Étudiant BTS SIO option SISR, administration système et réseau à Nevers.">
   <meta name="theme-color" content="#0d1b2a">
 
-  <!-- OPEN GRAPH & TWITTER CARD -->
+  <!-- ===================================================
+       FIX 1 : OPEN GRAPH & TWITTER CARD
+       Remplacer l'URL par votre domaine réel.
+       og:image → assets/og-preview.jpg (1200×630px requis)
+  =================================================== -->
   <meta property="og:title" content="Portfolio — Jules MONIN | BTS SIO SISR">
   <meta property="og:description" content="Étudiant BTS SIO option SISR — Administration système et réseau. Nevers, France.">
   <meta property="og:type" content="website">
@@ -20,14 +24,21 @@
 
   <title>Portfolio — MONIN Jules</title>
 
-  <!-- CHARGEMENT NON-BLOQUANT DES POLICES -->
+  <!-- ===================================================
+       FIX 2 : CHARGEMENT NON-BLOQUANT DES POLICES
+       Technique : preconnect + preload as="style" + media="print" swap
+       Évite le render-blocking tout en conservant font-display:swap.
+  =================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Préchargement de la feuille de style (non-bloquant) -->
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <!-- Chargement différé via media="print" → basculé en "all" après load -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
     media="print" onload="this.media='all'">
+  <!-- Fallback sans JS -->
   <noscript>
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -61,9 +72,6 @@
         radial-gradient(ellipse 50% 40% at 60% 40%,var(--bg-b3) 0%,transparent 50%);
       animation:bgP 12s ease-in-out infinite alternate}
     @keyframes bgP{0%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}100%{opacity:.8;transform:scale(.98)}}
-
-    /* === CURSEUR CUSTOM DÉSACTIVÉ === */
-    #cur,#cur-dot{display:none !important}
 
     /* === PROGRESS BAR === */
     #prog{position:fixed;top:0;left:0;z-index:9997;height:3px;width:0%;
@@ -151,116 +159,21 @@
     p{line-height:1.75;color:var(--text-body);margin-bottom:16px}
     strong{color:var(--text-h);font-weight:600}
 
-    /* ===================================================
-       ✨ ANIMATIONS RÉVÉLATION AMÉLIORÉES
-       Sans flou (blur) — fade + translate + scale + rotations
-       Courbes d'accélération naturelles (cubic-bezier)
-    =================================================== */
-    
-    /* --- Animation principale (par défaut) --- */
-    .reveal{
-      opacity: 0;
-      transform: translateY(45px) scale(0.97);
-      transition:
-        opacity 0.7s cubic-bezier(.25,.46,.45,.94),
-        transform 0.7s cubic-bezier(.25,.46,.45,.94);
-      will-change: opacity, transform;
-    }
-    .reveal.visible{
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    /* Délais échelonnés pour l'effet cascade */
-    .d1 { transition-delay: 0.08s; }
-    .d2 { transition-delay: 0.18s; }
-    .d3 { transition-delay: 0.30s; }
-    .d4 { transition-delay: 0.42s; }
-    .d5 { transition-delay: 0.54s; }
-
-    /* --- Animation pour les cartes de projet/cert/RP (rotation perspective) --- */
-    .proj-card.reveal,
-    .cert-card.reveal,
-    .ep-card.reveal,
-    .rp-card.reveal {
-      transform: translateY(50px) scale(0.95) rotateX(4deg);
-      transition:
-        opacity 0.8s cubic-bezier(.25,.46,.45,.94),
-        transform 0.8s cubic-bezier(.25,.46,.45,.94),
-        box-shadow 0.8s ease;
-    }
-    .proj-card.reveal.visible,
-    .cert-card.reveal.visible,
-    .ep-card.reveal.visible,
-    .rp-card.reveal.visible {
-      transform: translateY(0) scale(1) rotateX(0deg);
-    }
-
-    /* --- Animation pour le hero image (arrivée latérale gauche + rotation 3D) --- */
-    #profil .hero-img-wrap.reveal {
-      transform: translateX(-60px) scale(0.9) rotateY(-5deg);
-      opacity: 0;
-      transition:
-        opacity 1s cubic-bezier(.22,1,.36,1),
-        transform 1s cubic-bezier(.22,1,.36,1);
-    }
-    #profil .hero-img-wrap.reveal.visible {
-      transform: translateX(0) scale(1) rotateY(0deg);
-      opacity: 1;
-    }
-
-    /* --- Animation pour le hero text (arrivée latérale droite) --- */
-    #profil .hero-text .reveal {
-      transform: translateX(40px) scale(0.97);
-      opacity: 0;
-    }
-    #profil .hero-text .reveal.visible {
-      transform: translateX(0) scale(1);
-      opacity: 1;
-    }
-
-    /* --- Animation pour la timeline (arrivée diagonale) --- */
-    .t-item .reveal {
-      transform: translateX(-30px) translateY(20px) scale(0.98);
-    }
-    .t-item .reveal.visible {
-      transform: translateX(0) translateY(0) scale(1);
-    }
-
-    /* --- Animation pour les statistiques (effet bounce/rebond) --- */
-    .stat-box.reveal {
-      transform: translateY(30px) scale(0.85);
-      opacity: 0;
-      transition:
-        opacity 0.6s cubic-bezier(.34,1.56,.64,1),
-        transform 0.6s cubic-bezier(.34,1.56,.64,1);
-    }
-    .stat-box.reveal.visible {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-
-    /* --- Animation pour le contact (entrée large et douce) --- */
-    #contact .contact-inner.reveal {
-      transform: translateY(60px) scale(0.98);
-      opacity: 0;
-      transition:
-        opacity 0.9s cubic-bezier(.25,.46,.45,.94),
-        transform 0.9s cubic-bezier(.25,.46,.45,.94);
-    }
-    #contact .contact-inner.reveal.visible {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
+    /* === REVEAL === */
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
     /* === HERO === */
     #profil{flex-direction:row;align-items:center;gap:60px;min-height:100vh}
     .hero-img-wrap{flex-shrink:0;position:relative}
     .hero-img-frame{width:320px;height:420px;border-radius:18px;overflow:hidden;position:relative;
       box-shadow:var(--shadow-lg),0 0 0 1px var(--border);transition:transform .3s,box-shadow .3s;
+      /* FIX 3 : fond de secours affiché si l'image locale est absente */
       background:linear-gradient(135deg,#1a2332 0%,#141d2b 100%)}
     .hero-img-frame:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(0,0,0,.6),0 0 0 1px var(--border)}
     .hero-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Icône de remplacement affichée si l'image échoue (géré via JS onerror) */
     .hero-img-fallback{display:none;width:100%;height:100%;
       align-items:center;justify-content:center;flex-direction:column;gap:14px;
       color:var(--accent);opacity:.5}
@@ -365,7 +278,7 @@
       background:linear-gradient(135deg,rgba(74,154,187,.1),rgba(109,200,232,.07));
       border:1px solid var(--border);padding:3px 9px;border-radius:6px}
 
-    /* === STAGE DOCS === */
+    /* === STAGES DOCS === */
     .stage-docs{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center}
 
     /* === CERTIFICATIONS === */
@@ -473,7 +386,9 @@
       transition:opacity .3s;box-shadow:0 4px 12px rgba(109,200,232,.3)}
     .toast.on{opacity:1}
 
-    /* FORMULAIRE DE CONTACT */
+    /* ===================================================
+       FIX 5 : FORMULAIRE DE CONTACT
+    =================================================== */
     .contact-divider{display:flex;align-items:center;gap:14px;margin-bottom:28px}
     .contact-divider span{font-size:12px;font-family:'JetBrains Mono',monospace;
       color:var(--text-xsoft);white-space:nowrap}
@@ -604,13 +519,30 @@
     #back-top:hover{border-color:var(--accent);background:rgba(109,200,232,.1);
       transform:translateY(-3px);box-shadow:0 8px 24px rgba(109,200,232,.2)}
     @media(max-width:900px){#back-top{bottom:20px;right:16px}}
+
+    /* === BULLES FOND ANIMÉ === */
+    #bubbles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
+
+    /* === BTS COMPÉTENCES === */
+    .bts-competences{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:16px;margin-top:8px}
+    .bts-comp-item{background:var(--surface);border:1px solid var(--border-soft);
+      border-radius:var(--radius);padding:18px 20px;display:flex;gap:14px;align-items:flex-start;
+      box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s,border-color .25s}
+    .bts-comp-item:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);
+      border-color:rgba(109,200,232,.22)}
+    .bts-comp-num{width:36px;height:36px;border-radius:8px;flex-shrink:0;
+      background:var(--accent-grad);display:flex;align-items:center;justify-content:center;
+      font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;color:#fff}
+    .bts-comp-title{font-size:14px;font-weight:700;color:var(--text-h);margin-bottom:6px}
+    .bts-comp-detail{font-size:12.5px;color:var(--text-body);line-height:1.6}
+    @media(max-width:900px){.bts-competences{grid-template-columns:1fr}}
   </style>
 </head>
 
 <body>
 
-<div id="cur" aria-hidden="true"></div>
-<div id="cur-dot" aria-hidden="true"></div>
+<canvas id="bubbles-canvas" aria-hidden="true"></canvas>
 <div id="prog" aria-hidden="true"></div>
 <div id="nav-overlay"></div>
 
@@ -645,6 +577,11 @@
   <section id="profil" aria-label="Profil">
     <div class="hero-img-wrap reveal">
       <div class="hero-img-frame" id="hero-frame">
+        <!--
+          FIX 3 : IMAGE LOCALE — remplacer l'URL Unsplash par assets/hero-infra.jpg
+          Le fallback SVG s'affiche automatiquement si le fichier est absent (voir JS onerror).
+          Dimensions recommandées : 640×840px, format WebP ou JPEG optimisé (< 120 Ko).
+        -->
         <img
           src="assets/hero-infra.jpg"
           alt="Infrastructure réseau et serveurs — SISR"
@@ -655,6 +592,7 @@
           id="hero-img"
           onerror="document.getElementById('hero-frame').classList.add('img-error');this.onerror=null;"
         >
+        <!-- Affiché uniquement si l'image échoue -->
         <div class="hero-img-fallback" aria-hidden="true">
           <i class="fa-solid fa-server"></i>
           <span>hero-infra.jpg manquant</span>
@@ -671,9 +609,9 @@
       </div>
       <blockquote class="reveal d3">"Concevoir des architectures robustes et sécurisées pour le monde de demain."</blockquote>
       <div class="stats-row reveal d3">
-        <div class="stat-box reveal"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Ans de formation</div></div>
-        <div class="stat-box reveal d1"><div class="stat-num" data-target="4">0</div><div class="stat-lbl">Projets réalisés</div></div>
-        <div class="stat-box reveal d2"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Stages effectués</div></div>
+        <div class="stat-box"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Ans de formation</div></div>
+        <div class="stat-box"><div class="stat-num" data-target="4">0</div><div class="stat-lbl">Projets réalisés</div></div>
+        <div class="stat-box"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Stages effectués</div></div>
       </div>
       <div class="btns reveal d3">
         <a href="cv.pdf" class="btn btn-solid" download><i class="fa-solid fa-download" aria-hidden="true"></i> CV.pdf</a>
@@ -695,9 +633,52 @@
   <!-- BTS SIO -->
   <section id="bts" aria-label="Le BTS SIO SISR">
     <div class="section-title"><span class="num">01</span><h2>Le BTS SIO SISR</h2></div>
-    <p class="reveal">Le <strong>Brevet de Technicien Supérieur Services Informatiques aux Organisations</strong>, option <strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong> (SISR), est une formation de niveau Bac+2 orientée vers l'administration et la gestion des infrastructures informatiques.</p>
-    <p class="reveal d1">L'option SISR forme des techniciens capables de concevoir, déployer, administrer et sécuriser des infrastructures réseau et système au sein d'organisations. Elle se distingue de l'option SLAM (développement) en se concentrant sur le cœur du réseau : équipements, serveurs, sécurité et supervision.</p>
-    <p class="reveal d2">La formation couvre notamment : l'administration système sous <strong>Windows Server</strong> (Active Directory, GPO, DHCP, DNS) et <strong>Linux</strong>, la virtualisation avec <strong>VirtualBox</strong>, la gestion et configuration de <strong>switches</strong> et routeurs (VLAN, spanning-tree, routage), la mise en place de pare-feu <strong>pfSense</strong>, la cybersécurité des SI et la supervision avec des outils comme <strong>Nagios</strong>. La formation inclut également deux périodes de stage en entreprise.</p>
+    <p class="reveal">Le <strong>Brevet de Technicien Supérieur Services Informatiques aux Organisations</strong>, option <strong>Solutions d'Infrastructure, Systèmes et Réseaux</strong> (SISR), est une formation de niveau Bac+2 qui prépare à l'administration et à la gestion des infrastructures informatiques en entreprise.</p>
+    <p class="reveal d1">Le référentiel du BTS SIO définit <strong>6 blocs de compétences communs</strong> aux deux options, auxquels s'ajoutent les compétences spécifiques à l'option SISR :</p>
+    <div class="bts-competences reveal d2">
+      <div class="bts-comp-item">
+        <div class="bts-comp-num">B1</div>
+        <div class="bts-comp-body">
+          <div class="bts-comp-title">Gérer le patrimoine informatique</div>
+          <div class="bts-comp-detail">Recenser les ressources numériques, gérer les habilitations, assurer la continuité de service, gérer les sauvegardes et vérifier le respect des règles d'utilisation.</div>
+        </div>
+      </div>
+      <div class="bts-comp-item">
+        <div class="bts-comp-num">B2</div>
+        <div class="bts-comp-body">
+          <div class="bts-comp-title">Répondre aux incidents et aux demandes d'assistance</div>
+          <div class="bts-comp-detail">Collecter et orienter les demandes, traiter les incidents liés aux services réseau, système et applicatifs.</div>
+        </div>
+      </div>
+      <div class="bts-comp-item">
+        <div class="bts-comp-num">B3</div>
+        <div class="bts-comp-body">
+          <div class="bts-comp-title">Développer la présence en ligne de l'organisation</div>
+          <div class="bts-comp-detail">Valoriser l'image numérique de l'organisation, référencer les services en ligne et participer à l'évolution d'un site web.</div>
+        </div>
+      </div>
+      <div class="bts-comp-item">
+        <div class="bts-comp-num">B4</div>
+        <div class="bts-comp-body">
+          <div class="bts-comp-title">Travailler en mode projet</div>
+          <div class="bts-comp-detail">Analyser les objectifs d'un projet, planifier les activités, suivre les indicateurs et analyser les écarts.</div>
+        </div>
+      </div>
+      <div class="bts-comp-item">
+        <div class="bts-comp-num">B5</div>
+        <div class="bts-comp-body">
+          <div class="bts-comp-title">Mettre à disposition des utilisateurs un service informatique</div>
+          <div class="bts-comp-detail">Réaliser les tests d'intégration et d'acceptation, déployer un service et accompagner les utilisateurs.</div>
+        </div>
+      </div>
+      <div class="bts-comp-item">
+        <div class="bts-comp-num">B6</div>
+        <div class="bts-comp-body">
+          <div class="bts-comp-title">Organiser son développement professionnel</div>
+          <div class="bts-comp-detail">Mettre en place une veille informationnelle, gérer son identité professionnelle et développer son projet professionnel.</div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- PARCOURS -->
@@ -1068,21 +1049,9 @@
           <div class="cert-score-lbl">Baccalauréat Professionnel</div>
         </div>
         <p class="cert-desc">Baccalauréat professionnel option Réseaux Informatiques et Systèmes Communicants (RISC). Câblage réseau, configuration switches/routeurs et télécommunications.</p>
-        
-        <div class="btn-pair">
-          <a href="diplome_bac_pro_sn.pdf" download class="btn-dl" style="margin-top:0">
+        <a href="diplome_bac_pro_sn.pdf" download class="btn-dl" style="margin-top:16px">
           <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le diplôme
         </a>
-          <button class="btn-preview" id="btn-preview-diplome" onclick="togglePdf('diplome','diplome_bac_pro_sn.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
-        </div>
-        <div class="pdf-viewer-wrap" id="pdf-viewer-diplome">
-          <div class="pdf-viewer-bar">
-            <span>diplome_bac_pro_sn.pdf</span>
-            <button class="pdf-viewer-close" onclick="togglePdf('diplome','diplome_bac_pro_sn.pdf',document.getElementById('btn-preview-diplome'))">✕ Fermer</button>
-          </div>
-          <iframe id="pdf-iframe-diplome" src="" title="Aperçu Diplôme Bac Pro"></iframe>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1197,7 +1166,14 @@
         <span>ou via le formulaire</span>
       </div>
 
-      <!-- FORMULAIRE DE CONTACT (Formspree) -->
+      <!--
+        FIX 5 : FORMULAIRE DE CONTACT (Formspree)
+        Étapes :
+          1. Créer un compte gratuit sur https://formspree.io
+          2. Créer un nouveau formulaire → copier l'ID (ex: xpwzabcd)
+          3. Remplacer VOTRE_FORM_ID ci-dessous par cet ID
+        Le plan gratuit autorise 50 soumissions/mois, sans serveur requis.
+      -->
       <form
         id="contact-form"
         class="contact-form"
@@ -1285,18 +1261,32 @@
 </footer>
 
 <script>
-  /* EMAIL — obfuscation */
+  /* =====================================================
+     EMAIL — obfuscation
+  ===================================================== */
   const EMAIL = 'moninjules58' + String.fromCharCode(64) + 'gmail.com';
+
   document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
 
-  /* PROGRESS BAR */
+  /* =====================================================
+     CURSEUR CUSTOM
+  ===================================================== */
+  window.addEventListener('resize', () => {
+    if (!isDesktop()) {
+      
+    } else {
+      
+    }
+  });
+
+  /* === PROGRESS BAR === */
   const prog = document.getElementById('prog');
   window.addEventListener('scroll', () => {
     const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
     prog.style.width = pct + '%';
   }, { passive: true });
 
-  /* NAV ACTIVE (scroll spy) */
+  /* === NAV ACTIVE (scroll spy) === */
   const secs = document.querySelectorAll('section');
   const nls  = document.querySelectorAll('nav a');
   window.addEventListener('scroll', () => {
@@ -1305,7 +1295,7 @@
     nls.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
   }, { passive: true });
 
-  /* HAMBURGER & NAV */
+  /* === HAMBURGER & NAV === */
   const hamburger = document.getElementById('hamburger');
   const overlay   = document.getElementById('nav-overlay');
   const isMobile  = () => window.innerWidth <= 900;
@@ -1333,19 +1323,24 @@
     if (isMobile()) overlay.classList.remove('show');
   });
 
-  /* COPYRIGHT */
+  /* === COPYRIGHT === */
   document.querySelector('.copyright').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN';
   document.getElementById('footer-copy').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN — Tous droits réservés';
 
-  /* ANIMATIONS RÉVÉLATION — Sans flou */
+  /* =====================================================
+     FIX 4 : REVEAL + COMPTEURS ANIMÉS
+     Unification en un seul chemin (IntersectionObserver).
+     obs.unobserve() après déclenchement → plus de double appel possible.
+     La Set `done` reste présente comme garde de sécurité secondaire.
+  ===================================================== */
   const done = new Set();
 
   function animCount(el) {
     if (done.has(el)) return;
-    done.add(el);
+    done.add(el); // Ajout synchrone — JS est mono-thread, pas de race condition
     const target = parseInt(el.dataset.target, 10);
     let count = 0;
-    const step = target / (1500 / 30);
+    const step = target / (1500 / 30); // ~50 frames sur 1,5s
     const iv = setInterval(() => {
       count += step;
       if (count >= target) {
@@ -1359,23 +1354,16 @@
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      
-      requestAnimationFrame(() => {
-        e.target.classList.add('visible');
-      });
-      
+      e.target.classList.add('visible');
+      // Compteurs : déclenchés une seule fois puis l'élément n'est plus observé
       e.target.querySelectorAll('.stat-num[data-target]').forEach(animCount);
-      
-      obs.unobserve(e.target);
+      obs.unobserve(e.target); // ← supprime le double-déclenchement
     });
-  }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -60px 0px'
-  });
+  }, { threshold: 0.12 });
 
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  /* FILTRE PROJETS */
+  /* === FILTRE PROJETS === */
   document.querySelectorAll('.fbtn').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
@@ -1387,7 +1375,7 @@
     });
   });
 
-  /* COPIER EMAIL */
+  /* === COPIER EMAIL — fallback robuste === */
   document.getElementById('btn-copy').addEventListener('click', function() {
     const toast = this.querySelector('.toast');
     const showToast = () => {
@@ -1411,7 +1399,10 @@
     }
   });
 
-  /* FORMULAIRE DE CONTACT — soumission AJAX */
+  /* =====================================================
+     FIX 5 : FORMULAIRE DE CONTACT — soumission AJAX
+     Gère les états loading / succès / erreur sans rechargement.
+  ===================================================== */
   const form    = document.getElementById('contact-form');
   const formBtn = document.getElementById('form-btn');
   const formOk  = document.getElementById('form-success');
@@ -1420,8 +1411,10 @@
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
+    // Validation HTML5 native
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
+    // État chargement
     formBtn.disabled = true;
     formBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Envoi en cours…';
     formOk.style.display = 'none';
@@ -1449,7 +1442,7 @@
     }
   });
 
-  /* VISIONNEUSE PDF */
+  /* === VISIONNEUSE PDF === */
   function togglePdf(id, file, btn) {
     const wrap   = document.getElementById('pdf-viewer-' + id);
     const iframe = document.getElementById('pdf-iframe-' + id);
@@ -1468,7 +1461,7 @@
     }
   }
 
-  /* RETOUR EN HAUT */
+  /* === RETOUR EN HAUT === */
   const backTop = document.getElementById('back-top');
   if (backTop) {
     window.addEventListener('scroll', () => {
@@ -1478,6 +1471,61 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+  /* === BULLES FOND ANIMÉ === */
+  (function() {
+    const canvas = document.getElementById('bubbles-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, bubbles;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function createBubbles() {
+      bubbles = [];
+      const count = Math.floor((W * H) / 22000); // densité très faible
+      for (let i = 0; i < count; i++) {
+        bubbles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 3 + 1,        // rayon 1–4px
+          speedX: (Math.random() - .5) * .3,
+          speedY: -(Math.random() * .4 + .1), // monte doucement
+          opacity: Math.random() * .4 + .1
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (const b of bubbles) {
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(109,200,232,${b.opacity})`;
+        ctx.fill();
+
+        b.x += b.speedX;
+        b.y += b.speedY;
+
+        // Reboucle quand la bulle sort par le haut
+        if (b.y + b.r < 0) {
+          b.y = H + b.r;
+          b.x = Math.random() * W;
+        }
+        if (b.x < -b.r) b.x = W + b.r;
+        if (b.x > W + b.r) b.x = -b.r;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    createBubbles();
+    draw();
+    window.addEventListener('resize', () => { resize(); createBubbles(); }, { passive: true });
+  })();
 </script>
 
 <button id="back-top" aria-label="Retour en haut de page" title="Retour en haut">
