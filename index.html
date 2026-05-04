@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="jour">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -162,17 +162,16 @@
     .reveal{opacity:0;transform:translateY(32px);transition:opacity .65s,transform .65s}
     .reveal.visible{opacity:1;transform:translateY(0)}
     .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+    .d4{transition-delay:.4s}.d5{transition-delay:.5s}
 
     /* === HERO === */
     #profil{flex-direction:row;align-items:center;gap:60px;min-height:100vh}
     .hero-img-wrap{flex-shrink:0;position:relative}
     .hero-img-frame{width:320px;height:420px;border-radius:18px;overflow:hidden;position:relative;
       box-shadow:var(--shadow-lg),0 0 0 1px var(--border);transition:transform .3s,box-shadow .3s;
-      /* FIX 3 : fond de secours affiché si l'image locale est absente */
       background:linear-gradient(135deg,#1a2332 0%,#141d2b 100%)}
     .hero-img-frame:hover{transform:translateY(-6px);box-shadow:0 28px 70px rgba(0,0,0,.6),0 0 0 1px var(--border)}
     .hero-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
-    /* Icône de remplacement affichée si l'image échoue (géré via JS onerror) */
     .hero-img-fallback{display:none;width:100%;height:100%;
       align-items:center;justify-content:center;flex-direction:column;gap:14px;
       color:var(--accent);opacity:.5}
@@ -385,9 +384,6 @@
       transition:opacity .3s;box-shadow:0 4px 12px rgba(109,200,232,.3)}
     .toast.on{opacity:1}
 
-    /* ===================================================
-       FIX 5 : FORMULAIRE DE CONTACT
-    =================================================== */
     .contact-divider{display:flex;align-items:center;gap:14px;margin-bottom:28px}
     .contact-divider span{font-size:12px;font-family:'JetBrains Mono',monospace;
       color:var(--text-xsoft);white-space:nowrap}
@@ -540,6 +536,14 @@
     /* === ACCESSIBILITÉ CLAVIER === */
     a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+    /* === RÉDUCTION DES MOUVEMENTS === */
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:0s!important;transition-duration:0s!important}
+      .reveal{opacity:1;transform:none}
+      #bubbles-canvas{display:none}
+      body::before{animation:none;opacity:.8}
+    }
   </style>
 </head>
 
@@ -580,11 +584,6 @@
   <section id="profil" aria-label="Profil">
     <div class="hero-img-wrap reveal">
       <div class="hero-img-frame" id="hero-frame">
-        <!--
-          FIX 3 : IMAGE LOCALE — remplacer l'URL Unsplash par assets/hero-infra.jpg
-          Le fallback SVG s'affiche automatiquement si le fichier est absent (voir JS onerror).
-          Dimensions recommandées : 640×840px, format WebP ou JPEG optimisé (< 120 Ko).
-        -->
         <img
           src="assets/hero-infra.jpg"
           alt="Infrastructure réseau et serveurs — SISR"
@@ -595,7 +594,6 @@
           id="hero-img"
           onerror="document.getElementById('hero-frame').classList.add('img-error');this.onerror=null;"
         >
-        <!-- Affiché uniquement si l'image échoue -->
         <div class="hero-img-fallback" aria-hidden="true">
           <i class="fa-solid fa-server"></i>
           <span>hero-infra.jpg manquant</span>
@@ -735,11 +733,10 @@
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Contribution au déploiement de nouveaux équipements informatiques</li>
       </ul>
       <div class="stage-docs">
-        
         <div class="btn-pair">
           <a href="attestation_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
+          </a>
           <button class="btn-preview" id="btn-preview-att-bts1" onclick="togglePdf('att-bts1','attestation_stage_bts1_dsin.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts1">
@@ -749,11 +746,10 @@
           </div>
           <iframe id="pdf-iframe-att-bts1" src="" title="Aperçu Attestation stage BTS1"></iframe>
         </div>
-        
         <div class="btn-pair">
           <a href="rapport_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
-        </a>
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
+          </a>
           <button class="btn-preview" id="btn-preview-rap-bts1" onclick="togglePdf('rap-bts1','rapport_stage_bts1_dsin.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts1">
@@ -778,11 +774,10 @@
         <li><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>Rédaction de documentation technique et procédures d'exploitation</li>
       </ul>
       <div class="stage-docs">
-        
         <div class="btn-pair">
           <a href="attestation_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
+          </a>
           <button class="btn-preview" id="btn-preview-att-bts2" onclick="togglePdf('att-bts2','attestation_stage_bts2_dgfip.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts2">
@@ -792,11 +787,10 @@
           </div>
           <iframe id="pdf-iframe-att-bts2" src="" title="Aperçu Attestation stage BTS2"></iframe>
         </div>
-        
         <div class="btn-pair">
           <a href="rapport_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
-        </a>
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
+          </a>
           <button class="btn-preview" id="btn-preview-rap-bts2" onclick="togglePdf('rap-bts2','rapport_stage_bts2_dgfip.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts2">
@@ -827,11 +821,10 @@
         <h3>Pare-feu pfSense</h3>
         <p>Configuration avec règles de filtrage, NAT, VPN IPsec et segmentation réseau par zones (LAN, DMZ, WAN). Mise en place de règles de pare-feu et logs de trafic.</p>
         <div class="tags-sm"><span>pfSense</span><span>IPsec</span><span>NAT</span><span>DMZ</span></div>
-        
         <div class="btn-pair">
           <a href="Procedure_Installation_pfSense.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
           <button class="btn-preview" id="btn-preview-pfsense" onclick="togglePdf('pfsense','Procedure_Installation_pfSense.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-pfsense">
@@ -847,11 +840,10 @@
         <h3>GLPI &amp; gestion de parc</h3>
         <p>Déploiement de la solution GLPI pour la gestion des incidents et du parc informatique. Installation et déploiement automatisé des agents GLPI via Stratégies de Groupe (GPO) sur un domaine Active Directory existant.</p>
         <div class="tags-sm"><span>GLPI</span><span>GPO</span><span>Active Directory</span><span>MySQL</span></div>
-        
         <div class="btn-pair">
           <a href="Florent-Jules_Mission_C.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission
+          </a>
           <button class="btn-preview" id="btn-preview-glpi" onclick="togglePdf('glpi','Florent-Jules_Mission_C.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-glpi">
@@ -867,11 +859,10 @@
         <h3>Active Directory</h3>
         <p>Domaine Windows Server avec GPO, unités organisationnelles et gestion des utilisateurs.</p>
         <div class="tags-sm"><span>Windows Server</span><span>AD DS</span><span>GPO</span></div>
-        
         <div class="btn-pair">
           <a href="procedure_active_directory.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
           <button class="btn-preview" id="btn-preview-ad" onclick="togglePdf('ad','procedure_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-ad">
@@ -887,11 +878,10 @@
         <h3>Supervision Nagios</h3>
         <p>Mise en place d'une infrastructure de supervision réseau avec Nagios. Monitoring des hôtes, services (HTTP, SSH, ping) et alertes par e-mail.</p>
         <div class="tags-sm"><span>Nagios</span><span>Linux</span><span>SNMP</span><span>NRPE</span></div>
-        
         <div class="btn-pair">
           <a href="procedure_nagios.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
           <button class="btn-preview" id="btn-preview-nagios" onclick="togglePdf('nagios','procedure_nagios.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-nagios">
@@ -986,11 +976,10 @@
         <div class="rp-lieu"><i class="fa-solid fa-school" aria-hidden="true"></i>GSB — Lycée Raoul Follereau, Nevers</div>
         <p>Mise en place d'un cluster Haute Disponibilité Active/Passive pour le service web Apache2. Réplication synchrone des données entre deux nœuds Ubuntu via DRBD, gestion des ressources et basculement automatique (failover) avec HeartBeat via une IP virtuelle (192.168.56.100). Supervision de l'état du cluster avec Nagios Core.</p>
         <div class="tags-sm"><span>DRBD</span><span>HeartBeat</span><span>Apache2</span><span>Nagios</span><span>Ubuntu Server</span><span>VirtualBox</span></div>
-        
         <div class="btn-pair">
           <a href="procedure_rp1_haute_disponibilite.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP1
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP1
+          </a>
           <button class="btn-preview" id="btn-preview-rp1" onclick="togglePdf('rp1','procedure_rp1_haute_disponibilite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rp1">
@@ -1013,11 +1002,10 @@
         <div class="rp-lieu"><i class="fa-solid fa-school" aria-hidden="true"></i>GSB — Lycée Raoul Follereau, Nevers</div>
         <p>Déploiement d'un contrôleur de domaine Windows Server 2022 avec AD DS, DNS et DHCP. Création automatisée de 25 comptes via PowerShell, application de 5 GPO critiques (sécurité, restrictions, déploiement logiciel, redirection de dossiers). Intégration d'un serveur Linux Samba au domaine avec authentification SSO Kerberos.</p>
         <div class="tags-sm"><span>Windows Server 2022</span><span>Active Directory</span><span>GPO</span><span>Samba</span><span>Kerberos</span><span>PowerShell</span></div>
-        
         <div class="btn-pair">
           <a href="procedure_rp2_active_directory.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP2
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP2
+          </a>
           <button class="btn-preview" id="btn-preview-rp2" onclick="togglePdf('rp2','procedure_rp2_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rp2">
@@ -1058,11 +1046,10 @@
           Code : <strong>P-JR969VDX</strong>
           <a href="https://app.pix.fr/verification-certificat" target="_blank" rel="noopener noreferrer" class="cert-verify-link">Vérifier sur pix.fr</a>
         </div>
-        
         <div class="btn-pair">
           <a href="certification-pix-20260120.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
+          </a>
           <button class="btn-preview" id="btn-preview-pix" onclick="togglePdf('pix','certification-pix-20260120.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-pix">
@@ -1090,6 +1077,7 @@
           <div class="cert-score-lbl">Baccalauréat Professionnel</div>
         </div>
         <p class="cert-desc">Baccalauréat professionnel option Réseaux Informatiques et Systèmes Communicants (RISC). Câblage réseau, configuration switches/routeurs et télécommunications.</p>
+      </div>
     </div>
   </section>
 
@@ -1134,11 +1122,10 @@
             &nbsp;·&nbsp;
             <span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span>
           </div>
-          
           <div class="btn-pair">
             <a href="veille_ia_cybersecurite.pdf" download class="btn-dl-veille" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
-          </a>
+              <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
+            </a>
             <button class="btn-preview" id="btn-preview-veille-ia2" onclick="togglePdf('veille-ia2','veille_ia_cybersecurite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
           </div>
           <div class="pdf-viewer-wrap" id="pdf-viewer-veille-ia2">
@@ -1160,11 +1147,10 @@
             &nbsp;·&nbsp;
             <span title="Veille manuelle">👁 Manuelle — <a href="https://www.01net.com/" target="_blank" rel="noopener noreferrer" class="v-source-link">01net.com</a></span>
           </div>
-          
           <div class="btn-pair">
             <a href="veille_nvidia_gpu_ia.pdf" download class="btn-dl-veille" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
-          </a>
+              <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
+            </a>
             <button class="btn-preview" id="btn-preview-veille-gpu2" onclick="togglePdf('veille-gpu2','veille_nvidia_gpu_ia.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
           </div>
           <div class="pdf-viewer-wrap" id="pdf-viewer-veille-gpu2">
@@ -1185,7 +1171,6 @@
     <div class="contact-inner reveal">
       <p>Mon profil vous intéresse ? Je suis disponible pour toute opportunité de stage ou de collaboration.</p>
 
-      <!-- Boutons rapides -->
       <div class="contact-btns">
         <button class="btn btn-outline btn-copy" id="btn-copy" type="button">
           <i class="fa-solid fa-copy" aria-hidden="true"></i> Copier l'email
@@ -1199,19 +1184,10 @@
         </a>
       </div>
 
-      <!-- Séparateur -->
       <div class="contact-divider">
         <span>ou via le formulaire</span>
       </div>
 
-      <!--
-        FIX 5 : FORMULAIRE DE CONTACT (Formspree)
-        Étapes :
-          1. Créer un compte gratuit sur https://formspree.io
-          2. Créer un nouveau formulaire → copier l'ID (ex: xpwzabcd)
-          3. Remplacer VOTRE_FORM_ID ci-dessous par cet ID
-        Le plan gratuit autorise 50 soumissions/mois, sans serveur requis.
-      -->
       <form
         id="contact-form"
         class="contact-form"
@@ -1222,46 +1198,20 @@
         <div class="contact-form-row">
           <div class="form-group">
             <label for="cf-name">Nom complet</label>
-            <input
-              type="text"
-              id="cf-name"
-              name="name"
-              placeholder="Jean Dupont"
-              required
-              autocomplete="name"
-            >
+            <input type="text" id="cf-name" name="name" placeholder="Jean Dupont" required autocomplete="name">
           </div>
           <div class="form-group">
             <label for="cf-email">Adresse email</label>
-            <input
-              type="email"
-              id="cf-email"
-              name="email"
-              placeholder="jean@exemple.fr"
-              required
-              autocomplete="email"
-            >
+            <input type="email" id="cf-email" name="email" placeholder="jean@exemple.fr" required autocomplete="email">
           </div>
         </div>
         <div class="form-group">
           <label for="cf-subject">Objet</label>
-          <input
-            type="text"
-            id="cf-subject"
-            name="subject"
-            placeholder="Opportunité de stage / Collaboration / Question"
-            required
-          >
+          <input type="text" id="cf-subject" name="subject" placeholder="Opportunité de stage / Collaboration / Question" required>
         </div>
         <div class="form-group">
           <label for="cf-message">Message</label>
-          <textarea
-            id="cf-message"
-            name="message"
-            rows="5"
-            placeholder="Bonjour Jules, je vous contacte au sujet de…"
-            required
-          ></textarea>
+          <textarea id="cf-message" name="message" rows="5" placeholder="Bonjour Jules, je vous contacte au sujet de…" required></textarea>
         </div>
         <div class="form-submit">
           <span class="form-notice">Réponse sous 48h · Données transmises via Formspree</span>
@@ -1302,16 +1252,10 @@
 </button>
 
 <script>
-  /* =====================================================
-     EMAIL — obfuscation
-  ===================================================== */
+  /* === EMAIL — obfuscation === */
   const EMAIL = 'moninjules58' + String.fromCharCode(64) + 'gmail.com';
-
   document.getElementById('mailto-link').href = 'mailto:' + EMAIL;
 
-  /* =====================================================
-     CURSEUR CUSTOM
-  ===================================================== */
   /* === PROGRESS BAR === */
   const prog = document.getElementById('prog');
   window.addEventListener('scroll', () => {
@@ -1360,20 +1304,15 @@
   document.querySelector('.copyright').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN';
   document.getElementById('footer-copy').textContent = '© ' + new Date().getFullYear() + ' Jules MONIN — Tous droits réservés';
 
-  /* =====================================================
-     FIX 4 : REVEAL + COMPTEURS ANIMÉS
-     Unification en un seul chemin (IntersectionObserver).
-     obs.unobserve() après déclenchement → plus de double appel possible.
-     La Set `done` reste présente comme garde de sécurité secondaire.
-  ===================================================== */
+  /* === REVEAL + COMPTEURS ANIMÉS === */
   const done = new Set();
 
   function animCount(el) {
     if (done.has(el)) return;
-    done.add(el); // Ajout synchrone — JS est mono-thread, pas de race condition
+    done.add(el);
     const target = parseInt(el.dataset.target, 10);
     let count = 0;
-    const step = target / (1500 / 30); // ~50 frames sur 1,5s
+    const step = target / (1500 / 30);
     const iv = setInterval(() => {
       count += step;
       if (count >= target) {
@@ -1388,9 +1327,8 @@
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       e.target.classList.add('visible');
-      // Compteurs : déclenchés une seule fois puis l'élément n'est plus observé
       e.target.querySelectorAll('.stat-num[data-target]').forEach(animCount);
-      obs.unobserve(e.target); // ← supprime le double-déclenchement
+      obs.unobserve(e.target);
     });
   }, { threshold: 0.12 });
 
@@ -1408,7 +1346,7 @@
     });
   });
 
-  /* === COPIER EMAIL — fallback robuste === */
+  /* === COPIER EMAIL === */
   document.getElementById('btn-copy').addEventListener('click', function() {
     const toast = this.querySelector('.toast');
     const showToast = () => {
@@ -1432,10 +1370,7 @@
     }
   });
 
-  /* =====================================================
-     FIX 5 : FORMULAIRE DE CONTACT — soumission AJAX
-     Gère les états loading / succès / erreur sans rechargement.
-  ===================================================== */
+  /* === FORMULAIRE DE CONTACT — soumission AJAX === */
   const form    = document.getElementById('contact-form');
   const formBtn = document.getElementById('form-btn');
   const formOk  = document.getElementById('form-success');
@@ -1443,11 +1378,8 @@
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-
-    // Validation HTML5 native
     if (!form.checkValidity()) { form.reportValidity(); return; }
 
-    // État chargement
     formBtn.disabled = true;
     formBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Envoi en cours…';
     formOk.style.display = 'none';
@@ -1459,7 +1391,6 @@
         body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
-
       if (res.ok) {
         form.reset();
         formOk.style.display = 'flex';
@@ -1519,14 +1450,14 @@
 
     function createBubbles() {
       bubbles = [];
-      const count = Math.floor((W * H) / 22000); // densité très faible
+      const count = Math.floor((W * H) / 22000);
       for (let i = 0; i < count; i++) {
         bubbles.push({
           x: Math.random() * W,
           y: Math.random() * H,
-          r: Math.random() * 3 + 1,        // rayon 1–4px
+          r: Math.random() * 3 + 1,
           speedX: (Math.random() - .5) * .3,
-          speedY: -(Math.random() * .4 + .1), // monte doucement
+          speedY: -(Math.random() * .4 + .1),
           opacity: Math.random() * .4 + .1
         });
       }
@@ -1539,11 +1470,8 @@
         ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(109,200,232,${b.opacity})`;
         ctx.fill();
-
         b.x += b.speedX;
         b.y += b.speedY;
-
-        // Reboucle quand la bulle sort par le haut
         if (b.y + b.r < 0) {
           b.y = H + b.r;
           b.x = Math.random() * W;
