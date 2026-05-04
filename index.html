@@ -467,7 +467,7 @@
     /* === VISIONNEUSE PDF === */
     .pdf-viewer-wrap{display:none;margin-top:18px;border-radius:var(--radius);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-md)}
-    .pdf-viewer-wrap.open{display:block}
+    .pdf-viewer-wrap.open{display:block;flex:0 0 100%;max-width:100%}
     .pdf-viewer-bar{background:var(--surface-2);padding:10px 16px;display:flex;
       align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-soft)}
     .pdf-viewer-bar span{font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--text-soft)}
@@ -715,8 +715,8 @@
       <div class="stage-docs">
         <div class="btn-pair">
           <a href="attestation_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
+          </a>
           <button class="btn-preview" id="btn-preview-att-bts1" onclick="togglePdf('att-bts1','attestation_stage_bts1_dsin.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts1">
@@ -728,8 +728,8 @@
         </div>
         <div class="btn-pair">
           <a href="rapport_stage_bts1_dsin.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
-        </a>
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
+          </a>
           <button class="btn-preview" id="btn-preview-rap-bts1" onclick="togglePdf('rap-bts1','rapport_stage_bts1_dsin.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts1">
@@ -756,8 +756,8 @@
       <div class="stage-docs">
         <div class="btn-pair">
           <a href="attestation_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Attestation de stage
+          </a>
           <button class="btn-preview" id="btn-preview-att-bts2" onclick="togglePdf('att-bts2','attestation_stage_bts2_dgfip.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-att-bts2">
@@ -769,8 +769,8 @@
         </div>
         <div class="btn-pair">
           <a href="rapport_stage_bts2_dgfip.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
-        </a>
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Rapport de stage
+          </a>
           <button class="btn-preview" id="btn-preview-rap-bts2" onclick="togglePdf('rap-bts2','rapport_stage_bts2_dgfip.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rap-bts2">
@@ -803,8 +803,8 @@
         <div class="tags-sm"><span>pfSense</span><span>IPsec</span><span>NAT</span><span>DMZ</span></div>
         <div class="btn-pair">
           <a href="Procedure_Installation_pfSense.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
           <button class="btn-preview" id="btn-preview-pfsense" onclick="togglePdf('pfsense','Procedure_Installation_pfSense.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-pfsense">
@@ -822,8 +822,8 @@
         <div class="tags-sm"><span>GLPI</span><span>GPO</span><span>Active Directory</span><span>MySQL</span></div>
         <div class="btn-pair">
           <a href="Florent-Jules_Mission_C.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la mission
+          </a>
           <button class="btn-preview" id="btn-preview-glpi" onclick="togglePdf('glpi','Florent-Jules_Mission_C.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-glpi">
@@ -841,8 +841,8 @@
         <div class="tags-sm"><span>Windows Server</span><span>AD DS</span><span>GPO</span></div>
         <div class="btn-pair">
           <a href="procedure_active_directory.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
           <button class="btn-preview" id="btn-preview-ad" onclick="togglePdf('ad','procedure_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-ad">
@@ -860,8 +860,8 @@
         <div class="tags-sm"><span>Nagios</span><span>Linux</span><span>SNMP</span><span>NRPE</span></div>
         <div class="btn-pair">
           <a href="procedure_nagios.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la procédure
+          </a>
           <button class="btn-preview" id="btn-preview-nagios" onclick="togglePdf('nagios','procedure_nagios.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-nagios">
@@ -958,8 +958,8 @@
         <div class="tags-sm"><span>DRBD</span><span>HeartBeat</span><span>Apache2</span><span>Nagios</span><span>Ubuntu Server</span><span>VirtualBox</span></div>
         <div class="btn-pair">
           <a href="procedure_rp1_haute_disponibilite.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP1
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP1
+          </a>
           <button class="btn-preview" id="btn-preview-rp1" onclick="togglePdf('rp1','procedure_rp1_haute_disponibilite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rp1">
@@ -984,8 +984,8 @@
         <div class="tags-sm"><span>Windows Server 2022</span><span>Active Directory</span><span>GPO</span><span>Samba</span><span>Kerberos</span><span>PowerShell</span></div>
         <div class="btn-pair">
           <a href="procedure_rp2_active_directory.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP2
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger la fiche RP2
+          </a>
           <button class="btn-preview" id="btn-preview-rp2" onclick="togglePdf('rp2','procedure_rp2_active_directory.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-rp2">
@@ -1028,8 +1028,8 @@
         </div>
         <div class="btn-pair">
           <a href="certification-pix-20260120.pdf" download class="btn-dl" style="margin-top:0">
-          <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
-        </a>
+            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger l'attestation Pix
+          </a>
           <button class="btn-preview" id="btn-preview-pix" onclick="togglePdf('pix','certification-pix-20260120.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
         </div>
         <div class="pdf-viewer-wrap" id="pdf-viewer-pix">
@@ -1104,8 +1104,8 @@
           </div>
           <div class="btn-pair">
             <a href="veille_ia_cybersecurite.pdf" download class="btn-dl-veille" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
-          </a>
+              <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
+            </a>
             <button class="btn-preview" id="btn-preview-veille-ia2" onclick="togglePdf('veille-ia2','veille_ia_cybersecurite.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
           </div>
           <div class="pdf-viewer-wrap" id="pdf-viewer-veille-ia2">
@@ -1129,8 +1129,8 @@
           </div>
           <div class="btn-pair">
             <a href="veille_nvidia_gpu_ia.pdf" download class="btn-dl-veille" style="margin-top:0">
-            <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
-          </a>
+              <i class="fa-solid fa-file-pdf pdf-ico" aria-hidden="true"></i> Télécharger le dossier de veille
+            </a>
             <button class="btn-preview" id="btn-preview-veille-gpu2" onclick="togglePdf('veille-gpu2','veille_nvidia_gpu_ia.pdf',this)"><i class="fa-solid fa-eye" aria-hidden="true"></i> Aperçu</button>
           </div>
           <div class="pdf-viewer-wrap" id="pdf-viewer-veille-gpu2">
